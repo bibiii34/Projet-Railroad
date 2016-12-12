@@ -15,14 +15,21 @@ import javax.swing.ImageIcon;
 public class Train extends Case{
     private int[][] trajet;
     private  ArrayList<Ressource> stock;
+    private Ville depart;
+    private Ville arrivee;
     
-    public Train(int x, int y, ImageIcon t, int[][] trajet){
-        super(x,y,t);
+    //Constructeurs  
+    public Train(int x, int y, int[][] trajet, Ville d, Ville a){
+        super(x,y);
+        //image train
         this.trajet=trajet;
         this.stock=new ArrayList();
+        this.depart=d;
+        this.arrivee=a;
         
     }
 
+     //Accesseur 
     public int[][] getTrajet() {
         return trajet;
     }
