@@ -9,7 +9,7 @@
  * @author Bryan
  */
     public class Main {
-    public static void main(String[] argc){
+    public static void main(String[] argc) throws InterruptedException{
     Modele m = new Modele();
     RailroadFrame rf = new RailroadFrame(m);
     
