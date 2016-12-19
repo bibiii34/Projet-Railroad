@@ -17,6 +17,8 @@ public class Modele {
     private ArrayList<Produit> production;
     private ArrayList<Observateur> observateur;
     
+    ArrayList<Ville> villes = new ArrayList();
+    
     public Modele(){
         map=new Case[8][8];
         this.observateur=new ArrayList<>();
@@ -55,24 +57,21 @@ public class Modele {
             Produit shaker = new Produit("shaker",100,fabricationshaker);
             
             //Creation ville
-            Ville limoges=new Ville("Limoges",lait);
-            Ville beziers = new Ville("Bezier",proteine);
-            Ville toulouse = new Ville("toulouse",fer);
-            Ville servian = new Ville("servian",plastique);
-            Ville carcassonne = new Ville("carcassonne",haltere);
-            Ville agen = new Ville("agen",shaker);
             
-            
-            //Ajout dans une liste villes
-            ArrayList<Ville> villes = new ArrayList();
+            Ville limoges=new Ville("Limoges",lait, villes);
             villes.add(limoges);
+            Ville beziers = new Ville("Bezier",proteine, villes);
             villes.add(beziers);
+            Ville toulouse = new Ville("toulouse",fer, villes);
             villes.add(toulouse);
-            villes.add(servian);
+            Ville servian = new Ville("servian",plastique, villes);
+             villes.add(servian);
+            Ville carcassonne = new Ville("carcassonne",haltere, villes);
             villes.add(carcassonne);
+            Ville agen = new Ville("agen",shaker,villes );
             villes.add(agen);
-            
-            
+
+  
             //placement des villes sur le modele et sur la vue
             map[limoges.getX()][limoges.getY()]=limoges;
             avertirAllChangementCase(limoges.getX(), limoges.getY(), limoges);
@@ -116,10 +115,10 @@ public class Modele {
 
             
             //generer premiere ressource
-
             limoges.genererPremiereRessource(limoges.getItem());
             toulouse.genererPremiereRessource(toulouse.getItem());
             servian.genererPremiereRessource(servian.getItem());
+            
             
             //Lancer tache generer ressource ville
             BackgroundTask1 genererRessource = new BackgroundTask1(villes);
@@ -129,9 +128,7 @@ public class Modele {
             
            LigneItem I1halteretest = new LigneItem(fer,20);
            carcassonne.getStock().add(I1halteretest);
-            
-            
-            
+  
         }
     
         public void register(Observateur o){
@@ -148,9 +145,9 @@ public class Modele {
         }
         }
         
-        public void avertirAllObservateurs(int i, int j){
+        public void avertirAllObservateursSelectionVille(int i, int j, Ville v){
         for (Observateur o : this.observateur){
-            o.avertir(i, j);
+            o.avertirSelectionVille(i, j, v);
         }
         }
         
@@ -173,7 +170,7 @@ public class Modele {
         }
         } 
         
-                public void avertirAllPlacementRailVirage2(int i, int j, Case c){
+        public void avertirAllPlacementRailVirage2(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirPlacementRailVirage2(i, j, c);            
         }
@@ -191,13 +188,8 @@ public class Modele {
         }
         } 
         
-        public int aleatoire(){
-           int aleatoire= 0 + (int)(Math.random() * ((15 - 0) + 1));
-           return aleatoire;
-        }
         
-        /*placer rails Bouton*/
-        
+        /*placer rails */
         public void placerRails(ArrayList<Integer[]> trajet){
             
             /*on parcoure l'arraylist trajet en ignorant 1er et derniere coordonées (ville)*/
@@ -210,16 +202,22 @@ public class Modele {
                 /*si le X de la case selectionnée est le meme que la case precedente alors placement rail horizontal*/ 
                 if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rail.getX()==trajet.get(i-1)[0]){
                 this.avertirAllPlacementRailH(trajet.get(i)[0],trajet.get(i)[1], rail);
+                rail.setTexture(rail.getRailH());
+                rail.setTextureSelection(rail.getRailHSelection());
+                map[rail.getX()][rail.getY()]=rail;
                 }
         //RAIL VERTICAL        
                 /*sinon si le Y de la case selectionnée est le meme que la case precedente alors placement rail vertical*/ 
                 if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rail.getY()==trajet.get(i-1)[1]){
                     this.avertirAllPlacementRailV(trajet.get(i)[0],trajet.get(i)[1], rail);
+                    rail.setTexture(rail.getRailV());
+                    rail.setTextureSelection(rail.getRailVSelection());
+                    map[rail.getX()][rail.getY()]=rail;
                     }
                 
         //RAIL VIRAGE1 
                 /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if( (this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2) 
+                if( (i>=2) 
                         
                         /*X est plus petit que X de case-2 et Y est plus grand*/ 
                         && ((rail.getX()<trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1])|| 
@@ -228,11 +226,14 @@ public class Modele {
                         
                 {
                 this.avertirAllPlacementRailVirage1(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
+                rail.setTexture(rail.getRailVirage1());
+                rail.setTextureSelection(rail.getRailVirage1Selection());
+                map[rail.getX()][rail.getY()]=rail;
                 }
                 
         //RAIL VIRAGE 2
                 /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if(  (this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2) 
+                if(  (i>=2) 
                         
                         /*X et Y sont plus grand que X de case -2 */
                         && (rail.getX()>trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1] ||
@@ -240,12 +241,16 @@ public class Modele {
                         (rail.getX()<trajet.get(i-2)[0] && rail.getY()<trajet.get(i-2)[1]) ))                                
                 {
                 this.avertirAllPlacementRailVirage2(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
+                rail.setTexture(rail.getRailVirage2());
+                rail.setTextureSelection(rail.getRailVirage2Selection());
+                map[rail.getX()][rail.getY()]=rail;
+                
                 }
   
         
         //RAIL VIRAGE 3
                 /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if(  (this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2) 
+                if(  (i>=2) 
                         
                         /*X et Y sont plus grand que X de case -2 */
                         && ( (rail.getX()>trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1]&& rail.getY()==trajet.get(i-1)[1]) ||
@@ -254,11 +259,14 @@ public class Modele {
                         )                                
                 {
                 this.avertirAllPlacementRailVirage3(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
+                rail.setTexture(rail.getRailVirage3());
+                rail.setTextureSelection(rail.getRailVirage3Selection());
+                map[rail.getX()][rail.getY()]=rail;
                 }
                  
         //RAIL VIRAGE4 
                 /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if( (this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2) 
+                if( (i>=2) 
                         
                         /*X est plus petit que X de case-2 et Y est plus grand*/ 
                         && ((rail.getX()<trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1] && rail.getX()==trajet.get(i-1)[0] )|| 
@@ -267,13 +275,17 @@ public class Modele {
                         
                 {
                 this.avertirAllPlacementRailVirage4(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
+                rail.setTexture(rail.getRailVirage4());
+                rail.setTextureSelection(rail.getRailVirage4Selection());
+                map[rail.getX()][rail.getY()]=rail;
                 }     
-        
-                
-                
+             
             }
             
-            
+            for(Ville v : villes){
+                v.setSelection(false);
+                this.avertirAllObservateursSelectionVille(v.getX(), v.getY(), v);
+            }
             trajet.clear();
             
         }
