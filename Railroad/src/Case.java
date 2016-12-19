@@ -15,14 +15,17 @@ public class Case {
     protected int x;
     protected int y;
     protected ImageIcon texture;
+    protected ImageIcon textureSelection;
     
 
     //constructeur
     public Case(int x, int y) {
         this.x = x;
         this.y = y;
-        ImageIcon HERBE = new ImageIcon("./src/imgs/herbe.png");
-        this.texture = HERBE;
+        ImageIcon DESERT = new ImageIcon("./src/imgs/Texture 100x100/desert.png");
+        this.texture = DESERT;
+        ImageIcon DESERTSELECTION = new ImageIcon ("./src/imgs/Texture 100x100/desertSelection.png");
+        this.textureSelection = DESERTSELECTION;
     }
     
     public Case(){
@@ -54,5 +57,8 @@ public class Case {
         this.texture = texture;
     }
     
+      public ImageIcon getTextureSelection() {
+        return textureSelection;
+    }
     
 }

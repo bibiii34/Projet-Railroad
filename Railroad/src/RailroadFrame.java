@@ -1,5 +1,8 @@
 
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,9 +19,20 @@ import javax.swing.JPanel;
  */
 public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
-    private static final ImageIcon BLANC = new ImageIcon("./src/imgs/blanc.jpg");
-    private static final ImageIcon HERBE = new ImageIcon("./src/imgs/herbe.png");
-    private static final ImageIcon VILLE = new ImageIcon("./src/imgs/ville.png");
+
+    private static final ImageIcon DESERT = new ImageIcon("./src/imgs/Texture 100x100/desert.png");
+    private static final ImageIcon DESERTSELECTION = new ImageIcon("./src/imgs/Texture 100x100/desertSelection.png");
+    
+    private static final ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
+    private static final ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
+    
+    
+    private static final ImageIcon RAILV = new ImageIcon("./src/imgs/Texture 100x100/railsV.png");
+    private static final ImageIcon RAILH = new ImageIcon("./src/imgs/Texture 100x100/railsH.png");
+    private static final ImageIcon RAIL = new ImageIcon("./src/imgs/Texture 100x100/railsH.png");
+    
+    ArrayList<Integer[]> trajet = new ArrayList();
+    
     /**
      * Creates new form RailroadFrame
      */
@@ -31,15 +45,18 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         modele=m;
         
         
-    //    JPanel p = (JPanel) getContentPane();
-        panelJeu.setLayout(new GridLayout(15,15));
+    // Pannel disposé en grille 8*8
+        panelJeu.setLayout(new GridLayout(8,8));
         
-        jboard = new JLabel[15][15];
-         for(int i=0;i<15;i++){
-            for(int j=0;j<15;j++){
-                // init case
-                jboard[i][j] = new JLabel(HERBE);
+    // board composé de jlabel    
+        jboard = new JLabel[8][8];
+         for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                // init case desert
+                jboard[i][j] = new JLabel(DESERT);
                 panelJeu.add(jboard[i][j]);
+               jboard[i][j].addMouseListener(
+                new CaseControler(i,j));
                 }
    
             }
@@ -74,7 +91,8 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("jButton1 placer rails");
+        jButton1.setActionCommand("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -89,20 +107,20 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelJeu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addGap(121, 121, 121))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelJeu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 45, Short.MAX_VALUE))
+                .addGap(0, 385, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jButton1)
+                .addGap(13, 13, 13)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -111,8 +129,9 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Bouton placer rail
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    modele.placerRails(trajet);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -160,12 +179,82 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
     @Override
     public void avertir(int i, int j) {
-        jboard[i][j].setIcon(VILLE);
+        jboard[i][j].setIcon(DESERT);
     }
+    
     
     @Override
     public void avertirChangementCase(int i, int j, Case c) {
         jboard[i][j].setIcon(c.getTexture());
     }
+    
+    
+    @Override
+    public void avertirPlacementRailH(int i, int j, Case c) {
+        jboard[i][j].setIcon(((Rail) c).getRailH());
+    }
+    
+    @Override
+    public void avertirPlacementRailV(int i, int j, Case c) {
+    jboard[i][j].setIcon(((Rail) c).getRailV());
+    }
+     
+        @Override
+        public void avertirPlacementRailVirage1(int i, int j, Case c) {
+        jboard[i][j].setIcon(((Rail) c).getRailVirage1());
+    }
+        @Override
+        public void avertirPlacementRailVirage2(int i, int j, Case c) {
+        jboard[i][j].setIcon(((Rail) c).getRailVirage2());
+    }
+        @Override
+        public void avertirPlacementRailVirage3(int i, int j, Case c) {
+        jboard[i][j].setIcon(((Rail) c).getRailVirage3());
+    }
+        @Override
+        public void avertirPlacementRailVirage4(int i, int j, Case c) {
+        jboard[i][j].setIcon(((Rail) c).getRailVirage4());
+    }
+    
+    
+    
+    
+    //Mouvement souris
+     class CaseControler extends MouseAdapter {
+        int i;
+        int j;
+
+        public CaseControler(int _i, int _j){
+            i = _i;
+            j = _j;
+        }
+
+    //action de clic
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            System.out.println(i + " " + j);
+            
+            if (jboard[i][j].getIcon()==DESERT){
+               jboard[i][j].setIcon(DESERTSELECTION); 
+            }
+            
+            else if (jboard[i][j].getIcon()==DESERTSELECTION){
+                jboard[i][j].setIcon(DESERT);
+            }
+            
+            else if (modele.getCase(i, j) instanceof Ville && jboard[i][j].getIcon()==modele.getCase(i, j).getTexture()){
+                jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection());
+            }
+            
+            else if (modele.getCase(i, j) instanceof Ville && jboard[i][j].getIcon()==modele.getCase(i, j).getTextureSelection()){
+                jboard[i][j].setIcon(modele.getCase(i, j).getTexture());
+            }
+ 
+            Integer tab[] = {i,j};
+            trajet.add(tab);
+     
+        }
+     }
 
 }

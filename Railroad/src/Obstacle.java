@@ -21,10 +21,10 @@ public class Obstacle extends Case {
     }
     
     public Obstacle(){
-        this.x=0 + (int)(Math.random() * ((14 - 0) + 1));
-        this.y=0 + (int)(Math.random() * ((14 - 0) + 1));
-        ImageIcon CROIX = new ImageIcon("./src/imgs/croix.jpg");
-        this.texture = CROIX;
+        this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
+        this.y=0 + (int)(Math.random() * ((7 - 0) + 1));
+        ImageIcon OBSTACLE = new ImageIcon("./src/imgs/Texture 100x100/obstacle.png");
+        this.texture = OBSTACLE;
         
     }
 
