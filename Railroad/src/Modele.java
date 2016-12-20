@@ -17,13 +17,32 @@ public class Modele {
     private ArrayList<Produit> production;
     private ArrayList<Observateur> observateur;
     
-    ArrayList<Ville> villes = new ArrayList();
-    ArrayList<Rail> rails = new ArrayList();
-    
+    private ArrayList<Ville> villes = new ArrayList();
+    private ArrayList<Rail> rails = new ArrayList();
+    private ArrayList<Train> trains = new ArrayList();
+
     public Modele(){
+ 
         map=new Case[8][8];
         this.observateur=new ArrayList<>();
     }
+    
+    //GET SET
+
+    public Case[][] getMap() {
+        return map;
+    }
+
+    public void setMap(Case[][] map) {
+        this.map = map;
+    }
+    
+    public void setCaseTrain(int i, int j){
+        ((Rail)map[i][j]).setTrain(true);
+        
+    }
+    
+    
     
     
         public Case getCase(int x, int y){
@@ -92,11 +111,19 @@ public class Modele {
             map[agen.getX()][agen.getY()]=agen;
             avertirAllChangementCase(agen.getX(), agen.getY(), agen);
                 
+            for (Ville v : villes){
+                System.out.println("ville :"+v.getX()+"/"+v.getY());
+            }
+            
             //Generer obstacle
-            Obstacle o = new Obstacle();
-            Obstacle o1 = new Obstacle();
-            Obstacle o2 = new Obstacle();
-            Obstacle o3 = new Obstacle();
+            Obstacle o = new Obstacle(villes);
+            System.out.println("obstacle :"+o.getX()+"/"+o.getY());
+            Obstacle o1 = new Obstacle(villes);
+            System.out.println("obstacle :"+o1.getX()+"/"+o.getY());
+            Obstacle o2 = new Obstacle(villes);
+            System.out.println("obstacle :"+o2.getX()+"/"+o.getY());
+            Obstacle o3 = new Obstacle(villes);
+            System.out.println("obstacle :"+o3.getX()+"/"+o.getY());
   
             
  
@@ -122,7 +149,7 @@ public class Modele {
             
             
             //Lancer tache generer ressource ville
-           /* BackgroundTask1 genererRessource = new BackgroundTask1(villes);
+           /*BackgroundTask1 genererRessource = new BackgroundTask1(villes,trains, this);
             genererRessource.start();*/
             
             System.out.println("le programme fonctionne comme sur des roulettes");
@@ -152,10 +179,14 @@ public class Modele {
         }
         }
   
-        
+        public void avertirAllTrainTrue(int i, int j, Case c){
+         for (Observateur o : this.observateur){
+            o.avertirTrainTrue(i, j, c);
+        }   
+        }
         
         /* PLACER RAILS */
-        public void placerRails(ArrayList<Integer[]> trajet){
+        public void placerRails(ArrayList<int[]> trajet){
             int c = 0;
             /*on parcoure l'arraylist trajet en ignorant 1er coordonées (ville)*/
             for (int i=1; i<=trajet.size()-1; i++){
@@ -263,15 +294,23 @@ public class Modele {
                 this.avertirAllObservateursSelectionVille(v.getX(), v.getY(), v);
             }
           
-            //On nettoye le trajet apres cration du chemin de rails
             
+            //creation d'un train en fonction du trajet
+            trains.add(new Train(trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1]))));
+            
+            //On nettoye le trajet apres cration du chemin de rails 
             trajet.clear();
             
             for(Rail r : rails){
                 System.out.println("rail : "+r.getX()+"/"+r.getY());
             }
         }
+           
+        /*SUPPRIMER RAILS*/
+        public void supprimerRails(ArrayList<int[]> trajet){
+            
+        }
 }
-    
+
 
 
