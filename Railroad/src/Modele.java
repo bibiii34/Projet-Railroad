@@ -18,6 +18,7 @@ public class Modele {
     private ArrayList<Observateur> observateur;
     
     ArrayList<Ville> villes = new ArrayList();
+    ArrayList<Rail> rails = new ArrayList();
     
     public Modele(){
         map=new Case[8][8];
@@ -121,13 +122,13 @@ public class Modele {
             
             
             //Lancer tache generer ressource ville
-            BackgroundTask1 genererRessource = new BackgroundTask1(villes);
-            genererRessource.start();
+           /* BackgroundTask1 genererRessource = new BackgroundTask1(villes);
+            genererRessource.start();*/
             
             System.out.println("le programme fonctionne comme sur des roulettes");
             
-           LigneItem I1halteretest = new LigneItem(fer,20);
-           carcassonne.getStock().add(I1halteretest);
+           /*LigneItem I1halteretest = new LigneItem(fer,20);
+           carcassonne.getStock().add(I1halteretest);*/
   
         }
     
@@ -150,144 +151,125 @@ public class Modele {
             o.avertirSelectionVille(i, j, v);
         }
         }
-        
-        /*Placement Rail observateur*/
-        public void avertirAllPlacementRailH(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailH(i, j, c);            
-        }
-        } 
-        
-        public void avertirAllPlacementRailV(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailV(i, j, c);            
-        }
-        } 
-        
-        public void avertirAllPlacementRailVirage1(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailVirage1(i, j, c);            
-        }
-        } 
-        
-        public void avertirAllPlacementRailVirage2(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailVirage2(i, j, c);            
-        }
-        } 
-                
-        public void avertirAllPlacementRailVirage3(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailVirage3(i, j, c);            
-        }
-        }         
-        
-        public void avertirAllPlacementRailVirage4(int i, int j, Case c){
-        for (Observateur o : this.observateur){
-            o.avertirPlacementRailVirage4(i, j, c);            
-        }
-        } 
+  
         
         
-        /*placer rails */
+        /* PLACER RAILS */
         public void placerRails(ArrayList<Integer[]> trajet){
-            
-            /*on parcoure l'arraylist trajet en ignorant 1er et derniere coordonées (ville)*/
-            for (int i =1; i<=trajet.size()-1; i++){
-        
-                /*on crée une nouvelle case rail avec les coordonnées de la case selectionnée*/ 
-                Rail rail = new Rail(trajet.get(i)[0],trajet.get(i)[1]); 
+            int c = 0;
+            /*on parcoure l'arraylist trajet en ignorant 1er coordonées (ville)*/
+            for (int i=1; i<=trajet.size()-1; i++){
+ 
+                /*On rempli une liste de Rails avec les coordonnées des case selectionnées*/ 
+                if (i!=trajet.size()-1){
+                rails.add(c,new Rail(trajet.get(i)[0],trajet.get(i)[1])); 
+                }
                 
         //RAIL HORIZONTAL        
-                /*si le X de la case selectionnée est le meme que la case precedente alors placement rail horizontal*/ 
-                if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rail.getX()==trajet.get(i-1)[0]){
-                this.avertirAllPlacementRailH(trajet.get(i)[0],trajet.get(i)[1], rail);
-                rail.setTexture(rail.getRailH());
-                rail.setTextureSelection(rail.getRailHSelection());
-                map[rail.getX()][rail.getY()]=rail;
+                //Si la case n'est pas une ville et si le X de la case selectionnée est le meme que la case precedente alors placement rail horizontal              
+                if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rails.get(c).getX()==trajet.get(i-1)[0]){
+                    rails.get(c).setTexture(rails.get(c).getRailH());
+                    rails.get(c).setTextureSelection(rails.get(c).getRailHSelection());
+                
+                    //placement de la case rail sur le modele map[][]
+                    map[rails.get(c).getX()][rails.get(c).getY()]=rails.get(c);    
+                
+                    //changement du logo sur la frame
+                    this.avertirAllChangementCase(rails.get(c).getX(),rails.get(c).getY(), rails.get(c));
+                
                 }
         //RAIL VERTICAL        
-                /*sinon si le Y de la case selectionnée est le meme que la case precedente alors placement rail vertical*/ 
-                if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rail.getY()==trajet.get(i-1)[1]){
-                    this.avertirAllPlacementRailV(trajet.get(i)[0],trajet.get(i)[1], rail);
-                    rail.setTexture(rail.getRailV());
-                    rail.setTextureSelection(rail.getRailVSelection());
-                    map[rail.getX()][rail.getY()]=rail;
-                    }
-                
-        //RAIL VIRAGE1 
-                /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if( (i>=2) 
-                        
-                        /*X est plus petit que X de case-2 et Y est plus grand*/ 
-                        && ((rail.getX()<trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1])|| 
-                        /*X est plus grand et Y plus petit*/
-                        (rail.getX()>trajet.get(i-2)[0] && rail.getY()<trajet.get(i-2)[1]) ))
-                        
+                //Si la case n'est pas une ville et si le Y de la case selectionnée est le meme que la case precedente alors placement rail vertical
+                if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rails.get(c).getY()==trajet.get(i-1)[1])
                 {
-                this.avertirAllPlacementRailVirage1(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
-                rail.setTexture(rail.getRailVirage1());
-                rail.setTextureSelection(rail.getRailVirage1Selection());
-                map[rail.getX()][rail.getY()]=rail;
+                    rails.get(c).setTexture(rails.get(c).getRailV());
+                    rails.get(c).setTextureSelection(rails.get(c).getRailVSelection());
+                    map[rails.get(c).getX()][rails.get(c).getY()]=rails.get(c);
+                    this.avertirAllChangementCase(rails.get(c).getX(),rails.get(c).getY(), rails.get(c));
+  
                 }
                 
+        //RAIL VIRAGE1 
+                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
+                if( (i>=2)
+                        //X est plus petit que X de case-2 et Y est plus grand
+                        && ((trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1])|| 
+                        //X est plus grand et Y plus petit
+                        (trajet.get(i)[0]>trajet.get(i-2)[0] && trajet.get(i)[1]<trajet.get(i-2)[1]) ))                       
+                {
+                    rails.get(c-1).setTexture(rails.get(c-1).getRailVirage1());
+                    rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage1Selection());
+                    map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
+                    this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
+                }
+                
+                
         //RAIL VIRAGE 2
-                /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
+                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
-                        /*X et Y sont plus grand que X de case -2 */
-                        && (rail.getX()>trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1] ||
-                        /*X et Y sont plus petit que X de case -2 */
-                        (rail.getX()<trajet.get(i-2)[0] && rail.getY()<trajet.get(i-2)[1]) ))                                
+                        //X et Y sont plus grand que X de case -2 
+                        && (trajet.get(i)[0]>trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1] ||
+                        //X et Y sont plus petit que X de case -2 
+                        (trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]<trajet.get(i-2)[1]) ))                                
                 {
-                this.avertirAllPlacementRailVirage2(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
-                rail.setTexture(rail.getRailVirage2());
-                rail.setTextureSelection(rail.getRailVirage2Selection());
-                map[rail.getX()][rail.getY()]=rail;
-                
+                rails.get(c-1).setTexture(rails.get(c-1).getRailVirage2());
+                rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage2Selection());
+                map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
+                this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
   
         
         //RAIL VIRAGE 3
-                /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
+                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
-                        /*X et Y sont plus grand que X de case -2 */
-                        && ( (rail.getX()>trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1]&& rail.getY()==trajet.get(i-1)[1]) ||
-                        /*X et Y sont plus petit que X de case -2 */
-                        (rail.getX()<trajet.get(i-2)[0] && rail.getY()<trajet.get(i-2)[1] && rail.getX()==trajet.get(i-1)[0]) )
+                        //X et Y sont plus grand que X de case -2 + verif case-1 pr separer de virage1
+                        && ( (trajet.get(i)[0]>trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1]&&  trajet.get(i)[1]==trajet.get(i-1)[1]) ||
+                        //X et Y sont plus petit que X de case -2 
+                        (trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]<trajet.get(i-2)[1] && trajet.get(i)[0]==trajet.get(i-1)[0]) )
                         )                                
                 {
-                this.avertirAllPlacementRailVirage3(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
-                rail.setTexture(rail.getRailVirage3());
-                rail.setTextureSelection(rail.getRailVirage3Selection());
-                map[rail.getX()][rail.getY()]=rail;
+                rails.get(c-1).setTexture(rails.get(c-1).getRailVirage3());
+                rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage3Selection());
+                map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
+                this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
                  
         //RAIL VIRAGE4 
-                /*Si la case n'est pas une ville et que nous somme a partir de la 3eme case*/  
-                if( (i>=2) 
+                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
+                if( ((this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2)) 
                         
-                        /*X est plus petit que X de case-2 et Y est plus grand*/ 
-                        && ((rail.getX()<trajet.get(i-2)[0] && rail.getY()>trajet.get(i-2)[1] && rail.getX()==trajet.get(i-1)[0] )|| 
-                        /*X est plus grand et Y plus petit*/
-                        (rail.getX()>trajet.get(i-2)[0] && rail.getY()<trajet.get(i-2)[1])&&  rail.getY()==trajet.get(i-1)[1]  ))
+                        //X est plus petit que X de case-2 et Y est plus grand + verif case-1 pr separer de virage1
+                        && ((trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1] && trajet.get(i)[0]==trajet.get(i-1)[0] )|| 
+                        //X est plus grand et Y plus petit
+                        (trajet.get(i)[0]>trajet.get(i-2)[0] && trajet.get(i)[1]<trajet.get(i-2)[1])&& trajet.get(i)[1]==trajet.get(i-1)[1]  ))
                         
                 {
-                this.avertirAllPlacementRailVirage4(trajet.get(i-1)[0],trajet.get(i-1)[1], rail);
-                rail.setTexture(rail.getRailVirage4());
-                rail.setTextureSelection(rail.getRailVirage4Selection());
-                map[rail.getX()][rail.getY()]=rail;
-                }     
-             
+                rails.get(c-1).setTexture(rails.get(c-1).getRailVirage4());
+                rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage4Selection());
+                map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
+                this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
+         
+                } 
+  
+             //compteur pour l'arrayList rails
+             c++;
             }
             
+            //On deselectionne les villes
             for(Ville v : villes){
                 v.setSelection(false);
                 this.avertirAllObservateursSelectionVille(v.getX(), v.getY(), v);
             }
+          
+            //On nettoye le trajet apres cration du chemin de rails
+            
             trajet.clear();
             
+            for(Rail r : rails){
+                System.out.println("rail : "+r.getX()+"/"+r.getY());
+            }
         }
 }
     
