@@ -199,7 +199,11 @@ public class Rail extends Case {
     }
 
     
-    
+        @Override
+    public String toString(){
+    String chaine = " R ";
+    return chaine;
+    }  
   
     
     

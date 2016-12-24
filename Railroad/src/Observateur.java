@@ -10,12 +10,10 @@
  */
 public interface Observateur {
     
-     void avertir(int i, int j);
+     void avertirSelectionVille(int i, int j, Ville v);
      void avertirChangementCase(int i, int j, Case c);
-     void avertirPlacementRailH(int i, int j, Case c);
-     void avertirPlacementRailV(int i, int j, Case c);
-     void avertirPlacementRailVirage1(int i, int j, Case c);
-     void avertirPlacementRailVirage2(int i, int j, Case c);
-     void avertirPlacementRailVirage3(int i, int j, Case c);
-     void avertirPlacementRailVirage4(int i, int j, Case c);
+     void avertirTrainTrue(int i, int j, Case c);
+     void avertirTrainFalse(int i, int j, Case c);
+     void avertirCreationRessource();
+
 }

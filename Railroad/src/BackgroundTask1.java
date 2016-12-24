@@ -39,14 +39,14 @@ public class BackgroundTask1 extends Thread{
           //while (1==1){  
               for (Ville v : villes){
                   v.genererItem();
-                  for (LigneItem l:v.getStock()){
-                  System.out.println(v.getNom()+" :"+l.getItem().getNom()+" "+l.getQuantite());
-                  }
+                  //for (LigneItem l:v.getStock()){
+                  //System.out.println(v.getNom()+" :"+l.getItem().getNom()+" "+l.getQuantite());
+                  //}
                   modele.avertieAllCreationRessource();
               }
                                 
                   try { 
-                      Thread.sleep(5000);
+                      Thread.sleep(1000);
                   } catch (InterruptedException ex) {
                       Logger.getLogger(BackgroundTask1.class.getName()).log(Level.SEVERE, null, ex);
                   }

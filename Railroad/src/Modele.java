@@ -17,13 +17,21 @@ public class Modele {
     private ArrayList<Produit> production;
     private ArrayList<Observateur> observateur;
     
-    private ArrayList<Ville> villes = new ArrayList();
+    public ArrayList<Ville> villes = new ArrayList();
     private ArrayList<Rail> rails = new ArrayList();
     private ArrayList<Train> trains = new ArrayList();
-
+    BackgroundTask1 background = new BackgroundTask1(villes,trains, this);
+    int nbTrain=0;
     public Modele(){
  
         map=new Case[8][8];
+                for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                // init case
+                Case c = new Case(i,j);
+                map[i][j]=c;
+            }
+        }
         this.observateur=new ArrayList<>();
     }
     
@@ -37,9 +45,11 @@ public class Modele {
         this.map = map;
     }
     
-    public void setCaseTrain(int i, int j){
+    public void setCaseTrainTrue(int i, int j){
         ((Rail)map[i][j]).setTrain(true);
-        
+    }
+        public void setCaseTrainFalse(int i, int j){
+        ((Rail)map[i][j]).setTrain(false);
     }
     
     
@@ -49,12 +59,13 @@ public class Modele {
             return map[x][y];
         }
     
-        public void genererMonde() throws InterruptedException{
+        public void  genererMonde() throws InterruptedException{
             
             //Creation des ressource
             Ressource lait = new Ressource("lait",5); 
             Ressource plastique = new Ressource("plastique",5);
             Ressource fer = new Ressource("fer",5);
+                     
             
             //ligneItem des different produit
             LigneItem I1haltere = new LigneItem(fer,10);
@@ -80,24 +91,29 @@ public class Modele {
             
             Ville limoges=new Ville("Limoges",lait, villes);
             villes.add(limoges);
-            Ville beziers = new Ville("Bezier",proteine, villes);
-            villes.add(beziers);
+
             Ville toulouse = new Ville("toulouse",fer, villes);
             villes.add(toulouse);
+            
             Ville servian = new Ville("servian",plastique, villes);
-             villes.add(servian);
+            villes.add(servian);
+            
+            Ville beziers = new Ville("Bezier",proteine, villes);
+            villes.add(beziers);
+
             Ville carcassonne = new Ville("carcassonne",haltere, villes);
             villes.add(carcassonne);
             Ville agen = new Ville("agen",shaker,villes );
             villes.add(agen);
 
-  
+
+            
             //placement des villes sur le modele et sur la vue
             map[limoges.getX()][limoges.getY()]=limoges;
             avertirAllChangementCase(limoges.getX(), limoges.getY(), limoges);
             
-           map[beziers.getX()][beziers.getY()]=beziers;
-            avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+           //map[beziers.getX()][beziers.getY()]=beziers;
+            //avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
             
             map[toulouse.getX()][toulouse.getY()]=toulouse;
             avertirAllChangementCase(toulouse.getX(), toulouse.getY(), toulouse);
@@ -105,15 +121,12 @@ public class Modele {
             map[servian.getX()][servian.getY()]=servian;
             avertirAllChangementCase(servian.getX(), servian.getY(), servian);
             
-            map[carcassonne.getX()][carcassonne.getY()]=carcassonne;
+            /*map[carcassonne.getX()][carcassonne.getY()]=carcassonne;
             avertirAllChangementCase(carcassonne.getX(), carcassonne.getY(), carcassonne);
             
             map[agen.getX()][agen.getY()]=agen;
-            avertirAllChangementCase(agen.getX(), agen.getY(), agen);
+            avertirAllChangementCase(agen.getX(), agen.getY(), agen);*/
                 
-            for (Ville v : villes){
-                System.out.println("ville :"+v.getX()+"/"+v.getY());
-            }
             
             //Generer obstacle
             Obstacle o = new Obstacle(villes);
@@ -140,19 +153,66 @@ public class Modele {
             map[o3.getX()][o3.getY()]=o3;
             avertirAllChangementCase(o3.getX(), o3.getY(), o3);
             
-
-            
             //generer premiere ressource
             limoges.genererPremiereRessource(limoges.getItem());
             toulouse.genererPremiereRessource(toulouse.getItem());
             servian.genererPremiereRessource(servian.getItem());
             
             
-            //Lancer tache generer ressource ville
-           /*BackgroundTask1 genererRessource = new BackgroundTask1(villes,trains, this);
-            genererRessource.start();*/
+            //LigneItem pour initialiser le stock
             
-            System.out.println("le programme fonctionne comme sur des roulettes");
+            LigneItem laitItemToulouse = new LigneItem(lait,0);
+            LigneItem laitItemServian = new LigneItem(lait,0);
+            
+            LigneItem ferItemLimoges = new LigneItem(fer,0);
+            LigneItem ferItemServian = new LigneItem(fer,0);
+            
+            
+            LigneItem plasitqueItemLimoges = new LigneItem(plastique,0);
+             LigneItem plasitqueItemToulouse = new LigneItem(plastique,0);
+            
+            limoges.setStock(ferItemLimoges);
+            limoges.setStock(plasitqueItemLimoges);
+            
+            toulouse.setStock(laitItemToulouse);
+            toulouse.setStock(plasitqueItemToulouse);
+            
+            servian.setStock(ferItemServian);
+            servian.setStock(laitItemServian);
+            
+
+            
+            
+            
+            
+            
+            
+             //avertieAllCreationRessource();
+            
+            System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
+            System.out.println("Limoges: "+limoges.getStock().get(1).getItem().getNom()+limoges.getStock().get(1).getQuantite());
+            System.out.println("Limoges: "+limoges.getStock().get(2).getItem().getNom()+limoges.getStock().get(2).getQuantite());
+            
+           
+            System.out.println("Toulouse: "+toulouse.getStock().get(0).getItem().getNom()+toulouse.getStock().get(0).getQuantite());
+            System.out.println("Toulouse: "+toulouse.getStock().get(1).getItem().getNom()+toulouse.getStock().get(1).getQuantite());
+            System.out.println("Toulouse: "+toulouse.getStock().get(2).getItem().getNom()+toulouse.getStock().get(2).getQuantite());
+            
+            System.out.println("Servian: "+servian.getStock().get(0).getItem().getNom()+servian.getStock().get(0).getQuantite());
+            System.out.println("Servian: "+servian.getStock().get(1).getItem().getNom()+servian.getStock().get(1).getQuantite());
+            System.out.println("Servian: "+servian.getStock().get(2).getItem().getNom()+servian.getStock().get(2).getQuantite());
+            
+            avertieAllCreationRessource();
+
+            for(Ville v:villes){
+                System.out.println(v.getNom());
+            }
+            
+            
+            //Lancer tache generer ressource ville
+            background.start();
+            
+            //this.textuel();
             
            /*LigneItem I1halteretest = new LigneItem(fer,20);
            carcassonne.getStock().add(I1halteretest);*/
@@ -185,8 +245,22 @@ public class Modele {
         }   
         }
         
+        public void avertirAllTrainFalse(int i, int j, Case c){
+            for (Observateur o : this.observateur){
+            o.avertirTrainFalse(i, j, c);
+        }   
+        }
+        
+        public void avertieAllCreationRessource(){
+            for (Observateur o : this.observateur){
+                o.avertirCreationRessource();
+        }  
+        }
+        
         /* PLACER RAILS */
-        public void placerRails(ArrayList<int[]> trajet){
+        public synchronized void placerRails(ArrayList<int[]> trajet) throws InterruptedException{
+            
+            
             int c = 0;
             /*on parcoure l'arraylist trajet en ignorant 1er coordonées (ville)*/
             for (int i=1; i<=trajet.size()-1; i++){
@@ -201,6 +275,7 @@ public class Modele {
                 if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rails.get(c).getX()==trajet.get(i-1)[0]){
                     rails.get(c).setTexture(rails.get(c).getRailH());
                     rails.get(c).setTextureSelection(rails.get(c).getRailHSelection());
+                    rails.get(c).setTextureTrain(rails.get(c).getRailHTrain());
                 
                     //placement de la case rail sur le modele map[][]
                     map[rails.get(c).getX()][rails.get(c).getY()]=rails.get(c);    
@@ -215,7 +290,9 @@ public class Modele {
                 {
                     rails.get(c).setTexture(rails.get(c).getRailV());
                     rails.get(c).setTextureSelection(rails.get(c).getRailVSelection());
+                    rails.get(c).setTextureTrain(rails.get(c).getRailVTrain());
                     map[rails.get(c).getX()][rails.get(c).getY()]=rails.get(c);
+                    
                     this.avertirAllChangementCase(rails.get(c).getX(),rails.get(c).getY(), rails.get(c));
   
                 }
@@ -230,6 +307,7 @@ public class Modele {
                 {
                     rails.get(c-1).setTexture(rails.get(c-1).getRailVirage1());
                     rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage1Selection());
+                    rails.get(c-1).setTextureTrain(rails.get(c-1).getRailVirage1Train());
                     map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
                     this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
@@ -246,6 +324,7 @@ public class Modele {
                 {
                 rails.get(c-1).setTexture(rails.get(c-1).getRailVirage2());
                 rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage2Selection());
+                rails.get(c-1).setTextureTrain(rails.get(c-1).getRailVirage2Train());
                 map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
                 this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
@@ -263,6 +342,7 @@ public class Modele {
                 {
                 rails.get(c-1).setTexture(rails.get(c-1).getRailVirage3());
                 rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage3Selection());
+                rails.get(c-1).setTextureTrain(rails.get(c-1).getRailVirage3Train());
                 map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
                 this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
@@ -279,6 +359,7 @@ public class Modele {
                 {
                 rails.get(c-1).setTexture(rails.get(c-1).getRailVirage4());
                 rails.get(c-1).setTextureSelection(rails.get(c-1).getRailVirage4Selection());
+                rails.get(c-1).setTextureTrain(rails.get(c-1).getRailVirage4Train());
                 map[rails.get(c-1).getX()][rails.get(c-1).getY()]=rails.get(c-1);
                 this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
          
@@ -293,22 +374,67 @@ public class Modele {
                 v.setSelection(false);
                 this.avertirAllObservateursSelectionVille(v.getX(), v.getY(), v);
             }
-          
+ 
             
-            //creation d'un train en fonction du trajet
-            trains.add(new Train(trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1]))));
+            //creation d'un train en fonction du trajet.
+            synchronized(trains) {
+            trains.add(new Train(trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]))));
             
+            BackgroundTaskTrain bg = new BackgroundTaskTrain(trains.get(nbTrain),this);
+            nbTrain++;
+            bg.start();
+            }
             //On nettoye le trajet apres cration du chemin de rails 
             trajet.clear();
             
-            for(Rail r : rails){
-                System.out.println("rail : "+r.getX()+"/"+r.getY());
-            }
+            
+            //this.textuel();
+
         }
            
         /*SUPPRIMER RAILS*/
         public void supprimerRails(ArrayList<int[]> trajet){
             
+        }
+        
+    
+       public void textuel(){
+           System.out.println("textuel :");
+   
+               System.out.println(this.map[0][0].toString()+this.map[0][1].toString()+this.map[0][2].toString()+this.map[0][3].toString()
+               +this.map[0][4].toString()+this.map[0][5].toString()+this.map[0][6].toString()+this.map[0][7].toString());
+               
+               System.out.println(this.map[1][0].toString()+this.map[1][1].toString()+this.map[1][2].toString()+this.map[1][3].toString()                      
+               +this.map[1][4].toString()+this.map[1][5].toString()+this.map[1][6].toString()+this.map[1][7].toString());
+               
+               System.out.println(this.map[2][0].toString()+this.map[2][1].toString()+this.map[2][2].toString()+this.map[2][3].toString()                     
+               +this.map[2][4].toString()+this.map[2][5].toString()+this.map[2][6].toString()+this.map[2][7].toString());
+               
+               
+               System.out.println(this.map[3][0].toString()+this.map[3][1].toString()+this.map[3][2].toString()+this.map[3][3].toString()
+               +this.map[3][4].toString()+this.map[3][5].toString()+this.map[3][6].toString()+this.map[3][7].toString());
+               
+               System.out.println(this.map[4][0].toString()+this.map[4][1].toString()+this.map[4][2].toString()+this.map[4][3].toString()
+               +this.map[4][4].toString()+this.map[4][5].toString()+this.map[4][6].toString()+this.map[4][7].toString());
+               
+               System.out.println(this.map[5][0].toString()+this.map[5][1].toString()+this.map[5][2].toString()+this.map[5][3].toString()
+               +this.map[5][4].toString()+this.map[5][5].toString()+this.map[5][6].toString()+this.map[5][7].toString());
+               
+                System.out.println(this.map[6][0].toString()+this.map[6][1].toString()+this.map[6][2].toString()+this.map[6][3].toString()
+               +this.map[6][4].toString()+this.map[6][5].toString()+this.map[6][6].toString()+this.map[6][7].toString());
+               
+               System.out.println(this.map[7][0].toString()+this.map[7][1].toString()+this.map[7][2].toString()+this.map[7][3].toString()
+               +this.map[7][4].toString()+this.map[7][5].toString()+this.map[7][6].toString()+this.map[7][7].toString());
+               
+
+               
+              System.out.println("case 01 coordonnées: " + map[0][1].getX()+map[0][1].getY());
+              System.out.println("case 02 coordonnées: " + map[0][2].getX()+map[0][2].getY());
+              System.out.println("case 03 coordonnées: " + map[0][3].getX()+map[0][3].getY());
+              System.out.println("case 04 coordonnées: " + map[0][4].getX()+map[0][4].getY());
+              System.out.println("case 23 coordonnées: " + map[2][3].getX()+map[2][3].getY());
+           
+
         }
 }
 

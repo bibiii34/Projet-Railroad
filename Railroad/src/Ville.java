@@ -19,8 +19,16 @@ public class Ville extends Case {
     private  String nom;
     private  Item item;
     private  ArrayList<LigneItem> stock;
+  
 
         //constructeur
+    
+    public Ville(){
+        this.nom=" ";
+        this.item=null;
+        this.stock = new ArrayList<>();
+        
+    }
     public Ville(int x, int y, String n, Item i){
         super(x,y);
         ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
@@ -30,12 +38,31 @@ public class Ville extends Case {
         this.nom=n;
         this.item=i;
         this.stock = new ArrayList<>();
+        this.selection=false;
+        
+                
         
     }
     
-    public Ville(String n,Item i){
-        this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
-        this.y=0 + (int)(Math.random() * ((7 - 0) + 1));
+    public Ville(String n,Item i, ArrayList<Ville> v){
+        boolean coordonnees = false;
+        
+        while (coordonnees == false){
+            this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
+            this.y=0 + (int)(Math.random() * ((7 - 0) + 1));   
+            
+            if (v.isEmpty()){
+                coordonnees = true;
+            }    
+            else{
+                coordonnees=true;
+                for (Ville maville : v){
+                    if (this.x==maville.getX() && this.y==maville.getY()){
+                    coordonnees = false;
+                    }
+                }
+            }
+        }
         ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
         this.texture=VILLE;
         ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
@@ -67,8 +94,8 @@ public class Ville extends Case {
         return stock;
     }
 
-    public void setStock(ArrayList<LigneItem> stock) {
-        this.stock = stock;
+    public void setStock(LigneItem stock) {
+        this.stock.add(stock);
     }
     
     
@@ -161,10 +188,15 @@ public class Ville extends Case {
             }
                         
         }
-                    
+
+        
     }
             
-            
+        @Override
+    public String toString(){
+    String chaine = " V ";
+    return chaine;
+    }          
         
 }  
             

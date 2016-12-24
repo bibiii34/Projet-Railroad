@@ -16,6 +16,7 @@ public class Case {
     protected int y;
     protected ImageIcon texture;
     protected ImageIcon textureSelection;
+    protected boolean selection;
     
 
     //constructeur
@@ -26,10 +27,15 @@ public class Case {
         this.texture = DESERT;
         ImageIcon DESERTSELECTION = new ImageIcon ("./src/imgs/Texture 100x100/desertSelection.png");
         this.textureSelection = DESERTSELECTION;
+        this.selection=false;
     }
     
     public Case(){
-        
+        ImageIcon DESERT = new ImageIcon("./src/imgs/Texture 100x100/desert.png");
+        this.texture = DESERT;
+        ImageIcon DESERTSELECTION = new ImageIcon ("./src/imgs/Texture 100x100/desertSelection.png");
+        this.textureSelection = DESERTSELECTION;
+        this.selection=false; 
     }
 
     //Accesseur 
@@ -60,5 +66,18 @@ public class Case {
       public ImageIcon getTextureSelection() {
         return textureSelection;
     }
+
+    public boolean isSelection() {
+        return selection;
+    }
+
+    public void setSelection(boolean selection) {
+        this.selection = selection;
+    }
     
+    @Override
+    public String toString(){
+    String chaine = " 0 ";
+    return chaine;
+    }  
 }

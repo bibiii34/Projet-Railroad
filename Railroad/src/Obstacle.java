@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /*
@@ -20,12 +21,29 @@ public class Obstacle extends Case {
         this.type = "lac";
     }
     
-    public Obstacle(){
-        this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
-        this.y=0 + (int)(Math.random() * ((7 - 0) + 1));
-        ImageIcon OBSTACLE = new ImageIcon("./src/imgs/Texture 100x100/obstacle.png");
-        this.texture = OBSTACLE;
+    public Obstacle(ArrayList<Ville> v){
+        boolean coordonnees = false;
         
+        while (coordonnees == false){
+            this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
+            this.y=0 + (int)(Math.random() * ((7 - 0) + 1));   
+            
+            if (v.isEmpty()){
+                coordonnees = true;
+            }    
+            else{
+                coordonnees=true;
+                for (Ville maville : v){
+                    if (this.x==maville.getX() && this.y==maville.getY()){
+                    coordonnees = false;
+                    }
+                    
+                    
+                }
+            }
+        }
+        ImageIcon OBSTACLE = new ImageIcon("./src/imgs/Texture 100x100/obstacle.png");
+        this.texture = OBSTACLE;  
     }
 
     public String getType() {
@@ -37,6 +55,10 @@ public class Obstacle extends Case {
     }
     
     
-    
+    @Override
+    public String toString(){
+    String chaine = " 1 ";
+    return chaine;
+    }  
     
 }
