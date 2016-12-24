@@ -10,7 +10,8 @@
  */
 public interface Observateur {
     
-     void avertirSelectionVille(int i, int j, Ville v);
+     void avertirSelection(int i, int j, Case c);
+     public void avertirDeselection(int i, int j, Case c);
      void avertirChangementCase(int i, int j, Case c);
      void avertirTrainTrue(int i, int j, Case c);
      void avertirTrainFalse(int i, int j, Case c);

@@ -20,6 +20,7 @@ public class Train {
     private Ville depart;
     private Ville arrivee;
     int random = (int)(Math.random() * ((5 - 0) + 1));
+    BackgroundTaskTrain thd;
     
     //Constructeurs  
     public Train(int x, int y, ArrayList<int[]> trajet, Ville d, Ville a){
@@ -33,7 +34,15 @@ public class Train {
  
     }
 
-     //Accesseur 
+    public BackgroundTaskTrain getThd() {
+        return thd;
+    }
+
+    public void setThd(BackgroundTaskTrain thd) {
+        this.thd = thd;
+    }
+    
+
     public ArrayList<int[]> getTrajet() {
         return trajet;
     }
@@ -93,79 +102,95 @@ public class Train {
             
             //lecture de la liste trajet
             for(int c=1;c<this.getTrajet().size()-1;c++){
-                //premiere case on charge
-                if (c==1){
-                    this.chargerRessources();                   
-                    modele.avertieAllCreationRessource();
+                
+                if(modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1])instanceof Rail) {
+                 //premiere case on charge
+                    if (c==1){
+                        this.chargerRessources();                   
+                        modele.avertieAllCreationRessource();
+                     }
+                
+                    if (c>=2){
+                        //a partir de la deuxieme case, on efface l'image de la case precedente
+                        modele.setCaseTrainFalse(this.getTrajet().get(c-1)[0], this.getTrajet().get(c-1)[1]);
+                        modele.avertirAllTrainFalse(this.getTrajet().get(c-1)[0],this.getTrajet().get(c-1)[1], modele.getCase(this.getTrajet().get(c-1)[0], this.getTrajet().get(c-1)[1])); 
+                    }
+                    //si la case n'est pas la derniere du trajet                           
+                    if (c<=this.getTrajet().size()-1){
+                        //on change la variable train ainsi que l'image
+                        modele.setCaseTrainTrue(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]);
+                        modele.avertirAllTrainTrue(this.getTrajet().get(c)[0],this.getTrajet().get(c)[1], modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]));
+                    }
+
+                    //si le train est sur la derniere case du trajet
+                    if (c==this.getTrajet().size()-2){
+                        //l'allé étant effectué il devient false et le retour devient true
+                        aller=false;
+                         retour=true;
+                        //decharger
+                        this.dechargerRessources();
+                        modele.avertieAllCreationRessource();
+                        //le depart devient l'arrivé et l'arrivé le départ
+                        temp=this.depart;
+                        this.depart=this.arrivee;
+                         this.arrivee=temp;   
+                    }    
+                                
+                Thread.sleep(1000); 
+                }
+                else {
+                    System.out.println("le train s'arrete");
+                    this.thd.stop();
                 }
                 
-                if (c>=2){
-                    //a partir de la deuxieme case, on efface l'image de la case precedente
-                    modele.setCaseTrainFalse(this.getTrajet().get(c-1)[0], this.getTrajet().get(c-1)[1]);
-                    modele.avertirAllTrainFalse(this.getTrajet().get(c-1)[0],this.getTrajet().get(c-1)[1], modele.getCase(this.getTrajet().get(c-1)[0], this.getTrajet().get(c-1)[1])); 
-                                                           }
-                                //si la case n'est pas la derniere du trajet                           
-                                if (c<=this.getTrajet().size()-1){
-                                    //on change la variable train ainsi que l'image
-                                    modele.setCaseTrainTrue(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]);
-                                    modele.avertirAllTrainTrue(this.getTrajet().get(c)[0],this.getTrajet().get(c)[1], modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]));
-                                }
-                                //si le train est sur la derniere case du trajet
-                                if (c==this.getTrajet().size()-2){
-                                    //l'allé étant effectué il devient false et le retour devient true
-                                    aller=false;
-                                    retour=true;
-                                    //decharger
-                                    this.dechargerRessources();
-                                    modele.avertieAllCreationRessource();
-                                    //le depart devient l'arrivé et l'arrivé le départ
-                                    temp=this.depart;
-                                    this.depart=this.arrivee;
-                                    this.arrivee=temp;
-                                    
-                                    
-                                    
-                                    
-                                }    
-                                
-                                Thread.sleep(1000);
-                            }
+
+            }
 
                         }
                         //RETOUR
                         if (retour=true){
+                            
+                            
                             //on parcoure le trajet en partant de la fin
                             for(int c=this.getTrajet().size()-2;c>=1;c--){
                                 
-                                //derniere case du trajet devient la premiere du retour donc on charge 
-                                if(c==this.getTrajet().size()-2){
+                                //On verifie que le rail n'est pas etait supprimer
+                                if(modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1])instanceof Rail) {
+                                    
+                                    //derniere case du trajet devient la premiere du retour donc on charge 
+                                    if(c==this.getTrajet().size()-2){
 
-                                    this.chargerRessources();
-                                    modele.avertieAllCreationRessource();
-                                }
-                                //a partir de la deuxieme case du retour (size-3) on efface la case precedente
-                                if (c<=this.getTrajet().size()-3){
-                                    modele.setCaseTrainFalse(this.getTrajet().get(c+1)[0], this.getTrajet().get(c+1)[1]);
-                                    modele.avertirAllTrainFalse(this.getTrajet().get(c+1)[0],this.getTrajet().get(c+1)[1], modele.getCase(this.getTrajet().get(c+1)[0], this.getTrajet().get(c+1)[1])); 
-                                                           }
-                                //le train se deplace jusqu'a revenir a la derniere case  du retour soit la premier case de trajet
-                                if (c>=1){
-                                    modele.setCaseTrainTrue(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]);
-                                    modele.avertirAllTrainTrue(this.getTrajet().get(c)[0],this.getTrajet().get(c)[1], modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]));
-                                }
-                                
-                                //premiere case le retour est terminé ! on decharge on inverse depar et arrivé
-                                if (c==1){
-                                    aller=true;
-                                    retour=false;
-                                    temp=this.depart;
-                                    this.dechargerRessources();
-                                    this.depart=this.arrivee;
-                                    this.arrivee=temp;
-                                    modele.avertieAllCreationRessource();
-                                }    
+                                        this.chargerRessources();
+                                        modele.avertieAllCreationRessource();
+                                    }
+                                    //a partir de la deuxieme case du retour (size-3) on efface la case precedente
+                                    if (c<=this.getTrajet().size()-3){
+                                        modele.setCaseTrainFalse(this.getTrajet().get(c+1)[0], this.getTrajet().get(c+1)[1]);
+                                        modele.avertirAllTrainFalse(this.getTrajet().get(c+1)[0],this.getTrajet().get(c+1)[1], modele.getCase(this.getTrajet().get(c+1)[0], this.getTrajet().get(c+1)[1])); 
+                                                               }
+                                    //le train se deplace jusqu'a revenir a la derniere case  du retour soit la premier case de trajet
+                                    if (c>=1){
+                                        modele.setCaseTrainTrue(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]);
+                                        modele.avertirAllTrainTrue(this.getTrajet().get(c)[0],this.getTrajet().get(c)[1], modele.getCase(this.getTrajet().get(c)[0], this.getTrajet().get(c)[1]));
+                                    }
+
+                                    //premiere case le retour est terminé ! on decharge on inverse depar et arrivé
+                                    if (c==1){
+                                        aller=true;
+                                        retour=false;
+                                        temp=this.depart;
+                                        this.dechargerRessources();
+                                        this.depart=this.arrivee;
+                                        this.arrivee=temp;
+                                        modele.avertieAllCreationRessource();
+                                    }    
                                 
                                 Thread.sleep(1000);
+                                }
+                                else {
+                                     System.out.println("Plus de rail le train s'arrete");
+                                        this.thd.stop();
+                                }
                             }
 
                         }

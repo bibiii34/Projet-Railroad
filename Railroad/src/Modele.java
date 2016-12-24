@@ -46,7 +46,10 @@ public class Modele {
     }
     
     public void setCaseTrainTrue(int i, int j){
-        ((Rail)map[i][j]).setTrain(true);
+        if (map[i][j] instanceof Rail==false){
+            System.out.println("Attention accident de Train");
+        }
+        else((Rail)map[i][j]).setTrain(true);
     }
         public void setCaseTrainFalse(int i, int j){
         ((Rail)map[i][j]).setTrain(false);
@@ -233,11 +236,18 @@ public class Modele {
         }
         }
         
-        public void avertirAllObservateursSelectionVille(int i, int j, Ville v){
+        public void avertirAllObservateursSelection(int i, int j, Case c){
         for (Observateur o : this.observateur){
-            o.avertirSelectionVille(i, j, v);
+            o.avertirSelection(i, j, c);
         }
         }
+        
+              public void avertirAllObservateursDeselection(int i, int j, Case c){
+        for (Observateur o : this.observateur){
+            o.avertirDeselection(i, j, c);
+        }
+        }
+        
   
         public void avertirAllTrainTrue(int i, int j, Case c){
          for (Observateur o : this.observateur){
@@ -260,8 +270,9 @@ public class Modele {
         /* PLACER RAILS */
         public synchronized void placerRails(ArrayList<int[]> trajet) throws InterruptedException{
             
+        if(this.getCase(trajet.get(0)[0],trajet.get(0)[1]) instanceof Ville && this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]) instanceof Ville){
             
-            int c = 0;
+             int c = 0;
             /*on parcoure l'arraylist trajet en ignorant 1er coordonées (ville)*/
             for (int i=1; i<=trajet.size()-1; i++){
  
@@ -372,7 +383,7 @@ public class Modele {
             //On deselectionne les villes
             for(Ville v : villes){
                 v.setSelection(false);
-                this.avertirAllObservateursSelectionVille(v.getX(), v.getY(), v);
+               this.avertirAllObservateursDeselection(v.getX(), v.getY(), v);
             }
  
             
@@ -380,21 +391,38 @@ public class Modele {
             synchronized(trains) {
             trains.add(new Train(trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]))));
             
-            BackgroundTaskTrain bg = new BackgroundTaskTrain(trains.get(nbTrain),this);
+            BackgroundTaskTrain bg = new BackgroundTaskTrain(trains.get((int)nbTrain),this);
+            
+            trains.get(nbTrain).setThd(bg);
             nbTrain++;
             bg.start();
             }
             //On nettoye le trajet apres cration du chemin de rails 
             trajet.clear();
             
+        }    
+        
+        else {
+            System.out.println("Attention le depart et l'arrivée doivent etre une ville");
             
-            //this.textuel();
+            for (int i =0 ; i<8;i++){
+                for (int j=0 ; i<8;i++){
+                    map[i][j].setSelection(false);
+                    this.avertirAllObservateursDeselection(i, j, this.getCase(i, j));
+                }
+            }
+        }
 
         }
            
         /*SUPPRIMER RAILS*/
         public void supprimerRails(ArrayList<int[]> trajet){
-            
+            for(int[] t : trajet){
+                Case c = new Case(t[0],t[1]);
+                map[t[0]][t[1]]=c;
+                this.avertirAllChangementCase(c.getX(), c.getY(), c);
+                
+            }
         }
         
     

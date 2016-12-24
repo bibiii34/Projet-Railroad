@@ -118,6 +118,11 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         );
 
         jButton2.setText("SUPPRIMER RAILS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("PLACER RAILS");
         jButton1.setActionCommand("jButton1");
@@ -301,6 +306,10 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    modele.supprimerRails(trajet);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,11 +379,15 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
     
     @Override
-    public void avertirSelectionVille(int i, int j, Ville v) {
+    public void avertirSelection(int i, int j, Case c) {
         
-        jboard[i][j].setIcon(v.getTexture());
+        jboard[i][j].setIcon(c.getTextureSelection());
     }
     
+    @Override
+    public void avertirDeselection(int i, int j, Case c){
+        jboard[i][j].setIcon(c.getTexture());
+    }
     
     @Override
     public void avertirChangementCase(int i, int j, Case c) {
@@ -435,19 +448,25 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
             System.out.println(i + " " + j);
             
             //Si case non selectionné on change icone, et on enregistre ses coordonnées dans trajet
-            if (jboard[i][j].getIcon()==DESERT){
-               jboard[i][j].setIcon(DESERTSELECTION); 
+            if (modele.getCase(i, j).isSelection()==false){
+                modele.getCase(i, j).setSelection(true);
+               //jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection()); 
+                avertirSelection(i, j, modele.getCase(i, j));
                trajet.add(tab);
             }
             
             
             //Si case selectionné on change iconne et on vide trajet
-            else if (jboard[i][j].getIcon()==DESERTSELECTION){
-                jboard[i][j].setIcon(DESERT);
+           // else if (jboard[i][j].getIcon()==DESERTSELECTION){
+           //     jboard[i][j].setIcon(DESERT);
+            else {
+                //jboard[i][j].setIcon(modele.getCase(i, j).getTexture()); 
+                avertirDeselection(i, j, modele.getCase(i, j));
+                modele.getCase(i, j).setSelection(false);
                 trajet.clear();
             }
             
-            //Si clic sur une ville et quelle n'est pas selectionné (attibut selection) on change iconne on selectionne et ajout a trajet
+          /*  //Si clic sur une ville et quelle n'est pas selectionné (attibut selection) on change iconne on selectionne et ajout a trajet
             else if (modele.getCase(i, j) instanceof Ville && ((Ville)modele.getCase(i, j)).isSelection()==false){
                 jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection());
                 ((Ville)modele.getCase(i, j)).setSelection(true);
@@ -472,7 +491,7 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
                 jboard[i][j].setIcon(modele.getCase(i, j).getTexture());
                  modele.getCase(i, j).setSelection(false);
             
-            }
+            }*/
             
      
         }
