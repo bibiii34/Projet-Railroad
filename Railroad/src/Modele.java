@@ -24,9 +24,9 @@ public class Modele {
     int nbTrain=0;
     public Modele(){
  
-        map=new Case[8][8];
-                for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
+        map=new Case[7][7];
+                for(int i=0;i<7;i++){
+            for(int j=0;j<7;j++){
                 // init case
                 Case c = new Case(i,j);
                 map[i][j]=c;
@@ -54,10 +54,7 @@ public class Modele {
         public void setCaseTrainFalse(int i, int j){
         ((Rail)map[i][j]).setTrain(false);
     }
-    
-    
-    
-    
+
         public Case getCase(int x, int y){
             return map[x][y];
         }
@@ -91,10 +88,11 @@ public class Modele {
             Produit shaker = new Produit("shaker",100,fabricationshaker);
             
             //Creation ville
-            
+            ImageIcon villeLimoge = new ImageIcon("./src/imgs/Texture 100x100/villeLimoges.png");
             Ville limoges=new Ville("Limoges",lait, villes);
+            limoges.setTexture(villeLimoge);
             villes.add(limoges);
-
+            
             Ville toulouse = new Ville("toulouse",fer, villes);
             villes.add(toulouse);
             
@@ -242,7 +240,7 @@ public class Modele {
         }
         }
         
-              public void avertirAllObservateursDeselection(int i, int j, Case c){
+        public void avertirAllObservateursDeselection(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirDeselection(i, j, c);
         }
@@ -267,9 +265,14 @@ public class Modele {
         }  
         }
         
+        public void avertirAllInformations(String s){
+                        for (Observateur o : this.observateur){
+                o.avertirInformation(s);
+        }  
+        }
         /* PLACER RAILS */
         public synchronized void placerRails(ArrayList<int[]> trajet) throws InterruptedException{
-            
+        if (trajet.isEmpty()==false){
         if(this.getCase(trajet.get(0)[0],trajet.get(0)[1]) instanceof Ville && this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]) instanceof Ville){
             
              int c = 0;
@@ -401,12 +404,13 @@ public class Modele {
             trajet.clear();
             
         }    
+        }
         
         else {
             System.out.println("Attention le depart et l'arrivée doivent etre une ville");
-            
-            for (int i =0 ; i<8;i++){
-                for (int j=0 ; i<8;i++){
+            avertirAllInformations("Attention le depart et l'arrivée doivent etre une ville");
+            for (int i =0 ; i<7;i++){
+                for (int j=0 ; i<7;i++){
                     map[i][j].setSelection(false);
                     this.avertirAllObservateursDeselection(i, j, this.getCase(i, j));
                 }

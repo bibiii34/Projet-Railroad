@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,13 +13,16 @@
  */
     public class Main {
     public static void main(String[] argc) throws InterruptedException{
-    Modele m = new Modele();
-    RailroadFrame rf = new RailroadFrame(m);
+    //Modele m = new Modele();
+    //RailroadFrame rf = new RailroadFrame(m);
+    ArrayList<Joueur> joueurs = new ArrayList();
     
-    m.register(rf);
-    rf.setVisible(true);
+    Connexion c = new Connexion();
     
-    m.genererMonde();
+    //m.register(rf);
+    //rf.setVisible(false);
+    c.setVisible(true);
+    //m.genererMonde();
         
     }
     

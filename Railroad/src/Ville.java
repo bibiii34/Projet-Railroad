@@ -19,7 +19,7 @@ public class Ville extends Case {
     private  String nom;
     private  Item item;
     private  ArrayList<LigneItem> stock;
-  
+    
 
         //constructeur
     
@@ -32,8 +32,10 @@ public class Ville extends Case {
     public Ville(int x, int y, String n, Item i){
         super(x,y);
         ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
-        this.texture=VILLE;
+        
         ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
+        
+        this.texture=VILLE;
         this.textureSelection=VILLESELECTION;
         this.nom=n;
         this.item=i;
@@ -48,8 +50,8 @@ public class Ville extends Case {
         boolean coordonnees = false;
         
         while (coordonnees == false){
-            this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
-            this.y=0 + (int)(Math.random() * ((7 - 0) + 1));   
+            this.x=0 + (int)(Math.random() * ((5 - 0) + 1));
+            this.y=0 + (int)(Math.random() * ((5 - 0) + 1));   
             
             if (v.isEmpty()){
                 coordonnees = true;

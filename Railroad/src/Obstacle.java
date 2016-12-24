@@ -25,8 +25,8 @@ public class Obstacle extends Case {
         boolean coordonnees = false;
         
         while (coordonnees == false){
-            this.x=0 + (int)(Math.random() * ((7 - 0) + 1));
-            this.y=0 + (int)(Math.random() * ((7 - 0) + 1));   
+            this.x=0 + (int)(Math.random() * ((5 - 0) + 1));
+            this.y=0 + (int)(Math.random() * ((5 - 0) + 1));   
             
             if (v.isEmpty()){
                 coordonnees = true;

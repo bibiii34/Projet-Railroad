@@ -10,6 +10,7 @@
  */
 public interface Observateur {
     
+     void avertirInformation(String s);
      void avertirSelection(int i, int j, Case c);
      public void avertirDeselection(int i, int j, Case c);
      void avertirChangementCase(int i, int j, Case c);
