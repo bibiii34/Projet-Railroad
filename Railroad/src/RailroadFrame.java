@@ -341,8 +341,7 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelJeu, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,30 +465,22 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         
     }
     
+    @Override
     public void avertirInformation(String s){
         //jTextAreaInformations.setText("null");
         jTextAreaInformations.setText(s);
     }
     
+    @Override
     public void avertirTrainFalse(int i, int j, Case c) {
         jboard[i][j].setIcon(((Rail)c).getTexture());
         
     }
         
+    @Override
     public void avertirCreationRessource(){
        
-        jLabelLimogesLaitQ.setText(Integer.toString(modele.villes.get(0).getStock().get(0).getQuantite()));
-        jLabelLimogesFerQ.setText(Integer.toString(modele.villes.get(0).getStock().get(1).getQuantite()));
-        jLabelLimogesPlastiqueQ.setText(Integer.toString(modele.villes.get(0).getStock().get(2).getQuantite()));
-        
-        
-        jLabelToulouseFerQ.setText(Integer.toString(modele.villes.get(1).getStock().get(0).getQuantite()));
-        jLabelToulouseLaitQ.setText(Integer.toString(modele.villes.get(1).getStock().get(1).getQuantite()));
-        jLabelToulousePlastiqueQ.setText(Integer.toString(modele.villes.get(1).getStock().get(2).getQuantite()));
-        
-        jLabelServianPlastiqueQ.setText(Integer.toString(modele.villes.get(2).getStock().get(0).getQuantite()));
-        jLabelServianLaitQ.setText(Integer.toString(modele.villes.get(2).getStock().get(1).getQuantite()));
-        jLabelServianFerQ.setText(Integer.toString(modele.villes.get(2).getStock().get(2).getQuantite()));
+ 
         
         
     }
