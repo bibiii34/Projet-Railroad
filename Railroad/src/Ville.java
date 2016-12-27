@@ -31,8 +31,7 @@ public class Ville extends Case {
     }
     public Ville(int x, int y, String n, Item i){
         super(x,y);
-        ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
-        
+        ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");       
         ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
         
         this.texture=VILLE;
@@ -108,6 +107,15 @@ public class Ville extends Case {
             
         }
     }
+
+    public ImageIcon getTextureSelection() {
+        return textureSelection;
+    }
+
+    public void setTextureSelection(ImageIcon textureSelection) {
+        this.textureSelection = textureSelection;
+    }
+    
    
     
     

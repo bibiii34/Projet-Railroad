@@ -20,6 +20,22 @@ public class Modele {
     public ArrayList<Ville> villes = new ArrayList();
     private ArrayList<Rail> rails = new ArrayList();
     private ArrayList<Train> trains = new ArrayList();
+    
+    ImageIcon beziersCity = new ImageIcon("./src/imgs/Texture 100x100/villeBeziersCity.png");
+    ImageIcon beziersCitySelection = new ImageIcon("./src/imgs/Texture 100x100/villeBeziersCitySelection.png");
+    ImageIcon agenCity = new ImageIcon("./src/imgs/Texture 100x100/villeAgenCity.png");
+    ImageIcon agenCitySelection = new ImageIcon("./src/imgs/Texture 100x100/villeAgenCitySelection.png");
+    ImageIcon carsonCity = new ImageIcon("./src/imgs/Texture 100x100/villeCarsonCity.png");
+    ImageIcon carsonCitySelection = new ImageIcon("./src/imgs/Texture 100x100/villeCarsonCitySelection.png");
+    ImageIcon tombstoneIcn = new ImageIcon("./src/imgs/Texture 100x100/villeTombstone.png");
+    ImageIcon tombstoneSelection = new ImageIcon("./src/imgs/Texture 100x100/villeTombstoneSelection.png");
+    ImageIcon hillValleyIcn = new ImageIcon("./src/imgs/Texture 100x100/villeHillValley.png");
+    ImageIcon hillValleySelection = new ImageIcon("./src/imgs/Texture 100x100/villeHillValleySelection.png");
+    ImageIcon santaFeIcn = new ImageIcon("./src/imgs/Texture 100x100/villeSantaFe.png");
+    ImageIcon santaFeSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSantaFeSelection.png");
+    ImageIcon sanAntonioIcn = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonio.png");
+    ImageIcon sanAntonioSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonioSelection.png");
+    
     BackgroundTask1 background = new BackgroundTask1(villes,trains, this);
     int nbTrain=0;
     public Modele(){
@@ -100,25 +116,39 @@ public class Modele {
             //ImageIcon villeLimoge = new ImageIcon("./src/imgs/Texture 100x100/villeLimoges.png");
             
             Ville beziers = new Ville("Beziers City",pistolet, villes);
+            beziers.setTexture(beziersCity);
+            beziers.setTextureSelection(beziersCitySelection);
             villes.add(beziers);
             
             Ville agen=new Ville("Agen City",whisky, villes);
+            agen.setTexture(agenCity);
+            agen.setTextureSelection(agenCitySelection);
             villes.add(agen);
             
             Ville carson = new Ville("Carson City",bottes, villes);
+            carson.setTexture(carsonCity);
+            carson.setTextureSelection(carsonCitySelection);
             villes.add(carson);
             
             Ville tombstone = new Ville("Tombstone",bois, villes);
+            tombstone.setTexture(tombstoneIcn);
+            tombstone.setTextureSelection(tombstoneSelection);
             villes.add(tombstone);
             
 
             Ville hillValley = new Ville("Hill Valley",cereales, villes);
+            hillValley.setTexture(hillValleyIcn);
+            hillValley.setTextureSelection(hillValleySelection);
             villes.add(hillValley);
             
             Ville santaFe = new Ville("Sant Fe",fer,villes );
+            santaFe.setTexture(santaFeIcn);
+            santaFe.setTextureSelection(santaFeSelection);
             villes.add(santaFe);
 
             Ville sanAntonio = new Ville("San Antonio",cuir,villes);
+            sanAntonio.setTexture(sanAntonioIcn);
+            sanAntonio.setTextureSelection(sanAntonioSelection);
             villes.add(sanAntonio);
             
             
