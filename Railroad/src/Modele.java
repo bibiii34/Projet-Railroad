@@ -51,82 +51,98 @@ public class Modele {
         }
         else((Rail)map[i][j]).setTrain(true);
     }
-        public void setCaseTrainFalse(int i, int j){
+    
+    public void setCaseTrainFalse(int i, int j){
         ((Rail)map[i][j]).setTrain(false);
     }
 
-        public Case getCase(int x, int y){
+    public Case getCase(int x, int y){
             return map[x][y];
-        }
+    }
     
         public void  genererMonde() throws InterruptedException{
             
-            //Creation des ressource
-            Ressource lait = new Ressource("lait",5); 
-            Ressource plastique = new Ressource("plastique",5);
-            Ressource fer = new Ressource("fer",5);
-                     
+            //Creation des ressource          
+            Ressource bois = new Ressource("bois",1);
+            Ressource fer = new Ressource("fer",1);
+            Ressource cereales = new Ressource("cereales",1);
+            Ressource cuir = new Ressource("cuir",1);
             
-            //ligneItem des different produit
-            LigneItem I1haltere = new LigneItem(fer,10);
-            LigneItem I1proteine = new LigneItem(lait,20);
-            LigneItem I2proteine = new LigneItem(plastique,5);
-            LigneItem I1shaker = new LigneItem(plastique,3);
+            //ligneItem des different produit       
+            LigneItem I1pistolet = new LigneItem(fer,30);
+            LigneItem I2pistolet = new LigneItem(bois,10);
+            LigneItem I1whisky = new LigneItem(cereales,100);
+            LigneItem I2whisky = new LigneItem(bois,30);
+            LigneItem I1bottes = new LigneItem(cuir,20);
+            LigneItem I2bottes = new LigneItem(bois,5);
+            
+            
             
             //ArayList de ligne item pour crée des produit
-            ArrayList<LigneItem> fabricationhaltere =new ArrayList();
-            ArrayList<LigneItem> fabricationproteine =new ArrayList(); 
-            ArrayList<LigneItem> fabricationshaker=new ArrayList();
+            ArrayList<LigneItem> fabricationPistolet =new ArrayList();
+            ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
+            ArrayList<LigneItem> fabricationBottes=new ArrayList();
+           
+            fabricationPistolet.add(I1pistolet);
+            fabricationPistolet.add(I2pistolet);
+            fabricationWhisky.add(I1whisky);
+            fabricationWhisky.add(I2whisky);
+            fabricationBottes.add(I1bottes);
+            fabricationBottes.add(I2bottes);
             
-            fabricationhaltere.add(I1haltere);
-            fabricationproteine.add(I1proteine);
-            fabricationproteine.add(I2proteine);
             
-            //Creation des produit
-            Produit proteine = new Produit("proteine",100,fabricationproteine);
-            Produit haltere = new Produit("altere",100,fabricationhaltere);
-            Produit shaker = new Produit("shaker",100,fabricationshaker);
+            //Creation des produit          
+            Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
+            Produit whisky = new Produit("whisky",100,fabricationWhisky);
+            Produit bottes = new Produit("bottes",100,fabricationBottes);
             
             //Creation ville
-            ImageIcon villeLimoge = new ImageIcon("./src/imgs/Texture 100x100/villeLimoges.png");
-            Ville limoges=new Ville("Limoges",lait, villes);
-            limoges.setTexture(villeLimoge);
-            villes.add(limoges);
+            //ImageIcon villeLimoge = new ImageIcon("./src/imgs/Texture 100x100/villeLimoges.png");
             
-            Ville toulouse = new Ville("toulouse",fer, villes);
-            villes.add(toulouse);
-            
-            Ville servian = new Ville("servian",plastique, villes);
-            villes.add(servian);
-            
-            Ville beziers = new Ville("Bezier",proteine, villes);
+            Ville beziers = new Ville("Beziers City",pistolet, villes);
             villes.add(beziers);
-
-            Ville carcassonne = new Ville("carcassonne",haltere, villes);
-            villes.add(carcassonne);
-            Ville agen = new Ville("agen",shaker,villes );
+            
+            Ville agen=new Ville("Agen City",whisky, villes);
             villes.add(agen);
+            
+            Ville carson = new Ville("Carson City",bottes, villes);
+            villes.add(carson);
+            
+            Ville tombstone = new Ville("Tombstone",bois, villes);
+            villes.add(tombstone);
+            
 
+            Ville hillValley = new Ville("Hill Valley",cereales, villes);
+            villes.add(hillValley);
+            
+            Ville santaFe = new Ville("Sant Fe",fer,villes );
+            villes.add(santaFe);
 
+            Ville sanAntonio = new Ville("San Antonio",cuir,villes);
+            villes.add(sanAntonio);
+            
             
             //placement des villes sur le modele et sur la vue
-            map[limoges.getX()][limoges.getY()]=limoges;
-            avertirAllChangementCase(limoges.getX(), limoges.getY(), limoges);
-            
-           //map[beziers.getX()][beziers.getY()]=beziers;
-            //avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
-            
-            map[toulouse.getX()][toulouse.getY()]=toulouse;
-            avertirAllChangementCase(toulouse.getX(), toulouse.getY(), toulouse);
-            
-            map[servian.getX()][servian.getY()]=servian;
-            avertirAllChangementCase(servian.getX(), servian.getY(), servian);
-            
-            /*map[carcassonne.getX()][carcassonne.getY()]=carcassonne;
-            avertirAllChangementCase(carcassonne.getX(), carcassonne.getY(), carcassonne);
-            
+            map[beziers.getX()][beziers.getY()]=beziers;
+            avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+ 
             map[agen.getX()][agen.getY()]=agen;
-            avertirAllChangementCase(agen.getX(), agen.getY(), agen);*/
+            avertirAllChangementCase(agen.getX(), agen.getY(), agen);
+            
+            map[carson.getX()][carson.getY()]=carson;
+            avertirAllChangementCase(carson.getX(), carson.getY(), carson);
+            
+            map[tombstone.getX()][tombstone.getY()]=tombstone;
+            avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
+            
+            map[hillValley.getX()][hillValley.getY()]=hillValley;
+            avertirAllChangementCase(hillValley.getX(), hillValley.getY(), hillValley);
+                        
+            map[santaFe.getX()][santaFe.getY()]=santaFe;
+            avertirAllChangementCase(santaFe.getX(), santaFe.getY(), santaFe);
+            
+            map[sanAntonio.getX()][sanAntonio.getY()]=sanAntonio;
+            avertirAllChangementCase(sanAntonio.getX(), sanAntonio.getY(), sanAntonio);
                 
             
             //Generer obstacle
@@ -155,42 +171,48 @@ public class Modele {
             avertirAllChangementCase(o3.getX(), o3.getY(), o3);
             
             //generer premiere ressource
-            limoges.genererPremiereRessource(limoges.getItem());
-            toulouse.genererPremiereRessource(toulouse.getItem());
-            servian.genererPremiereRessource(servian.getItem());
+            tombstone.genererPremiereRessource(tombstone.getItem());
+            hillValley.genererPremiereRessource(hillValley.getItem());
+            santaFe.genererPremiereRessource(santaFe.getItem());
+            sanAntonio.genererPremiereRessource(sanAntonio.getItem());
             
             
             //LigneItem pour initialiser le stock
+            LigneItem ferItemTombstone = new LigneItem(fer,0);
+            LigneItem cerealeItemTombstone = new LigneItem(cereales,0);
+            LigneItem cuirItemTombstone = new LigneItem(cuir,0);
             
-            LigneItem laitItemToulouse = new LigneItem(lait,0);
-            LigneItem laitItemServian = new LigneItem(lait,0);
+            LigneItem boisItemSantaFe = new LigneItem(bois,0);
+            LigneItem cerealeItemSantaFe = new LigneItem(cereales,0);
+            LigneItem cuirItemSantaFe = new LigneItem(cuir,0);
             
-            LigneItem ferItemLimoges = new LigneItem(fer,0);
-            LigneItem ferItemServian = new LigneItem(fer,0);
+            LigneItem boisItemHillValley = new LigneItem(bois,0);
+            LigneItem ferItemHillValley = new LigneItem(fer,0);
+            LigneItem cuirItemHillValley = new LigneItem(cuir,0);
+            
+            LigneItem boisItemSanAntonio = new LigneItem(bois,0);
+            LigneItem ferItemSantAntonio= new LigneItem(fer,0);
+            LigneItem cerealeItemSanAntonio = new LigneItem(cereales,0);
             
             
-            LigneItem plasitqueItemLimoges = new LigneItem(plastique,0);
-             LigneItem plasitqueItemToulouse = new LigneItem(plastique,0);
+            tombstone.setStock(ferItemTombstone);
+            tombstone.setStock(cerealeItemTombstone);
+            tombstone.setStock(cuirItemTombstone);
             
-            limoges.setStock(ferItemLimoges);
-            limoges.setStock(plasitqueItemLimoges);
+            santaFe.setStock(boisItemSantaFe);
+            santaFe.setStock(cerealeItemSantaFe);
+            santaFe.setStock(cuirItemSantaFe);
+
+            hillValley.setStock(boisItemHillValley);
+            hillValley.setStock(ferItemHillValley);
+            hillValley.setStock(cuirItemHillValley);
             
-            toulouse.setStock(laitItemToulouse);
-            toulouse.setStock(plasitqueItemToulouse);
-            
-            servian.setStock(ferItemServian);
-            servian.setStock(laitItemServian);
-            
+            sanAntonio.setStock(boisItemSanAntonio);
+            sanAntonio.setStock(ferItemSantAntonio);
+            sanAntonio.setStock(cerealeItemSanAntonio);
 
             
-            
-            
-            
-            
-            
-             //avertieAllCreationRessource();
-            
-            System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
+          /*  System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
             System.out.println("Limoges: "+limoges.getStock().get(1).getItem().getNom()+limoges.getStock().get(1).getQuantite());
             System.out.println("Limoges: "+limoges.getStock().get(2).getItem().getNom()+limoges.getStock().get(2).getQuantite());
             
@@ -202,7 +224,8 @@ public class Modele {
             System.out.println("Servian: "+servian.getStock().get(0).getItem().getNom()+servian.getStock().get(0).getQuantite());
             System.out.println("Servian: "+servian.getStock().get(1).getItem().getNom()+servian.getStock().get(1).getQuantite());
             System.out.println("Servian: "+servian.getStock().get(2).getItem().getNom()+servian.getStock().get(2).getQuantite());
-            
+            */
+          
             avertieAllCreationRessource();
 
             for(Ville v:villes){
