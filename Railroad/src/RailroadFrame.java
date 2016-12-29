@@ -2,6 +2,7 @@
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,7 +112,8 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         jLabelSantaFeFer = new javax.swing.JLabel();
         jLabelSantaFeCereales = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuSauvegarder = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -319,7 +321,7 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
                         .addComponent(jLabelSantaFeFer)
                         .addGap(10, 10, 10)
                         .addComponent(jLabelSantaFeCereales)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,8 +330,22 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
         jButton1.getAccessibleContext().setAccessibleName("placerRails");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuSauvegarder.setText("Monde");
+        jMenuSauvegarder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSauvegarderActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Sauvegarder");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuSauvegarder.add(jMenuItem1);
+
+        jMenuBar1.add(jMenuSauvegarder);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -369,6 +385,18 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     modele.supprimerRails(trajet);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuSauvegarderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSauvegarderActionPerformed
+
+    }//GEN-LAST:event_jMenuSauvegarderActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+            try {
+            modele.sauvegarder("modele1");        // TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,9 +458,10 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     private javax.swing.JLabel jLabelTomstoneBois;
     private javax.swing.JLabel jLabelTomstoneCereales;
     private javax.swing.JLabel jLabelTomstoneFer;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenuSauvegarder;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -1,4 +1,10 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,18 +110,31 @@ public class Connexion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        Modele m = new Modele();
-        RailroadFrame rf = new RailroadFrame(m);
-        m.register(rf);
-        j.add(new Joueur(jTextField1.getText(),m));
-        rf.setVisible(true);
-        this.setVisible(false);
+        
         try {
-            m.genererMonde();
+            if (joueurExistant(jTextField1.getText())){
+                System.out.println("joueur existant");
+                
+            }
+            
+            else {
+                nouveauJoueur(jTextField1.getText());
+                Modele m = new Modele();
+                
+                RailroadFrame rf = new RailroadFrame(m);
+                m.register(rf);
+                j.add(new Joueur(jTextField1.getText(),m));
+                rf.setVisible(true);
+                this.setVisible(false);
+                try {
+                    m.genererMonde();
 
-            // TODO add your handling code here:
-        } catch (InterruptedException ex) {
+                // TODO add your handling code here:
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (IOException ex) {
             Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -163,4 +182,28 @@ public class Connexion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+public boolean joueurExistant(String joueur) throws FileNotFoundException, IOException{
+    boolean j = false;
+    FileReader fr=new FileReader("./src/joueur.txt");
+    BufferedReader br = new BufferedReader(fr);
+    
+    while (br.ready()){
+        if (br.readLine().equalsIgnoreCase(joueur)){
+            j=true;
+        }        
+    }
+    return j;
+}
+
+public void nouveauJoueur(String j) throws FileNotFoundException, IOException{
+    FileWriter fw=new FileWriter("./src/joueur.txt",true);
+    BufferedWriter bw = new BufferedWriter (fw);
+    bw.write(j);
+    bw.newLine();
+    bw.close();
+    
+}
+
+
 }

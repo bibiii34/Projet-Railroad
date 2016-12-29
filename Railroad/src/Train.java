@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -12,7 +13,7 @@ import javax.swing.ImageIcon;
  *
  * @author btorralba
  */
-public class Train {
+public class Train implements Serializable {
     private int x;
     private int y;
     private ArrayList<int[]> trajet;

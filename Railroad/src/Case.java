@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /*
@@ -11,7 +12,7 @@ import javax.swing.ImageIcon;
  *
  * @author btorralba
  */
-public class Case {
+public class Case implements Serializable {
     protected int x;
     protected int y;
     protected ImageIcon texture;

@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import javax.swing.ImageIcon;
  *
  * @author btorralba
  */
-public class Ville extends Case {
+public class Ville extends Case implements Serializable {
     private  String nom;
     private  Item item;
     private  ArrayList<LigneItem> stock;

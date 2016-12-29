@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author btorralba
  */
-public class BackgroundTask1 extends Thread{ 
+public class BackgroundTask1 extends Thread implements Serializable{ 
     
     private ArrayList<Ville> villes;
     private ArrayList<Train> trains;

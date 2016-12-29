@@ -1,5 +1,13 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /*
@@ -12,7 +20,7 @@ import javax.swing.ImageIcon;
  *
  * @author btorralba
  */
-public class Modele {
+public class Modele implements Serializable{
     private Case[][] map;
     private ArrayList<Produit> production;
     private ArrayList<Observateur> observateur;
@@ -483,6 +491,26 @@ public class Modele {
         }
         
     
+        public void sauvegarder(String s) throws IOException{
+       try {
+            FileOutputStream f = new FileOutputStream(new File("./src/modele1.rr"));
+            ObjectOutputStream oos = new ObjectOutputStream(f);
+            oos.writeObject(this.map);
+            oos.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Modele.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("monde sauvegardé");
+        }
+        
+        public void charger(String s){
+            Object o = new Object();
+            //FileInputStream f = new FileInputStream(new File("./src/modele1.rr"))
+        }
+        
+        
        public void textuel(){
            System.out.println("textuel :");
    
