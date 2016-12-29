@@ -113,7 +113,7 @@ public class Modele {
             Produit bottes = new Produit("bottes",100,fabricationBottes);
             
             //Creation ville
-            //ImageIcon villeLimoge = new ImageIcon("./src/imgs/Texture 100x100/villeLimoges.png");
+            
             
             Ville beziers = new Ville("Beziers City",pistolet, villes);
             beziers.setTexture(beziersCity);
@@ -125,10 +125,10 @@ public class Modele {
             agen.setTextureSelection(agenCitySelection);
             villes.add(agen);
             
-            Ville carson = new Ville("Carson City",bottes, villes);
-            carson.setTexture(carsonCity);
-            carson.setTextureSelection(carsonCitySelection);
-            villes.add(carson);
+            //Ville carson = new Ville("Carson City",bottes, villes);
+            //carson.setTexture(carsonCity);
+            //carson.setTextureSelection(carsonCitySelection);
+            //villes.add(carson);
             
             Ville tombstone = new Ville("Tombstone",bois, villes);
             tombstone.setTexture(tombstoneIcn);
@@ -146,10 +146,10 @@ public class Modele {
             santaFe.setTextureSelection(santaFeSelection);
             villes.add(santaFe);
 
-            Ville sanAntonio = new Ville("San Antonio",cuir,villes);
-            sanAntonio.setTexture(sanAntonioIcn);
-            sanAntonio.setTextureSelection(sanAntonioSelection);
-            villes.add(sanAntonio);
+           // Ville sanAntonio = new Ville("San Antonio",cuir,villes);
+            //sanAntonio.setTexture(sanAntonioIcn);
+           // sanAntonio.setTextureSelection(sanAntonioSelection);
+           // villes.add(sanAntonio);
             
             
             //placement des villes sur le modele et sur la vue
@@ -159,8 +159,8 @@ public class Modele {
             map[agen.getX()][agen.getY()]=agen;
             avertirAllChangementCase(agen.getX(), agen.getY(), agen);
             
-            map[carson.getX()][carson.getY()]=carson;
-            avertirAllChangementCase(carson.getX(), carson.getY(), carson);
+           // map[carson.getX()][carson.getY()]=carson;
+            //avertirAllChangementCase(carson.getX(), carson.getY(), carson);
             
             map[tombstone.getX()][tombstone.getY()]=tombstone;
             avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
@@ -171,8 +171,8 @@ public class Modele {
             map[santaFe.getX()][santaFe.getY()]=santaFe;
             avertirAllChangementCase(santaFe.getX(), santaFe.getY(), santaFe);
             
-            map[sanAntonio.getX()][sanAntonio.getY()]=sanAntonio;
-            avertirAllChangementCase(sanAntonio.getX(), sanAntonio.getY(), sanAntonio);
+            //map[sanAntonio.getX()][sanAntonio.getY()]=sanAntonio;
+            //avertirAllChangementCase(sanAntonio.getX(), sanAntonio.getY(), sanAntonio);
                 
             
             //Generer obstacle
@@ -204,7 +204,7 @@ public class Modele {
             tombstone.genererPremiereRessource(tombstone.getItem());
             hillValley.genererPremiereRessource(hillValley.getItem());
             santaFe.genererPremiereRessource(santaFe.getItem());
-            sanAntonio.genererPremiereRessource(sanAntonio.getItem());
+           // sanAntonio.genererPremiereRessource(sanAntonio.getItem());
             
             
             //LigneItem pour initialiser le stock
@@ -237,9 +237,9 @@ public class Modele {
             hillValley.setStock(ferItemHillValley);
             hillValley.setStock(cuirItemHillValley);
             
-            sanAntonio.setStock(boisItemSanAntonio);
-            sanAntonio.setStock(ferItemSantAntonio);
-            sanAntonio.setStock(cerealeItemSanAntonio);
+           //sanAntonio.setStock(boisItemSanAntonio);
+           // sanAntonio.setStock(ferItemSantAntonio);
+           // sanAntonio.setStock(cerealeItemSanAntonio);
 
             
           /*  System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());

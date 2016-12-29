@@ -83,30 +83,33 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        jLabelLimoges = new javax.swing.JLabel();
         jLabelLimogesLait = new javax.swing.JLabel();
-        jLabelLimogesLaitQ = new javax.swing.JLabel();
+        jLabelTomstoneBois = new javax.swing.JLabel();
         jLabelLimogesFer = new javax.swing.JLabel();
-        jLabelLimogesFerQ = new javax.swing.JLabel();
+        jLabelTomstoneFer = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabelLimogesPlastiqueQ = new javax.swing.JLabel();
-        jLabelToulouse = new javax.swing.JLabel();
-        jLabelToulouseLaitQ = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelToulouseFer = new javax.swing.JLabel();
-        jLabelToulouseFerQ = new javax.swing.JLabel();
-        jLabelToulousePlastiqueQ = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabelServianLaitQ = new javax.swing.JLabel();
-        jLabelServianFerQ = new javax.swing.JLabel();
-        jLabelServianPlastiqueQ = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelTomstoneCereales = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaInformations = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jLabelHillValley2 = new javax.swing.JLabel();
+        jLabelHillValley1 = new javax.swing.JLabel();
+        jLabelHillValley3 = new javax.swing.JLabel();
+        jLabelHillValleyBois = new javax.swing.JLabel();
+        jLabelHillValleyFer = new javax.swing.JLabel();
+        jLabelHillValleyCereales = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPane4 = new javax.swing.JTextPane();
+        jLabelHillValley4 = new javax.swing.JLabel();
+        jLabelHillValley5 = new javax.swing.JLabel();
+        jLabelHillValley6 = new javax.swing.JLabel();
+        jLabelSantaFeBois = new javax.swing.JLabel();
+        jLabelSantaFeFer = new javax.swing.JLabel();
+        jLabelSantaFeCereales = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -156,41 +159,11 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextPane1);
 
-        jLabelLimoges.setText("Hill Valley");
-
         jLabelLimogesLait.setText("Cereales :");
 
         jLabelLimogesFer.setText("Fer :");
 
         jLabel6.setText("Bois :");
-
-        jLabelToulouse.setText("Santa Fe");
-
-        jLabelToulouseLaitQ.setText("jLabel8");
-
-        jLabel1.setText("Cereales :");
-
-        jLabelToulouseFer.setText("Fer :");
-
-        jLabelToulouseFerQ.setText("jLabel9");
-
-        jLabelToulousePlastiqueQ.setText("jLabel10");
-
-        jLabel7.setText("Bois :");
-
-        jLabel2.setText("Carson City :");
-
-        jLabel5.setText("Cereales :");
-
-        jLabelServianLaitQ.setText("jLabel11");
-
-        jLabelServianFerQ.setText("jLabel12");
-
-        jLabelServianPlastiqueQ.setText("jLabel13");
-
-        jLabel3.setText("Bois :");
-
-        jLabel4.setText("Fer :");
 
         jTextAreaInformations.setColumns(20);
         jTextAreaInformations.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -202,6 +175,39 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Informations :");
 
+        jTextPane2.setText("Tombstone");
+        jScrollPane3.setViewportView(jTextPane2);
+
+        jTextPane3.setText("Hill Valley");
+        jScrollPane4.setViewportView(jTextPane3);
+
+        jLabelHillValley2.setText("Fer :");
+
+        jLabelHillValley1.setText("Bois :");
+
+        jLabelHillValley3.setText("Cereales :");
+
+        jLabelHillValleyBois.setText("jLabel1");
+
+        jLabelHillValleyFer.setText("jLabel2");
+
+        jLabelHillValleyCereales.setText("jLabel3");
+
+        jTextPane4.setText("Santa Fe");
+        jScrollPane5.setViewportView(jTextPane4);
+
+        jLabelHillValley4.setText("Bois :");
+
+        jLabelHillValley5.setText("Fer :");
+
+        jLabelHillValley6.setText("Cereales :");
+
+        jLabelSantaFeBois.setText("jLabel1");
+
+        jLabelSantaFeFer.setText("jLabel2");
+
+        jLabelSantaFeCereales.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -212,58 +218,52 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelServianLaitQ)
-                                        .addComponent(jLabelServianFerQ)
-                                        .addComponent(jLabelServianPlastiqueQ)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabelLimogesFer)
-                                        .addComponent(jLabelLimogesLait)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabelLimoges)
-                                        .addComponent(jLabelToulouse))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelLimogesLaitQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelLimogesFerQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelLimogesPlastiqueQ, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelToulouseLaitQ)
-                                    .addGap(8, 8, 8))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel7)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabelToulouseFer)
-                                            .addGap(1, 1, 1)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelToulouseFerQ)
-                                        .addComponent(jLabelToulousePlastiqueQ))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)))
-                                .addGap(24, 24, 24))))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addGap(24, 24, 24))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelLimogesLait)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabelLimogesFer))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTomstoneBois, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTomstoneCereales, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTomstoneFer, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelHillValley3)
+                                    .addComponent(jLabelHillValley1)
+                                    .addComponent(jLabelHillValley2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelHillValleyBois)
+                                    .addComponent(jLabelHillValleyFer)
+                                    .addComponent(jLabelHillValleyCereales)))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelHillValley6)
+                                    .addComponent(jLabelHillValley4)
+                                    .addComponent(jLabelHillValley5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelSantaFeBois)
+                                    .addComponent(jLabelSantaFeFer)
+                                    .addComponent(jLabelSantaFeCereales))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,51 +273,53 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelLimoges)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLimogesLaitQ, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelLimogesLait, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLimogesFerQ, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelLimogesFer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabelLimogesPlastiqueQ, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabelToulouse)
+                    .addComponent(jLabelTomstoneBois, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelLimogesFer)
+                    .addComponent(jLabelTomstoneFer, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelLimogesLait)
+                    .addComponent(jLabelTomstoneCereales, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelToulouseLaitQ))
-                .addGap(8, 8, 8)
+                    .addComponent(jLabelHillValley1)
+                    .addComponent(jLabelHillValleyBois))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelToulouseFer)
-                    .addComponent(jLabelToulouseFerQ))
+                    .addComponent(jLabelHillValley2)
+                    .addComponent(jLabelHillValleyFer))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHillValley3)
+                    .addComponent(jLabelHillValleyCereales))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabelToulousePlastiqueQ))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabelServianLaitQ))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabelServianFerQ))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabelServianPlastiqueQ))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelHillValley4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelHillValley5)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelHillValley6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelSantaFeBois)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSantaFeFer)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelSantaFeCereales)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,36 +411,39 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelLimoges;
+    private javax.swing.JLabel jLabelHillValley1;
+    private javax.swing.JLabel jLabelHillValley2;
+    private javax.swing.JLabel jLabelHillValley3;
+    private javax.swing.JLabel jLabelHillValley4;
+    private javax.swing.JLabel jLabelHillValley5;
+    private javax.swing.JLabel jLabelHillValley6;
+    private javax.swing.JLabel jLabelHillValleyBois;
+    private javax.swing.JLabel jLabelHillValleyCereales;
+    private javax.swing.JLabel jLabelHillValleyFer;
     private javax.swing.JLabel jLabelLimogesFer;
-    private javax.swing.JLabel jLabelLimogesFerQ;
     private javax.swing.JLabel jLabelLimogesLait;
-    private javax.swing.JLabel jLabelLimogesLaitQ;
-    private javax.swing.JLabel jLabelLimogesPlastiqueQ;
-    private javax.swing.JLabel jLabelServianFerQ;
-    private javax.swing.JLabel jLabelServianLaitQ;
-    private javax.swing.JLabel jLabelServianPlastiqueQ;
-    private javax.swing.JLabel jLabelToulouse;
-    private javax.swing.JLabel jLabelToulouseFer;
-    private javax.swing.JLabel jLabelToulouseFerQ;
-    private javax.swing.JLabel jLabelToulouseLaitQ;
-    private javax.swing.JLabel jLabelToulousePlastiqueQ;
+    private javax.swing.JLabel jLabelSantaFeBois;
+    private javax.swing.JLabel jLabelSantaFeCereales;
+    private javax.swing.JLabel jLabelSantaFeFer;
+    private javax.swing.JLabel jLabelTomstoneBois;
+    private javax.swing.JLabel jLabelTomstoneCereales;
+    private javax.swing.JLabel jLabelTomstoneFer;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextAreaInformations;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextPane jTextPane4;
     private javax.swing.JPanel panelJeu;
     // End of variables declaration//GEN-END:variables
 
@@ -479,8 +484,9 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         
     @Override
     public void avertirCreationRessource(){
-       
- 
+        
+        jLabelTomstoneBois.setText( String.valueOf(modele.villes.get(2).getStock().get(0).getQuantite()));
+        jLabelSantaFeBois.setText( String.valueOf(modele.villes.get(4).getStock().get(1).getQuantite()));
         
         
     }
