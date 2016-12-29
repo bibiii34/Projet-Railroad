@@ -9,12 +9,14 @@
  * @author alepage
  */
 public class MenuUser extends javax.swing.JFrame {
-
+    private String joueur;
     /**
      * Creates new form MenuUser
      */
-    public MenuUser() {
+    public MenuUser(String j) {
         initComponents();
+        this.joueur=j;
+        
     }
 
     /**
@@ -132,7 +134,11 @@ public class MenuUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuUser().setVisible(true);
+                //new MenuUser().setVisible(true);
+                
+                
+            
+            
             }
         });
     }

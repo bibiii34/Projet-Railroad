@@ -17,5 +17,5 @@ public interface Observateur {
      void avertirTrainTrue(int i, int j, Case c);
      void avertirTrainFalse(int i, int j, Case c);
      void avertirCreationRessource();
-
+     void rafraichir();
 }

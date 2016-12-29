@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Bryan
  */
-public class BackgroundTaskTrain extends Thread{
+public class BackgroundTaskTrain extends Thread implements Serializable{
     
     private Train train;
     private Modele modele;

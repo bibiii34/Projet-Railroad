@@ -2,7 +2,12 @@
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +25,7 @@ import javax.swing.JPanel;
  *
  * @author btorralba
  */
-public class RailroadFrame extends javax.swing.JFrame implements Observateur {
+public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, Serializable {
 
 
     private static final ImageIcon DESERT = new ImageIcon("./src/imgs/Texture 100x100/desert.png");
@@ -78,6 +83,7 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jMenuItem7 = new javax.swing.JMenuItem();
         panelJeu = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -112,9 +118,18 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         jLabelSantaFeFer = new javax.swing.JLabel();
         jLabelSantaFeCereales = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuSauvegarder = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+
+        jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 51, 0));
@@ -220,11 +235,10 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
                         .addGap(24, 24, 24))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
@@ -330,14 +344,26 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
         jButton1.getAccessibleContext().setAccessibleName("placerRails");
 
-        jMenuSauvegarder.setText("Monde");
+        jMenu1.setText("Partie");
+
+        jMenuItem8.setText("Nouvelle Partie");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenuSauvegarder.setText("Sauvegarder");
         jMenuSauvegarder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuSauvegarderActionPerformed(evt);
             }
         });
 
-        jMenuItem1.setText("Sauvegarder");
+        jMenuItem1.setText("Emplacement 1");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -345,9 +371,50 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
         });
         jMenuSauvegarder.add(jMenuItem1);
 
+        jMenuItem2.setText("Emplacement 2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuSauvegarder.add(jMenuItem2);
+
+        jMenuItem3.setText("Emplacement 3");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuSauvegarder.add(jMenuItem3);
+
         jMenuBar1.add(jMenuSauvegarder);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Charger");
+
+        jMenuItem6.setText("Emplacement 1");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem4.setText("Emplacement 2");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Emplacement 3");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -392,11 +459,66 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
             try {
-            modele.sauvegarder("modele1");        // TODO add your handling code here:
+            modele.sauvegarder("1");        // TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            modele.sauvegarder("2");
         } catch (IOException ex) {
             Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            modele.sauvegarder("3");
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            modele.charger("2");
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+ 
+        try { 
+            modele.charger("1");
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        try {           
+            modele.charger("3");
+        } catch (IOException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,9 +580,17 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     private javax.swing.JLabel jLabelTomstoneBois;
     private javax.swing.JLabel jLabelTomstoneCereales;
     private javax.swing.JLabel jLabelTomstoneFer;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenu jMenuSauvegarder;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -514,12 +644,25 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
     @Override
     public void avertirCreationRessource(){
         
-        jLabelTomstoneBois.setText( String.valueOf(modele.villes.get(2).getStock().get(0).getQuantite()));
-        jLabelSantaFeBois.setText( String.valueOf(modele.villes.get(4).getStock().get(1).getQuantite()));
+        jLabelTomstoneBois.setText( String.valueOf(modele.getVilles().get(2).getStock().get(0).getQuantite()));
+        jLabelSantaFeBois.setText( String.valueOf(modele.getVilles().get(4).getStock().get(1).getQuantite()));
+        jTextPane1.setText(Long.toString(modele.getPoint()));
         
         
     }
         
+    @Override
+    public void rafraichir(){
+        for (int i=0; i<7;i++){
+            for (int j=0; j<7;j++){
+               
+                 jboard[i][j].setIcon(modele.getMap()[i][j].getTexture());
+                
+
+            }
+        }
+        //avertirCreationRessource();
+    }
     
     
 
@@ -544,51 +687,28 @@ public class RailroadFrame extends javax.swing.JFrame implements Observateur {
             
             System.out.println(i + " " + j);
             
-            //Si case non selectionné on change icone, et on enregistre ses coordonnées dans trajet
-            if (modele.getCase(i, j).isSelection()==false){
-                modele.getCase(i, j).setSelection(true);
-               //jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection()); 
-                avertirSelection(i, j, modele.getCase(i, j));
-               trajet.add(tab);
+            if(modele.getCase(i, j) instanceof Obstacle==false){
+                //Si case non selectionné on change icone, et on enregistre ses coordonnées dans trajet
+                if (modele.getCase(i, j).isSelection()==false){
+                    modele.getCase(i, j).setSelection(true);
+                    //jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection()); 
+                    avertirSelection(i, j, modele.getCase(i, j));
+                    trajet.add(tab);
+                 }
+            
+            
+                    //Si case selectionné on change iconne et on vide trajet
+                    // else if (jboard[i][j].getIcon()==DESERTSELECTION){
+                 //     jboard[i][j].setIcon(DESERT);
+                else {
+                    //jboard[i][j].setIcon(modele.getCase(i, j).getTexture()); 
+                    avertirDeselection(i, j, modele.getCase(i, j));
+                    modele.getCase(i, j).setSelection(false);
+                    trajet.clear();
+                }
             }
             
-            
-            //Si case selectionné on change iconne et on vide trajet
-           // else if (jboard[i][j].getIcon()==DESERTSELECTION){
-           //     jboard[i][j].setIcon(DESERT);
-            else {
-                //jboard[i][j].setIcon(modele.getCase(i, j).getTexture()); 
-                avertirDeselection(i, j, modele.getCase(i, j));
-                modele.getCase(i, j).setSelection(false);
-                trajet.clear();
-            }
-            
-          /*  //Si clic sur une ville et quelle n'est pas selectionné (attibut selection) on change iconne on selectionne et ajout a trajet
-            else if (modele.getCase(i, j) instanceof Ville && ((Ville)modele.getCase(i, j)).isSelection()==false){
-                jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection());
-                ((Ville)modele.getCase(i, j)).setSelection(true);
-                trajet.add(tab);
-            }
-            
-            //Si ville deja selectionne on change iconne on change selection a false et on vide trajet
-            else if (modele.getCase(i, j) instanceof Ville && ((Ville)modele.getCase(i, j)).isSelection()){
-                jboard[i][j].setIcon(modele.getCase(i, j).getTexture());
-                 modele.getCase(i, j).setSelection(false);
-                 trajet.clear();
-            }
- 
-            //Si on clique sur un rail pas selectionné on change iconne et on change selection
-            if (modele.getCase(i, j) instanceof Rail && ((Rail)modele.getCase(i, j)).isSelection()==false){
-               jboard[i][j].setIcon(modele.getCase(i, j).getTextureSelection());
-               modele.getCase(i, j).setSelection(true);
-            }
-            
-            
-            else if (modele.getCase(i, j) instanceof Rail && ((Rail)modele.getCase(i, j)).isSelection()){
-                jboard[i][j].setIcon(modele.getCase(i, j).getTexture());
-                 modele.getCase(i, j).setSelection(false);
-            
-            }*/
+         
             
      
         }

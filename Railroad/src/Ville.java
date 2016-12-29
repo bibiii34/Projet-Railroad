@@ -1,4 +1,6 @@
 
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -126,7 +128,7 @@ public class Ville extends Case implements Serializable {
 
     }
     
-    public void genererItem(){
+    public void genererItem(Modele m){
   
         //si l'item de la ville est une ressource
         if (this.item instanceof Ressource){
@@ -136,14 +138,15 @@ public class Ville extends Case implements Serializable {
                 //est on increment seulement la ressource de la ville pas les autres
                 if (this.item==l.getItem()){
                 l.setQuantite(l.getQuantite()+1);
+                //m.setPoint(m.getPoint()+1);
                 }
             }
         }
 
         //si l'item est un produit
         if (this.item instanceof Produit){
+            ArrayList<String> ressources = new ArrayList();
             boolean ressource = false;
-            
             
             //on parcoure les ressource necessaire pour realiser ce produit
             for (LigneItem ligneItemProduit : ((Produit) this.item).getRessource()){
@@ -157,11 +160,21 @@ public class Ville extends Case implements Serializable {
                         //on verifie si il y a suffisemment de quantité de ressource pour produire le produit
                         if (ligneItemStock.getQuantite()>= ligneItemProduit.getQuantite()){
                             
+                            ressources.add("v");
                             ressource=true;
                             
                         }
                         
-                        else ressource=false;   
+                        else {
+                            ressources.add("f");
+                        }   
+                        
+                        for (String s : ressources){
+                            if(s.equals("f")){
+                                ressource=false;
+                            }
+                            
+                        }
                     }
                 }
             }
@@ -186,6 +199,7 @@ public class Ville extends Case implements Serializable {
                                 //si oui, on augmente la quantité du produit +1
                                 if (ligneItemStock2.getItem()==this.getItem()){
                                     ligneItemStock2.setQuantite(ligneItemStock2.getQuantite()+1);
+                                    m.setPoint(m.getPoint()+this.item.point);
                                     produit=true;
                                 }
                                 //si non, on crée une ligneitem du produit et on l'ajoute au stock
@@ -194,6 +208,7 @@ public class Ville extends Case implements Serializable {
                 if (produit==false){
                 LigneItem ligneItem = new LigneItem(((Produit) this.item),1);
                 this.stock.add(ligneItem);
+                m.setPoint(m.getPoint()+this.item.point);
                 }
                                 
             }

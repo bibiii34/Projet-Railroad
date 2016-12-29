@@ -108,7 +108,7 @@ public class Train implements Serializable {
                  //premiere case on charge
                     if (c==1){
                         this.chargerRessources();                   
-                        modele.avertieAllCreationRessource();
+                        modele.avertirAllCreationRessource();
                      }
                 
                     if (c>=2){
@@ -130,7 +130,10 @@ public class Train implements Serializable {
                          retour=true;
                         //decharger
                         this.dechargerRessources();
-                        modele.avertieAllCreationRessource();
+                        modele.avertirAllCreationRessource();
+                        for(LigneItem li: this.getArrivee().getStock()){
+                            System.out.println(li.getItem().nom+li.getQuantite());
+                        }
                         //le depart devient l'arrivé et l'arrivé le départ
                         temp=this.depart;
                         this.depart=this.arrivee;
@@ -161,8 +164,8 @@ public class Train implements Serializable {
                                     //derniere case du trajet devient la premiere du retour donc on charge 
                                     if(c==this.getTrajet().size()-2){
 
-                                        this.chargerRessources();
-                                        modele.avertieAllCreationRessource();
+                                       // this.chargerRessources();
+                                        modele.avertirAllCreationRessource();
                                     }
                                     //a partir de la deuxieme case du retour (size-3) on efface la case precedente
                                     if (c<=this.getTrajet().size()-3){
@@ -180,10 +183,10 @@ public class Train implements Serializable {
                                         aller=true;
                                         retour=false;
                                         temp=this.depart;
-                                        this.dechargerRessources();
+                                        //this.dechargerRessources();
                                         this.depart=this.arrivee;
                                         this.arrivee=temp;
-                                        modele.avertieAllCreationRessource();
+                                        modele.avertirAllCreationRessource();
                                     }    
                                 
                                 Thread.sleep(1000);

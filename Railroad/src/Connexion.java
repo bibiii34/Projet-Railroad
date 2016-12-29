@@ -1,10 +1,13 @@
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -112,18 +115,50 @@ public class Connexion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         try {
+             //si le joueur existe
             if (joueurExistant(jTextField1.getText())){
                 System.out.println("joueur existant");
+              
+                MenuUser menu = new MenuUser(jTextField1.getText());
+                menu.setVisible(true);
+                
+                
+            /*    this.setVisible(false);
+                //on charge le modele en fonction du nom et de l'emplacement
+            Modele m = new Modele(jTextField1.getText());
+            FileInputStream f = new FileInputStream(new File("./src/save/"+jTextField1.getText()+1));
+            try (ObjectInputStream oos = new ObjectInputStream(f)) {
+                m = (Modele)oos.readObject();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                RailroadFrame rf = new RailroadFrame(m);
+                m.register(rf);
+                this.setVisible(false);
+                rf.setVisible(true);
+                
+                //relance generation de ressource
+                m.background.start();
+                //Relance train
+                for (Train t : m.getTrains()){
+                    t.thd.start();
+                }
+                
+                rf.rafraichir();
+                */
+
+                
+                
                 
             }
             
             else {
+                //si il n'existe pas
                 nouveauJoueur(jTextField1.getText());
-                Modele m = new Modele();
-                
+                Modele m = new Modele(jTextField1.getText());
                 RailroadFrame rf = new RailroadFrame(m);
                 m.register(rf);
-                j.add(new Joueur(jTextField1.getText(),m));
+
                 rf.setVisible(true);
                 this.setVisible(false);
                 try {

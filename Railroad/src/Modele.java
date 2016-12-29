@@ -1,11 +1,14 @@
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -21,11 +24,14 @@ import javax.swing.ImageIcon;
  * @author btorralba
  */
 public class Modele implements Serializable{
+    private String nom;
     private Case[][] map;
     private ArrayList<Produit> production;
-    private ArrayList<Observateur> observateur;
+    private  ArrayList<Observateur> observateur;
+    transient ArrayList<Observateur> temp;
+    private long point;
     
-    public ArrayList<Ville> villes = new ArrayList();
+    private ArrayList<Ville> villes = new ArrayList();
     private ArrayList<Rail> rails = new ArrayList();
     private ArrayList<Train> trains = new ArrayList();
     
@@ -44,9 +50,9 @@ public class Modele implements Serializable{
     ImageIcon sanAntonioIcn = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonio.png");
     ImageIcon sanAntonioSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonioSelection.png");
     
-    BackgroundTask1 background = new BackgroundTask1(villes,trains, this);
+    BackgroundTask1 background = new BackgroundTask1(villes, this);
     int nbTrain=0;
-    public Modele(){
+    public Modele(String s){
  
         map=new Case[7][7];
                 for(int i=0;i<7;i++){
@@ -57,6 +63,8 @@ public class Modele implements Serializable{
             }
         }
         this.observateur=new ArrayList<>();
+        this.nom=s;
+        this.point=0;
     }
     
     //GET SET
@@ -83,6 +91,50 @@ public class Modele implements Serializable{
     public Case getCase(int x, int y){
             return map[x][y];
     }
+
+    public ArrayList<Ville> getVilles() {
+        return villes;
+    }
+
+    public void setVilles(ArrayList<Ville> villes) {
+        this.villes = villes;
+    }
+
+    public long getPoint() {
+        return point;
+    }
+
+    public void setPoint(long point) {
+        this.point = point;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public ArrayList<Rail> getRails() {
+        return rails;
+    }
+
+    public void setRails(ArrayList<Rail> rails) {
+        this.rails = rails;
+    }
+
+    public ArrayList<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(ArrayList<Train> trains) {
+        this.trains = trains;
+    }
+    
+    
+    
+    
     
         public void  genererMonde() throws InterruptedException{
             
@@ -93,8 +145,8 @@ public class Modele implements Serializable{
             Ressource cuir = new Ressource("cuir",1);
             
             //ligneItem des different produit       
-            LigneItem I1pistolet = new LigneItem(fer,30);
-            LigneItem I2pistolet = new LigneItem(bois,10);
+            LigneItem I1pistolet = new LigneItem(fer,5);
+            LigneItem I2pistolet = new LigneItem(bois,1);
             LigneItem I1whisky = new LigneItem(cereales,100);
             LigneItem I2whisky = new LigneItem(bois,30);
             LigneItem I1bottes = new LigneItem(cuir,20);
@@ -228,9 +280,9 @@ public class Modele implements Serializable{
             LigneItem ferItemHillValley = new LigneItem(fer,0);
             LigneItem cuirItemHillValley = new LigneItem(cuir,0);
             
-            LigneItem boisItemSanAntonio = new LigneItem(bois,0);
-            LigneItem ferItemSantAntonio= new LigneItem(fer,0);
-            LigneItem cerealeItemSanAntonio = new LigneItem(cereales,0);
+            LigneItem boisItemBeziers = new LigneItem(bois,0);
+            LigneItem ferItemBeziers= new LigneItem(fer,0);
+            LigneItem cerealeItemBeziers = new LigneItem(cereales,0);
             
             
             tombstone.setStock(ferItemTombstone);
@@ -245,9 +297,9 @@ public class Modele implements Serializable{
             hillValley.setStock(ferItemHillValley);
             hillValley.setStock(cuirItemHillValley);
             
-           //sanAntonio.setStock(boisItemSanAntonio);
-           // sanAntonio.setStock(ferItemSantAntonio);
-           // sanAntonio.setStock(cerealeItemSanAntonio);
+           beziers.setStock(boisItemBeziers);
+           beziers.setStock(ferItemBeziers);
+           beziers.setStock(cerealeItemBeziers);
 
             
           /*  System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
@@ -264,7 +316,7 @@ public class Modele implements Serializable{
             System.out.println("Servian: "+servian.getStock().get(2).getItem().getNom()+servian.getStock().get(2).getQuantite());
             */
           
-            avertieAllCreationRessource();
+            avertirAllCreationRessource();
 
             for(Ville v:villes){
                 System.out.println(v.getNom());
@@ -307,7 +359,6 @@ public class Modele implements Serializable{
         }
         }
         
-  
         public void avertirAllTrainTrue(int i, int j, Case c){
          for (Observateur o : this.observateur){
             o.avertirTrainTrue(i, j, c);
@@ -320,9 +371,15 @@ public class Modele implements Serializable{
         }   
         }
         
-        public void avertieAllCreationRessource(){
+        public void avertirAllCreationRessource(){
             for (Observateur o : this.observateur){
                 o.avertirCreationRessource();
+        }  
+        }
+        
+        public void avertirAllRafraichir(){
+                        for (Observateur o : this.observateur){
+                o.rafraichir();
         }  
         }
         
@@ -492,52 +549,61 @@ public class Modele implements Serializable{
         
     
         public void sauvegarder(String s) throws IOException{
-       try {
-            FileOutputStream f = new FileOutputStream(new File("./src/modele1.rr"));
+             temp=new ArrayList(observateur);
+        FileOutputStream f = new FileOutputStream(new File("./src/save/"+this.nom+s));
+            observateur.clear();
             ObjectOutputStream oos = new ObjectOutputStream(f);
-            oos.writeObject(this.map);
+            oos.writeObject(this);
             oos.close();
+            for (Observateur o : temp){
+                observateur.add(o);
+            }
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Modele.class.getName()).log(Level.SEVERE, null, ex);
+            avertirAllInformations("Monde Sauvegardé !");
         }
         
-        System.out.println("monde sauvegardé");
+        public void charger(String s) throws FileNotFoundException, IOException, ClassNotFoundException{
+            //on charge le modele en fonction du nom et de l'emplacement
+            temp.clear();
+
+            Modele m = new Modele(this.nom);
+            FileInputStream f = new FileInputStream(new File("./src/save/"+this.nom+s));
+        try (ObjectInputStream oos = new ObjectInputStream(f)) {
+            m = (Modele)oos.readObject();
+        }
+            
+            m.register(o);
+            avertirAllRafraichir();
+            this.textuel();
+            System.out.println("monde chargé");
         }
         
-        public void charger(String s){
-            Object o = new Object();
-            //FileInputStream f = new FileInputStream(new File("./src/modele1.rr"))
-        }
         
         
        public void textuel(){
            System.out.println("textuel :");
    
                System.out.println(this.map[0][0].toString()+this.map[0][1].toString()+this.map[0][2].toString()+this.map[0][3].toString()
-               +this.map[0][4].toString()+this.map[0][5].toString()+this.map[0][6].toString()+this.map[0][7].toString());
+               +this.map[0][4].toString()+this.map[0][5].toString()+this.map[0][6].toString());
                
                System.out.println(this.map[1][0].toString()+this.map[1][1].toString()+this.map[1][2].toString()+this.map[1][3].toString()                      
-               +this.map[1][4].toString()+this.map[1][5].toString()+this.map[1][6].toString()+this.map[1][7].toString());
+               +this.map[1][4].toString()+this.map[1][5].toString()+this.map[1][6].toString());
                
                System.out.println(this.map[2][0].toString()+this.map[2][1].toString()+this.map[2][2].toString()+this.map[2][3].toString()                     
-               +this.map[2][4].toString()+this.map[2][5].toString()+this.map[2][6].toString()+this.map[2][7].toString());
+               +this.map[2][4].toString()+this.map[2][5].toString()+this.map[2][6].toString());
                
                
                System.out.println(this.map[3][0].toString()+this.map[3][1].toString()+this.map[3][2].toString()+this.map[3][3].toString()
-               +this.map[3][4].toString()+this.map[3][5].toString()+this.map[3][6].toString()+this.map[3][7].toString());
+               +this.map[3][4].toString()+this.map[3][5].toString()+this.map[3][6].toString());
                
                System.out.println(this.map[4][0].toString()+this.map[4][1].toString()+this.map[4][2].toString()+this.map[4][3].toString()
-               +this.map[4][4].toString()+this.map[4][5].toString()+this.map[4][6].toString()+this.map[4][7].toString());
+               +this.map[4][4].toString()+this.map[4][5].toString()+this.map[4][6].toString());
                
                System.out.println(this.map[5][0].toString()+this.map[5][1].toString()+this.map[5][2].toString()+this.map[5][3].toString()
-               +this.map[5][4].toString()+this.map[5][5].toString()+this.map[5][6].toString()+this.map[5][7].toString());
+               +this.map[5][4].toString()+this.map[5][5].toString()+this.map[5][6].toString());
                
                 System.out.println(this.map[6][0].toString()+this.map[6][1].toString()+this.map[6][2].toString()+this.map[6][3].toString()
-               +this.map[6][4].toString()+this.map[6][5].toString()+this.map[6][6].toString()+this.map[6][7].toString());
-               
-               System.out.println(this.map[7][0].toString()+this.map[7][1].toString()+this.map[7][2].toString()+this.map[7][3].toString()
-               +this.map[7][4].toString()+this.map[7][5].toString()+this.map[7][6].toString()+this.map[7][7].toString());
+               +this.map[6][4].toString()+this.map[6][5].toString()+this.map[6][6].toString());
                
 
                

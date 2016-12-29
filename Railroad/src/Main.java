@@ -15,14 +15,11 @@ import java.util.ArrayList;
     public static void main(String[] argc) throws InterruptedException{
     //Modele m = new Modele();
     //RailroadFrame rf = new RailroadFrame(m);
-    ArrayList<Joueur> joueurs = new ArrayList();
+    
     
     Connexion c = new Connexion();
-    
-    //m.register(rf);
-    //rf.setVisible(false);
+
     c.setVisible(true);
-    //m.genererMonde();
         
     }
     
