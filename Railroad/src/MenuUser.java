@@ -173,7 +173,16 @@ public class MenuUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sauvegarde(joueur); 
+        Modele m = new Modele(joueur);
+        RailroadFrame rf = new RailroadFrame(m);
+        m.register(rf);
+        this.setVisible(false);
+        try {
+            m.genererMonde();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MenuUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rf.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -198,7 +207,8 @@ public class MenuUser extends javax.swing.JFrame {
                 rf.setVisible(true);
                 
                 //relance generation de ressource
-                m.background.start();
+                BackgroundTask1 background = new BackgroundTask1(m.getVilles(), m);
+                background.start();
                 
                 //Relance train
                 for (Train t : m.getTrains()){

@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  * @author btorralba
  */
 public class Train implements Serializable {
+    int id;
     private int x;
     private int y;
     private ArrayList<int[]> trajet;
@@ -23,9 +24,11 @@ public class Train implements Serializable {
     int random = (int)(Math.random() * ((5 - 0) + 1));
     transient BackgroundTaskTrain thd;
     private boolean aller;
+    private ArrayList<Train> trains;
     
-    //Constructeurs  
-    public Train(int x, int y, ArrayList<int[]> trajet, Ville d, Ville a){
+//Constructeurs  
+    public Train(int i, int x, int y, ArrayList<int[]> trajet, Ville d, Ville a, ArrayList<Train> t){
+        this.id=i;
         this.x=x;
         this.y=y;
         //image train
@@ -34,6 +37,7 @@ public class Train implements Serializable {
         this.depart=d;
         this.arrivee=a;
         this.aller=true;
+        this.trains=t;
  
     }
 
@@ -151,6 +155,7 @@ public class Train implements Serializable {
                 else {
                     System.out.println("le train s'arrete");
                     this.thd.stop();
+                    
                 }
                 
 
@@ -199,6 +204,10 @@ public class Train implements Serializable {
                                 else {
                                      System.out.println("Plus de rail le train s'arrete");
                                         this.thd.stop();
+                                        trains.remove(this.id);
+                                        for (Train t : trains){
+                                            System.out.println("train numero: "+t.id);
+                                        }
                                 }
                             }
 

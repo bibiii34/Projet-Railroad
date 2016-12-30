@@ -50,7 +50,7 @@ public class Modele implements Serializable{
     ImageIcon sanAntonioIcn = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonio.png");
     ImageIcon sanAntonioSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonioSelection.png");
     
-    BackgroundTask1 background = new BackgroundTask1(villes, this);
+    transient BackgroundTask1 background = new BackgroundTask1(villes, this);
     int nbTrain=0;
     public Modele(String s){
  
@@ -516,7 +516,7 @@ public class Modele implements Serializable{
             
             //creation d'un train en fonction du trajet.
             synchronized(trains) {
-            trains.add(new Train(trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]))));
+            trains.add(new Train(nbTrain, trajet.get(1)[0],trajet.get(1)[1],trajet,((Ville)this.getCase(trajet.get(0)[0],trajet.get(0)[1])), ((Ville)this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1])),trains));
             
             BackgroundTaskTrain bg = new BackgroundTaskTrain(trains.get((int)nbTrain),this);
             
