@@ -36,4 +36,16 @@ public class BackgroundTaskTrain extends Thread implements Serializable{
         
 
     }
+    
+    public void pause() throws InterruptedException {
+    synchronized(this) {
+      this.wait();
+    }
+  }  
+ 
+  public void release() {
+    synchronized(this) {
+      this.notify();
+    }
+  }
 }

@@ -199,9 +199,15 @@ public class MenuUser extends javax.swing.JFrame {
                 
                 //relance generation de ressource
                 m.background.start();
+                
                 //Relance train
                 for (Train t : m.getTrains()){
-                    t.thd.start();
+                    BackgroundTaskTrain bg = new BackgroundTaskTrain(t,m);
+                    t.setThd(bg);
+                    if(!t.isAller()){
+                        t.changementVilles();
+                    }
+                    bg.start();
                 }
                 rf.rafraichir();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -266,19 +272,19 @@ public class MenuUser extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy H:mm:ss");
                 Date d = new Date(save1.lastModified()); 
                 sauvegardes[0] = "sauvegarde 1 | Date: "+ sdf.format(d);  
-            } else sauvegardes[0]="Emplacement 1 |Pas de sauvegarde";
+            } else sauvegardes[0]="Emplacement 1 | Pas de sauvegarde";
 
             if (save2.exists()){
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy H:mm:ss");
                 Date d = new Date(save2.lastModified()); 
                 sauvegardes[1] = "sauvegarde 2 | Date: "+ sdf.format(d);  
-            } else sauvegardes[1]="Emplacement 2 |Pas de sauvegarde";
+            } else sauvegardes[1]="Emplacement 2 | Pas de sauvegarde";
             
             if (save3.exists()){
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy H:mm:ss");
                 Date d = new Date(save3.lastModified()); 
                 sauvegardes[2] = "sauvegarde 3 | Date: "+ sdf.format(d);  
-            } else sauvegardes[2]="Emplacement 3 |Pas de sauvegarde";
+            } else sauvegardes[2]="Emplacement 3 | Pas de sauvegarde";
             
             return sauvegardes;
   

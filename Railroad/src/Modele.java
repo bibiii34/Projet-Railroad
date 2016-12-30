@@ -131,11 +131,7 @@ public class Modele implements Serializable{
     public void setTrains(ArrayList<Train> trains) {
         this.trains = trains;
     }
-    
-    
-    
-    
-    
+
         public void  genererMonde() throws InterruptedException{
             
             //Creation des ressource          
@@ -146,9 +142,9 @@ public class Modele implements Serializable{
             
             //ligneItem des different produit       
             LigneItem I1pistolet = new LigneItem(fer,5);
-            LigneItem I2pistolet = new LigneItem(bois,1);
-            LigneItem I1whisky = new LigneItem(cereales,100);
-            LigneItem I2whisky = new LigneItem(bois,30);
+            LigneItem I2pistolet = new LigneItem(bois,5);
+            LigneItem I1whisky = new LigneItem(cereales,5);
+            LigneItem I2whisky = new LigneItem(bois,5);
             LigneItem I1bottes = new LigneItem(cuir,20);
             LigneItem I2bottes = new LigneItem(bois,5);
             
@@ -283,7 +279,12 @@ public class Modele implements Serializable{
             LigneItem boisItemBeziers = new LigneItem(bois,0);
             LigneItem ferItemBeziers= new LigneItem(fer,0);
             LigneItem cerealeItemBeziers = new LigneItem(cereales,0);
+            LigneItem pistoletItem = new LigneItem(pistolet,0);
             
+            LigneItem boisItemAgen = new LigneItem(bois, 0);
+            LigneItem ferItemAgen = new LigneItem(fer, 0);
+            LigneItem cerealeItemAgen = new LigneItem(cereales, 0);
+            LigneItem whiskyItem=new LigneItem(whisky,0);
             
             tombstone.setStock(ferItemTombstone);
             tombstone.setStock(cerealeItemTombstone);
@@ -300,8 +301,13 @@ public class Modele implements Serializable{
            beziers.setStock(boisItemBeziers);
            beziers.setStock(ferItemBeziers);
            beziers.setStock(cerealeItemBeziers);
-
-            
+           beziers.setStock(pistoletItem);
+           
+           agen.setStock(boisItemAgen);
+           agen.setStock(ferItemAgen);
+           agen.setStock(cerealeItemAgen);
+           agen.setStock(whiskyItem);
+           
           /*  System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
             System.out.println("Limoges: "+limoges.getStock().get(1).getItem().getNom()+limoges.getStock().get(1).getQuantite());
             System.out.println("Limoges: "+limoges.getStock().get(2).getItem().getNom()+limoges.getStock().get(2).getQuantite());
@@ -548,10 +554,11 @@ public class Modele implements Serializable{
         }
         
     
-        public void sauvegarder(String s) throws IOException{
-             temp=new ArrayList(observateur);
-        FileOutputStream f = new FileOutputStream(new File("./src/save/"+this.nom+s));
+        public void sauvegarder(String s) throws IOException, InterruptedException{
+            temp=new ArrayList(observateur);
+            FileOutputStream f = new FileOutputStream(new File("./src/save/"+this.nom+s));
             observateur.clear();
+       
             ObjectOutputStream oos = new ObjectOutputStream(f);
             oos.writeObject(this);
             oos.close();

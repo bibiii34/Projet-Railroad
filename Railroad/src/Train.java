@@ -21,7 +21,8 @@ public class Train implements Serializable {
     private Ville depart;
     private Ville arrivee;
     int random = (int)(Math.random() * ((5 - 0) + 1));
-    BackgroundTaskTrain thd;
+    transient BackgroundTaskTrain thd;
+    private boolean aller;
     
     //Constructeurs  
     public Train(int x, int y, ArrayList<int[]> trajet, Ville d, Ville a){
@@ -32,6 +33,7 @@ public class Train implements Serializable {
         this.stock=new ArrayList();
         this.depart=d;
         this.arrivee=a;
+        this.aller=true;
  
     }
 
@@ -91,6 +93,11 @@ public class Train implements Serializable {
     public void setArrivee(Ville arrivee) {
         this.arrivee = arrivee;
     }
+
+    public boolean isAller() {
+        return aller;
+    }
+    
     
     public void deplacer(Modele modele) throws InterruptedException{
         
@@ -127,17 +134,16 @@ public class Train implements Serializable {
                     if (c==this.getTrajet().size()-2){
                         //l'allé étant effectué il devient false et le retour devient true
                         aller=false;
-                         retour=true;
+                        retour=true;
                         //decharger
                         this.dechargerRessources();
                         modele.avertirAllCreationRessource();
                         for(LigneItem li: this.getArrivee().getStock()){
                             System.out.println(li.getItem().nom+li.getQuantite());
                         }
-                        //le depart devient l'arrivé et l'arrivé le départ
-                        temp=this.depart;
-                        this.depart=this.arrivee;
-                         this.arrivee=temp;   
+                        //le depart devient l'arrivé et l'arrivé le départ                       
+                        changementVilles();  
+                        this.aller=false;
                     }    
                                 
                 Thread.sleep(1000); 
@@ -180,12 +186,11 @@ public class Train implements Serializable {
 
                                     //premiere case le retour est terminé ! on decharge on inverse depar et arrivé
                                     if (c==1){
-                                        aller=true;
+                                        aller=true;                                        
                                         retour=false;
-                                        temp=this.depart;
                                         //this.dechargerRessources();
-                                        this.depart=this.arrivee;
-                                        this.arrivee=temp;
+                                        changementVilles();
+                                        this.aller=true;
                                         modele.avertirAllCreationRessource();
                                     }    
                                 
@@ -208,7 +213,7 @@ public class Train implements Serializable {
                 //parcours de la liste de la ville de depart
                 for (LigneItem li : this.depart.getStock()){
                     //si la quantité de l'item est >= 2
-                    if (li.getQuantite()>=2){
+                    if (li.getQuantite()>=2 && li.getItem() instanceof Ressource){
                         //LigneItem l = new LigneItem(li.getItem(),li.getQuantite()/3);
                         //on l'ajoute au stock du train
                         this.stock.add(((Ressource)li.getItem()));
@@ -241,6 +246,10 @@ public class Train implements Serializable {
             this.stock.clear();
     }
         
-    
+    public void changementVilles(){
+        Ville temp=this.depart;
+        this.depart=this.arrivee;
+        this.arrivee=temp;
+    }
 }
 
