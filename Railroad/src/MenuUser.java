@@ -29,7 +29,7 @@ public class MenuUser extends javax.swing.JFrame {
     public MenuUser(String j) {
         initComponents();
         this.joueur=j;
-        
+        this.setLocationRelativeTo(null);
         jList1.setModel(new javax.swing.AbstractListModel() {
             
             @Override
@@ -62,6 +62,7 @@ public class MenuUser extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
 

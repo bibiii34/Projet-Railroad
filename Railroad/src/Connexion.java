@@ -31,6 +31,8 @@ public class Connexion extends javax.swing.JFrame {
     public Connexion() {
         initComponents();
         j= new ArrayList();
+        this.setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -64,6 +66,7 @@ public class Connexion extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("GO");
+        jButton1.setSelected(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -121,35 +124,7 @@ public class Connexion extends javax.swing.JFrame {
               
                 MenuUser menu = new MenuUser(jTextField1.getText());
                 menu.setVisible(true);
-                this.setVisible(false);
-                
-            /*    this.setVisible(false);
-                //on charge le modele en fonction du nom et de l'emplacement
-            Modele m = new Modele(jTextField1.getText());
-            FileInputStream f = new FileInputStream(new File("./src/save/"+jTextField1.getText()+1));
-            try (ObjectInputStream oos = new ObjectInputStream(f)) {
-                m = (Modele)oos.readObject();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                RailroadFrame rf = new RailroadFrame(m);
-                m.register(rf);
-                this.setVisible(false);
-                rf.setVisible(true);
-                
-                //relance generation de ressource
-                m.background.start();
-                //Relance train
-                for (Train t : m.getTrains()){
-                    t.thd.start();
-                }
-                
-                rf.rafraichir();
-                */
-
-                
-                
-                
+                this.setVisible(false);                
             }
             
             else {
@@ -207,6 +182,7 @@ public class Connexion extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Connexion().setVisible(true);
+                
             }
         });
     }

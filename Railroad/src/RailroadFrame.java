@@ -49,7 +49,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     
     public RailroadFrame(Modele m) {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
         modele=m;
         
         
@@ -664,10 +664,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         //avertirCreationRessource();
     }
     
-    
-
-    
-    
+  
     
     //Mouvement souris
      class CaseControler extends MouseAdapter {
