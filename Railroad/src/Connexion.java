@@ -121,7 +121,7 @@ public class Connexion extends javax.swing.JFrame {
               
                 MenuUser menu = new MenuUser(jTextField1.getText());
                 menu.setVisible(true);
-                
+                this.setVisible(false);
                 
             /*    this.setVisible(false);
                 //on charge le modele en fonction du nom et de l'emplacement
@@ -218,7 +218,7 @@ public class Connexion extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-public boolean joueurExistant(String joueur) throws FileNotFoundException, IOException{
+public boolean joueurExistant(String joueur) throws IOException{
     boolean j = false;
     FileReader fr=new FileReader("./src/joueur.txt");
     BufferedReader br = new BufferedReader(fr);

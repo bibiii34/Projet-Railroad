@@ -572,7 +572,7 @@ public class Modele implements Serializable{
             m = (Modele)oos.readObject();
         }
             
-            m.register(o);
+            //m.register(o);
             avertirAllRafraichir();
             this.textuel();
             System.out.println("monde chargé");

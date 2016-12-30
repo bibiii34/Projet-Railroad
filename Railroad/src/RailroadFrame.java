@@ -459,7 +459,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
             try {
-            modele.sauvegarder("1");        // TODO add your handling code here:
+            modele.sauvegarder("0");        // TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -467,7 +467,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
-            modele.sauvegarder("2");
+            modele.sauvegarder("1");
         } catch (IOException ex) {
             Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -475,7 +475,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try {
-            modele.sauvegarder("3");
+            modele.sauvegarder("2");
         } catch (IOException ex) {
             Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
         }  
