@@ -62,6 +62,7 @@ public class MenuUser extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Western RailRoad");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(102, 51, 0));
