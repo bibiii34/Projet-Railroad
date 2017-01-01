@@ -93,6 +93,11 @@ public class MenuUser extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Editeur de monde");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
@@ -222,6 +227,14 @@ public class MenuUser extends javax.swing.JFrame {
                 }
                 rf.rafraichir();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    Modele m = new Modele(joueur);
+        RailroadFrame rf = new RailroadFrame(m);
+        m.register(rf);
+        this.setVisible(false);
+        rf.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -353,13 +353,13 @@ public class Modele implements Serializable{
         }
         }
         
-        public void avertirAllObservateursSelection(int i, int j, Case c){
+        public void avertirAllSelection(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirSelection(i, j, c);
         }
         }
         
-        public void avertirAllObservateursDeselection(int i, int j, Case c){
+        public void avertirAllDeselection(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirDeselection(i, j, c);
         }
@@ -394,6 +394,7 @@ public class Modele implements Serializable{
                 o.avertirInformation(s);
         }  
         }
+        
         /* PLACER RAILS */
         public synchronized void placerRails(ArrayList<int[]> trajet) throws InterruptedException{
         if (trajet.isEmpty()==false){
@@ -510,7 +511,7 @@ public class Modele implements Serializable{
             //On deselectionne les villes
             for(Ville v : villes){
                 v.setSelection(false);
-               this.avertirAllObservateursDeselection(v.getX(), v.getY(), v);
+               this.avertirAllDeselection(v.getX(), v.getY(), v);
             }
  
             
@@ -536,7 +537,7 @@ public class Modele implements Serializable{
             for (int i =0 ; i<7;i++){
                 for (int j=0 ; i<7;i++){
                     map[i][j].setSelection(false);
-                    this.avertirAllObservateursDeselection(i, j, this.getCase(i, j));
+                    this.avertirAllDeselection(i, j, this.getCase(i, j));
                 }
             }
         }
@@ -545,15 +546,18 @@ public class Modele implements Serializable{
            
         /*SUPPRIMER RAILS*/
         public void supprimerRails(ArrayList<int[]> trajet){
+           
             for(int[] t : trajet){
+                if(map[t[0]][t[1]] instanceof Rail){
                 Case c = new Case(t[0],t[1]);
                 map[t[0]][t[1]]=c;
-                this.avertirAllChangementCase(c.getX(), c.getY(), c);
+                this.avertirAllChangementCase(c.getX(), c.getY(), c);   
+                }
+
                 
             }
         }
-        
-    
+
         public void sauvegarder(String s) throws IOException, InterruptedException{
             temp=new ArrayList(observateur);
             FileOutputStream f = new FileOutputStream(new File("./src/save/"+this.nom+s));
@@ -584,9 +588,7 @@ public class Modele implements Serializable{
             this.textuel();
             System.out.println("monde chargé");
         }
-        
-        
-        
+
        public void textuel(){
            System.out.println("textuel :");
    
@@ -622,7 +624,53 @@ public class Modele implements Serializable{
            
 
         }
+       
+       public void PlacerVille(ArrayList<int[]> t){
+           
+            //Creation des ressource          
+            Ressource bois = new Ressource("bois",1);
+            Ressource fer = new Ressource("fer",1);
+            Ressource cereales = new Ressource("cereales",1);
+            Ressource cuir = new Ressource("cuir",1);
+            
+            //ligneItem des different produit       
+            LigneItem I1pistolet = new LigneItem(fer,5);
+            LigneItem I2pistolet = new LigneItem(bois,5);
+            LigneItem I1whisky = new LigneItem(cereales,5);
+            LigneItem I2whisky = new LigneItem(bois,5);
+            LigneItem I1bottes = new LigneItem(cuir,20);
+            LigneItem I2bottes = new LigneItem(bois,5);
+            
+            
+            
+            //ArayList de ligne item pour crée des produit
+            ArrayList<LigneItem> fabricationPistolet =new ArrayList();
+            ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
+            ArrayList<LigneItem> fabricationBottes=new ArrayList();
+           
+            fabricationPistolet.add(I1pistolet);
+            fabricationPistolet.add(I2pistolet);
+            fabricationWhisky.add(I1whisky);
+            fabricationWhisky.add(I2whisky);
+            fabricationBottes.add(I1bottes);
+            fabricationBottes.add(I2bottes);
+            
+            
+            //Creation des produit          
+            Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
+            Produit whisky = new Produit("whisky",100,fabricationWhisky);
+            Produit bottes = new Produit("bottes",100,fabricationBottes);
+            
+            Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
+            beziers.setTexture(beziersCity);
+            beziers.setTextureSelection(beziersCitySelection);
+            villes.add(beziers);
+            
+            map[beziers.getX()][beziers.getY()]=beziers;
+            avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+       }
 }
+    
 
 
 

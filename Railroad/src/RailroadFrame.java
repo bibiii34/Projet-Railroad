@@ -139,6 +139,11 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jLabelAgenFer = new javax.swing.JLabel();
         jLabelAgenCereales = new javax.swing.JLabel();
         jLabelAgenWhisky = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jButtonBeziers = new javax.swing.JButton();
+        jButtonAgen = new javax.swing.JButton();
+        jButtonObstacle = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -573,6 +578,50 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addGap(16, 16, 16))
         );
 
+        jLabel18.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
+        jLabel18.setText("Editeur de monde");
+
+        jButtonBeziers.setText("Béziers");
+        jButtonBeziers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBeziersActionPerformed(evt);
+            }
+        });
+
+        jButtonAgen.setText("Agen");
+
+        jButtonObstacle.setText("Obstacle");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonAgen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonBeziers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButtonObstacle)))
+                .addContainerGap(260, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBeziers)
+                    .addComponent(jButtonObstacle))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAgen)
+                .addContainerGap(102, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -580,6 +629,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())
@@ -634,15 +684,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -828,6 +877,11 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jButtonBeziersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBeziersActionPerformed
+        modele.PlacerVille(trajet);
+        trajet.clear();
+    }//GEN-LAST:event_jButtonBeziersActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -869,6 +923,9 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAgen;
+    private javax.swing.JButton jButtonBeziers;
+    private javax.swing.JButton jButtonObstacle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -878,6 +935,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -929,6 +987,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextAreaInformations;
@@ -1049,8 +1108,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                     avertirSelection(i, j, modele.getCase(i, j));
                     trajet.add(tab);
                  }
-            
-            
+
                     //Si case selectionné on change iconne et on vide trajet
                     // else if (jboard[i][j].getIcon()==DESERTSELECTION){
                  //     jboard[i][j].setIcon(DESERT);
