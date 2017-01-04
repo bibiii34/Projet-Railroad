@@ -234,6 +234,7 @@ public class MenuUser extends javax.swing.JFrame {
         m.register(rf);
         this.setVisible(false);
         rf.setVisible(true);
+        rf.editeur(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

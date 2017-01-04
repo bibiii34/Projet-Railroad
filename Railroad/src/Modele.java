@@ -625,7 +625,7 @@ public class Modele implements Serializable{
 
         }
        
-       public void PlacerVille(ArrayList<int[]> t){
+       public void PlacerVille(ArrayList<int[]> t, int ville){
            
             //Creation des ressource          
             Ressource bois = new Ressource("bois",1);
@@ -640,9 +640,7 @@ public class Modele implements Serializable{
             LigneItem I2whisky = new LigneItem(bois,5);
             LigneItem I1bottes = new LigneItem(cuir,20);
             LigneItem I2bottes = new LigneItem(bois,5);
-            
-            
-            
+        
             //ArayList de ligne item pour crée des produit
             ArrayList<LigneItem> fabricationPistolet =new ArrayList();
             ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
@@ -659,15 +657,57 @@ public class Modele implements Serializable{
             //Creation des produit          
             Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
             Produit whisky = new Produit("whisky",100,fabricationWhisky);
-            Produit bottes = new Produit("bottes",100,fabricationBottes);
+            //Produit bottes = new Produit("bottes",100,fabricationBottes);
             
-            Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
-            beziers.setTexture(beziersCity);
-            beziers.setTextureSelection(beziersCitySelection);
-            villes.add(beziers);
+            switch (ville)
+            {
+            case 0:
+                Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
+                beziers.setTexture(beziersCity);
+                beziers.setTextureSelection(beziersCitySelection);
+                villes.add(ville,beziers);           
+                map[beziers.getX()][beziers.getY()]=beziers;
+                avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+            break;
+          
+            case 1:
+                Ville agen = new Ville(t.get(0)[0],t.get(0)[1],"Agen City",whisky);
+                agen.setTexture(agenCity);
+                agen.setTextureSelection(agenCitySelection);
+                villes.add(ville, agen);
+                map[agen.getX()][agen.getY()]=agen;
+                avertirAllChangementCase(agen.getX(), agen.getY(), agen);
+            break;
             
-            map[beziers.getX()][beziers.getY()]=beziers;
-            avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+            case 2:
+                Ville tombstone = new Ville(t.get(0)[0],t.get(0)[1],"Tombstone",bois);
+                tombstone.setTexture(tombstoneIcn);
+                tombstone.setTextureSelection(tombstoneSelection);
+                villes.add(ville, tombstone);
+                map[tombstone.getX()][tombstone.getY()]=tombstone;
+                avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
+            break;
+            
+            case 3:
+                Ville hillvalley = new Ville(t.get(0)[0],t.get(0)[1],"hillvalley",cereales);
+                hillvalley.setTexture(hillValleyIcn);
+                hillvalley.setTextureSelection(hillValleySelection);
+                villes.add(ville, hillvalley);
+                map[hillvalley.getX()][hillvalley.getY()]=hillvalley;
+                avertirAllChangementCase(hillvalley.getX(), hillvalley.getY(), hillvalley);
+            break;
+            
+            case 4:
+                Ville santafe = new Ville(t.get(0)[0],t.get(0)[1],"santafe",fer);
+                santafe.setTexture(santaFeIcn);
+                santafe.setTextureSelection(santaFeSelection);
+                villes.add(ville, santafe);
+                map[santafe.getX()][santafe.getY()]=santafe;
+                avertirAllChangementCase(santafe.getX(), santafe.getY(), santafe);
+            break;
+            
+            } 
+           
        }
 }
     

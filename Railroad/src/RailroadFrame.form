@@ -173,7 +173,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel7" max="32767" attributes="0"/>
+                      <Component id="jPanelEditeur" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -249,7 +249,7 @@
                       <Component id="jPanel6" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jPanel7" max="32767" attributes="0"/>
+                  <Component id="jPanelEditeur" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1036,7 +1036,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel7">
+        <Container class="javax.swing.JPanel" name="jPanelEditeur">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -1054,7 +1054,7 @@
                               <Component id="jButtonObstacle" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="260" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1070,7 +1070,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonAgen" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="102" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1096,6 +1096,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agen"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgenActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonObstacle">
               <Properties>
