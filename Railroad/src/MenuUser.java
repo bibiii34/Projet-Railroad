@@ -177,12 +177,13 @@ public class MenuUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Bouton Nouvelle Partie
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Modele m = new Modele(joueur);
         RailroadFrame rf = new RailroadFrame(m);
         m.register(rf);
         this.setVisible(false);
+        rf.editeur(false);
         try {
             m.genererMonde();
         } catch (InterruptedException ex) {
@@ -190,7 +191,9 @@ public class MenuUser extends javax.swing.JFrame {
         }
         rf.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+    
 
+    //Bouton Charger
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
             //on charge le modele en fonction du nom et de l'emplacement
             Modele m = new Modele(joueur);
@@ -210,6 +213,7 @@ public class MenuUser extends javax.swing.JFrame {
                 RailroadFrame rf = new RailroadFrame(m);
                 m.register(rf);
                 this.setVisible(false);
+                rf.editeur(false);
                 rf.setVisible(true);
                 
                 //relance generation de ressource
