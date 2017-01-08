@@ -119,14 +119,6 @@ public class Ville extends Case implements Serializable {
         this.textureSelection = textureSelection;
     }
     
-   
-    
-    
-    public void genererPremiereRessource(Item item) throws InterruptedException{
-        LigneItem li = new LigneItem(item,1);
-        this.stock.add(li);
-
-    }
     
     public void genererItem(Modele m){
   
@@ -217,7 +209,15 @@ public class Ville extends Case implements Serializable {
 
         
     }
-            
+          
+    
+    public int getStockMax(){
+        int stock=0;
+        for(LigneItem l : this.stock){
+            stock += l.getQuantite();
+        }
+        return stock;
+    }
         @Override
     public String toString(){
     String chaine = " V ";

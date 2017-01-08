@@ -612,6 +612,11 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jButtonTombstone.setBackground(new java.awt.Color(0, 0, 0));
         jButtonTombstone.setForeground(new java.awt.Color(255, 255, 255));
         jButtonTombstone.setText("Tombstone");
+        jButtonTombstone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTombstoneActionPerformed(evt);
+            }
+        });
 
         jButtonSantaFe.setBackground(new java.awt.Color(0, 0, 0));
         jButtonSantaFe.setForeground(new java.awt.Color(255, 255, 255));
@@ -780,7 +785,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanelEditeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -977,8 +982,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     }//GEN-LAST:event_jButtonBeziersActionPerformed
 
     private void jButtonAgenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgenActionPerformed
-modele.PlacerVille(trajet,1);        // TODO add your handling code here:
+        modele.PlacerVille(trajet,1);  
+        trajet.clear();
+// TODO add your handling code here:
     }//GEN-LAST:event_jButtonAgenActionPerformed
+
+    private void jButtonTombstoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTombstoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonTombstoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1153,17 +1164,15 @@ modele.PlacerVille(trajet,1);        // TODO add your handling code here:
         jLabelTomstoneFer.setText( String.valueOf(modele.getVilles().get(2).getStock().get(1).getQuantite()));
         jLabelTomstoneCereales.setText( String.valueOf(modele.getVilles().get(2).getStock().get(2).getQuantite()));
         
-        jLabelHillValleyCereales.setText( String.valueOf(modele.getVilles().get(3).getStock().get(0).getQuantite()));
-        jLabelHillValleyBois.setText( String.valueOf(modele.getVilles().get(3).getStock().get(1).getQuantite()));
-        jLabelHillValleyFer.setText( String.valueOf(modele.getVilles().get(3).getStock().get(2).getQuantite()));
+        jLabelHillValleyBois.setText( String.valueOf(modele.getVilles().get(3).getStock().get(0).getQuantite()));
+        jLabelHillValleyFer.setText( String.valueOf(modele.getVilles().get(3).getStock().get(1).getQuantite()));
+        jLabelHillValleyCereales.setText( String.valueOf(modele.getVilles().get(3).getStock().get(2).getQuantite()));
         
-        jLabelSantaFeFer.setText( String.valueOf(modele.getVilles().get(4).getStock().get(0).getQuantite()));
-        jLabelSantaFeBois.setText( String.valueOf(modele.getVilles().get(4).getStock().get(1).getQuantite()));
+        
+        jLabelSantaFeBois.setText( String.valueOf(modele.getVilles().get(4).getStock().get(0).getQuantite()));
+        jLabelSantaFeFer.setText( String.valueOf(modele.getVilles().get(4).getStock().get(1).getQuantite()));
         jLabelSantaFeCereales.setText( String.valueOf(modele.getVilles().get(4).getStock().get(2).getQuantite()));
-        
-        
-        
-        
+ 
         jLabelPoints.setText(Long.toString(modele.getPoint()));
         
         

@@ -138,39 +138,34 @@ public class Modele implements Serializable{
             Ressource bois = new Ressource("bois",1);
             Ressource fer = new Ressource("fer",1);
             Ressource cereales = new Ressource("cereales",1);
-            Ressource cuir = new Ressource("cuir",1);
+            
             
             //ligneItem des different produit       
-            LigneItem I1pistolet = new LigneItem(fer,5);
+            LigneItem I1pistolet = new LigneItem(fer,20);
             LigneItem I2pistolet = new LigneItem(bois,5);
-            LigneItem I1whisky = new LigneItem(cereales,5);
+            LigneItem I1whisky = new LigneItem(cereales,20);
             LigneItem I2whisky = new LigneItem(bois,5);
-            LigneItem I1bottes = new LigneItem(cuir,20);
-            LigneItem I2bottes = new LigneItem(bois,5);
-            
-            
-            
+
+          
             //ArayList de ligne item pour crée des produit
             ArrayList<LigneItem> fabricationPistolet =new ArrayList();
             ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
-            ArrayList<LigneItem> fabricationBottes=new ArrayList();
+
            
             fabricationPistolet.add(I1pistolet);
             fabricationPistolet.add(I2pistolet);
             fabricationWhisky.add(I1whisky);
             fabricationWhisky.add(I2whisky);
-            fabricationBottes.add(I1bottes);
-            fabricationBottes.add(I2bottes);
-            
+
+        
             
             //Creation des produit          
             Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
             Produit whisky = new Produit("whisky",100,fabricationWhisky);
-            Produit bottes = new Produit("bottes",100,fabricationBottes);
+
             
             //Creation ville
-            
-            
+        
             Ville beziers = new Ville("Beziers City",pistolet, villes);
             beziers.setTexture(beziersCity);
             beziers.setTextureSelection(beziersCitySelection);
@@ -180,17 +175,11 @@ public class Modele implements Serializable{
             agen.setTexture(agenCity);
             agen.setTextureSelection(agenCitySelection);
             villes.add(agen);
-            
-            //Ville carson = new Ville("Carson City",bottes, villes);
-            //carson.setTexture(carsonCity);
-            //carson.setTextureSelection(carsonCitySelection);
-            //villes.add(carson);
-            
+
             Ville tombstone = new Ville("Tombstone",bois, villes);
             tombstone.setTexture(tombstoneIcn);
             tombstone.setTextureSelection(tombstoneSelection);
             villes.add(tombstone);
-            
 
             Ville hillValley = new Ville("Hill Valley",cereales, villes);
             hillValley.setTexture(hillValleyIcn);
@@ -202,21 +191,13 @@ public class Modele implements Serializable{
             santaFe.setTextureSelection(santaFeSelection);
             villes.add(santaFe);
 
-           // Ville sanAntonio = new Ville("San Antonio",cuir,villes);
-            //sanAntonio.setTexture(sanAntonioIcn);
-           // sanAntonio.setTextureSelection(sanAntonioSelection);
-           // villes.add(sanAntonio);
-            
-            
+    
             //placement des villes sur le modele et sur la vue
             map[beziers.getX()][beziers.getY()]=beziers;
             avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
  
             map[agen.getX()][agen.getY()]=agen;
             avertirAllChangementCase(agen.getX(), agen.getY(), agen);
-            
-           // map[carson.getX()][carson.getY()]=carson;
-            //avertirAllChangementCase(carson.getX(), carson.getY(), carson);
             
             map[tombstone.getX()][tombstone.getY()]=tombstone;
             avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
@@ -226,11 +207,7 @@ public class Modele implements Serializable{
                         
             map[santaFe.getX()][santaFe.getY()]=santaFe;
             avertirAllChangementCase(santaFe.getX(), santaFe.getY(), santaFe);
-            
-            //map[sanAntonio.getX()][sanAntonio.getY()]=sanAntonio;
-            //avertirAllChangementCase(sanAntonio.getX(), sanAntonio.getY(), sanAntonio);
-                
-            
+
             //Generer obstacle
             Obstacle o = new Obstacle(villes);
             System.out.println("obstacle :"+o.getX()+"/"+o.getY());
@@ -240,9 +217,7 @@ public class Modele implements Serializable{
             System.out.println("obstacle :"+o2.getX()+"/"+o.getY());
             Obstacle o3 = new Obstacle(villes);
             System.out.println("obstacle :"+o3.getX()+"/"+o.getY());
-  
-            
- 
+      
             //placement des obstacles sur le modele et la vue;
             map[o.getX()][o.getY()]=o;
             avertirAllChangementCase(o.getX(), o.getY(), o);
@@ -256,25 +231,22 @@ public class Modele implements Serializable{
             map[o3.getX()][o3.getY()]=o3;
             avertirAllChangementCase(o3.getX(), o3.getY(), o3);
             
-            //generer premiere ressource
-            tombstone.genererPremiereRessource(tombstone.getItem());
-            hillValley.genererPremiereRessource(hillValley.getItem());
-            santaFe.genererPremiereRessource(santaFe.getItem());
-           // sanAntonio.genererPremiereRessource(sanAntonio.getItem());
-            
             
             //LigneItem pour initialiser le stock
+            LigneItem boisItemTombstone = new LigneItem(bois,10);
             LigneItem ferItemTombstone = new LigneItem(fer,0);
             LigneItem cerealeItemTombstone = new LigneItem(cereales,0);
-            LigneItem cuirItemTombstone = new LigneItem(cuir,0);
+            
             
             LigneItem boisItemSantaFe = new LigneItem(bois,0);
+            LigneItem ferItemSantaFe = new LigneItem(fer,10);
             LigneItem cerealeItemSantaFe = new LigneItem(cereales,0);
-            LigneItem cuirItemSantaFe = new LigneItem(cuir,0);
+            
             
             LigneItem boisItemHillValley = new LigneItem(bois,0);
             LigneItem ferItemHillValley = new LigneItem(fer,0);
-            LigneItem cuirItemHillValley = new LigneItem(cuir,0);
+            LigneItem cerealesItemHillValley = new LigneItem(cereales,10);
+            
             
             LigneItem boisItemBeziers = new LigneItem(bois,0);
             LigneItem ferItemBeziers= new LigneItem(fer,0);
@@ -286,17 +258,18 @@ public class Modele implements Serializable{
             LigneItem cerealeItemAgen = new LigneItem(cereales, 0);
             LigneItem whiskyItem=new LigneItem(whisky,0);
             
+            tombstone.setStock(boisItemTombstone);
             tombstone.setStock(ferItemTombstone);
             tombstone.setStock(cerealeItemTombstone);
-            tombstone.setStock(cuirItemTombstone);
             
             santaFe.setStock(boisItemSantaFe);
+            santaFe.setStock(ferItemSantaFe);
             santaFe.setStock(cerealeItemSantaFe);
-            santaFe.setStock(cuirItemSantaFe);
+            
 
             hillValley.setStock(boisItemHillValley);
             hillValley.setStock(ferItemHillValley);
-            hillValley.setStock(cuirItemHillValley);
+            hillValley.setStock(cerealesItemHillValley);
             
            beziers.setStock(boisItemBeziers);
            beziers.setStock(ferItemBeziers);
@@ -308,26 +281,9 @@ public class Modele implements Serializable{
            agen.setStock(cerealeItemAgen);
            agen.setStock(whiskyItem);
            
-          /*  System.out.println("Limoges: "+limoges.getStock().get(0).getItem().getNom()+limoges.getStock().get(0).getQuantite());
-            System.out.println("Limoges: "+limoges.getStock().get(1).getItem().getNom()+limoges.getStock().get(1).getQuantite());
-            System.out.println("Limoges: "+limoges.getStock().get(2).getItem().getNom()+limoges.getStock().get(2).getQuantite());
-            
-           
-            System.out.println("Toulouse: "+toulouse.getStock().get(0).getItem().getNom()+toulouse.getStock().get(0).getQuantite());
-            System.out.println("Toulouse: "+toulouse.getStock().get(1).getItem().getNom()+toulouse.getStock().get(1).getQuantite());
-            System.out.println("Toulouse: "+toulouse.getStock().get(2).getItem().getNom()+toulouse.getStock().get(2).getQuantite());
-            
-            System.out.println("Servian: "+servian.getStock().get(0).getItem().getNom()+servian.getStock().get(0).getQuantite());
-            System.out.println("Servian: "+servian.getStock().get(1).getItem().getNom()+servian.getStock().get(1).getQuantite());
-            System.out.println("Servian: "+servian.getStock().get(2).getItem().getNom()+servian.getStock().get(2).getQuantite());
-            */
           
             avertirAllCreationRessource();
-
-            for(Ville v:villes){
-                System.out.println(v.getNom());
-            }
-            
+       
             
             //Lancer tache generer ressource ville
             background.start();
@@ -437,7 +393,7 @@ public class Modele implements Serializable{
                 }
                 
         //RAIL VIRAGE1 
-                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
+                //Si  nous somme a partir de la 3eme case
                 if( (i>=2)
                         //X est plus petit que X de case-2 et Y est plus grand
                         && ((trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1])|| 
@@ -453,7 +409,7 @@ public class Modele implements Serializable{
                 
                 
         //RAIL VIRAGE 2
-                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
+                //Si nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
                         //X et Y sont plus grand que X de case -2 
@@ -470,7 +426,7 @@ public class Modele implements Serializable{
   
         
         //RAIL VIRAGE 3
-                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
+                //Si nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
                         //X et Y sont plus grand que X de case -2 + verif case-1 pr separer de virage1
@@ -487,8 +443,8 @@ public class Modele implements Serializable{
                 }
                  
         //RAIL VIRAGE4 
-                //Si la case n'est pas une ville et que nous somme a partir de la 3eme case
-                if( ((this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && i>=2)) 
+                //Si nous somme a partir de la 3eme case
+                if( ((i>=2)) 
                         
                         //X est plus petit que X de case-2 et Y est plus grand + verif case-1 pr separer de virage1
                         && ((trajet.get(i)[0]<trajet.get(i-2)[0] && trajet.get(i)[1]>trajet.get(i-2)[1] && trajet.get(i)[0]==trajet.get(i-1)[0] )|| 

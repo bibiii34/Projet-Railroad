@@ -18,14 +18,13 @@ public class Train implements Serializable {
     private int x;
     private int y;
     private ArrayList<int[]> trajet;
-    private  ArrayList<Ressource> stock;
+    private  ArrayList<LigneItem> stock;
     private Ville depart;
     private Ville arrivee;
-    int random = (int)(Math.random() * ((5 - 0) + 1));
     transient BackgroundTaskTrain thd;
     private boolean aller;
     private ArrayList<Train> trains;
-    
+    private int capacite;
 //Constructeurs  
     public Train(int i, int x, int y, ArrayList<int[]> trajet, Ville d, Ville a, ArrayList<Train> t){
         this.id=i;
@@ -38,7 +37,18 @@ public class Train implements Serializable {
         this.arrivee=a;
         this.aller=true;
         this.trains=t;
- 
+        this.capacite=12;
+        //initialisation stock du train
+        Ressource bois = new Ressource("bois",1);
+        Ressource fer = new Ressource("fer",1);
+        Ressource cereales = new Ressource("cereales",1);
+        LigneItem boisItemTrain = new LigneItem(bois,0);
+        LigneItem ferItemTrain= new LigneItem(fer,0);
+        LigneItem cerealeItemTrain = new LigneItem(cereales,0);
+        this.stock.add(boisItemTrain);
+        this.stock.add(ferItemTrain);
+        this.stock.add(cerealeItemTrain);
+        
     }
 
     public BackgroundTaskTrain getThd() {
@@ -58,11 +68,11 @@ public class Train implements Serializable {
         this.trajet = trajet;
     }
 
-    public ArrayList<Ressource> getStock() {
+    public ArrayList<LigneItem> getStock() {
         return stock;
     }
 
-    public void setStock(ArrayList<Ressource> stock) {
+    public void setStock(ArrayList<LigneItem> stock) {
         this.stock = stock;
     }
 
@@ -175,7 +185,7 @@ public class Train implements Serializable {
                                     //derniere case du trajet devient la premiere du retour donc on charge 
                                     if(c==this.getTrajet().size()-2){
 
-                                       // this.chargerRessources();
+                                        //this.chargerRessources();
                                         modele.avertirAllCreationRessource();
                                     }
                                     //a partir de la deuxieme case du retour (size-3) on efface la case precedente
@@ -199,7 +209,7 @@ public class Train implements Serializable {
                                         modele.avertirAllCreationRessource();
                                     }    
                                 
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
                                 }
                                 else {
                                      System.out.println("Plus de rail le train s'arrete");
@@ -215,22 +225,20 @@ public class Train implements Serializable {
     }
     
     public void chargerRessources(){
-      
-        System.out.println("je pars de "+this.depart.getNom());
-   
+        double prorata =  (double)this.capacite / (double)this.depart.getStockMax();
+        System.out.println("prorata :" +prorata);
         synchronized(this.depart.getStock()) {
-                //parcours de la liste de la ville de depart
-                for (LigneItem li : this.depart.getStock()){
-                    //si la quantité de l'item est >= 2
-                    if (li.getQuantite()>=2 && li.getItem() instanceof Ressource){
-                        //LigneItem l = new LigneItem(li.getItem(),li.getQuantite()/3);
-                        //on l'ajoute au stock du train
-                        this.stock.add(((Ressource)li.getItem()));
-                        
-                        //et on decrement le stock de la ville
-                        li.setQuantite(li.getQuantite()-2);
- 
-                }
+                //boucle de 0 a 2 pour parcourir seulement les ressources (stocké dans les 3 premieres case des listes de stocks)
+                for (int i=0;i<=2;i++){
+                    //si prorata inferieur a 1 on ne prend les ressources au prorata
+                    if (prorata<1){                     
+                        this.stock.get(i).setQuantite((int) (this.depart.getStock().get(i).getQuantite()*prorata));
+                        this.depart.getStock().get(i).setQuantite((int) (this.depart.getStock().get(i).getQuantite()-this.depart.getStock().get(i).getQuantite()*prorata));
+                }   //sinon on peut prendre toutes les ressources
+                    else {
+                        this.stock.get(i).setQuantite(this.depart.getStock().get(i).getQuantite());
+                        this.depart.getStock().get(i).setQuantite(0);
+                    }
 
             }
         }
@@ -239,20 +247,13 @@ public class Train implements Serializable {
     public void dechargerRessources(){
         LigneItem lit = new LigneItem();
         
-            for (Ressource r : this.getStock()){
                 synchronized(this.arrivee.getStock()) {
-                    for (LigneItem li : this.arrivee.getStock()){ 
-                        //si les ressources du train sont deja dans le stock sous forme de ligneItem
-                        if (r.nom.equals(li.getItem().nom)){
-                            
-                            //on incremente
-                            li.setQuantite(li.getQuantite()+2);                           
-                        }
+                    for (int i=0;i<=2;i++){                 
+                        this.arrivee.getStock().get(i).setQuantite(this.arrivee.getStock().get(i).getQuantite()+this.getStock().get(i).getQuantite());
+                        this.getStock().get(i).setQuantite(0);
                     }
      
-                }         
-            }
-            this.stock.clear();
+                }                   
     }
         
     public void changementVilles(){
