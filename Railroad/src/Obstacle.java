@@ -14,10 +14,11 @@ import javax.swing.ImageIcon;
  */
 public class Obstacle extends Case {
     private String type;
-
+    ImageIcon OBSTACLE = new ImageIcon("./src/imgs/Texture 100x100/obstacle.png");
+    
     public Obstacle(int x, int y) {
         super(x, y);
-        //this.texture=
+        this.texture=OBSTACLE;
         this.type = "lac";
     }
     
@@ -42,7 +43,7 @@ public class Obstacle extends Case {
                 }
             }
         }
-        ImageIcon OBSTACLE = new ImageIcon("./src/imgs/Texture 100x100/obstacle.png");
+        
         this.texture = OBSTACLE;  
     }
 

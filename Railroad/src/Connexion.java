@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,8 +29,9 @@ public class Connexion extends javax.swing.JFrame {
     public Connexion() {
         initComponents();
         j= new ArrayList();
-        this.setLocationRelativeTo(null);
-       
+        this.setLocationRelativeTo(null); 
+        ImageIcon img = new ImageIcon("./src/imgs/Texture 100x100/train.png");
+        this.setIconImage(img.getImage());
     }
 
     /**
@@ -117,13 +119,13 @@ public class Connexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         try {
              //si le joueur existe
             if (joueurExistant(jTextField1.getText())){
-                System.out.println("joueur existant");
-              
+ 
                 MenuUser menu = new MenuUser(jTextField1.getText());
                 menu.setVisible(true);
                 this.setVisible(false);                
@@ -131,20 +133,10 @@ public class Connexion extends javax.swing.JFrame {
             
             else {
                 //si il n'existe pas
-                nouveauJoueur(jTextField1.getText());
-                Modele m = new Modele(jTextField1.getText());
-                RailroadFrame rf = new RailroadFrame(m);
-                m.register(rf);
-
-                rf.setVisible(true);
+                nouveauJoueur(jTextField1.getText());              
+                MenuNewUser menu = new MenuNewUser(jTextField1.getText());
+                menu.setVisible(true);
                 this.setVisible(false);
-                try {
-                    m.genererMonde();
-
-                // TODO add your handling code here:
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);

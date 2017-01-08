@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,6 +31,8 @@ public class MenuUser extends javax.swing.JFrame {
         initComponents();
         this.joueur=j;
         this.setLocationRelativeTo(null);
+        ImageIcon img = new ImageIcon("./src/imgs/Texture 100x100/train.png");
+        this.setIconImage(img.getImage());
         jList1.setModel(new javax.swing.AbstractListModel() {
             
             @Override
@@ -233,12 +236,16 @@ public class MenuUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Modele m = new Modele(joueur);
+        Modele m = new Modele(joueur);
         RailroadFrame rf = new RailroadFrame(m);
         m.register(rf);
         this.setVisible(false);
         rf.setVisible(true);
         rf.editeur(true);
+        rf.bouton(false);
+        rf.jouer(false);
+        rf.information("Placer les 5 villes et des obstacles sur la carte");
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

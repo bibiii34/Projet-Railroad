@@ -30,10 +30,17 @@ public class Modele implements Serializable{
     private  ArrayList<Observateur> observateur;
     transient ArrayList<Observateur> temp;
     private long point;
-    
     private ArrayList<Ville> villes = new ArrayList();
     private ArrayList<Rail> rails = new ArrayList();
-    private ArrayList<Train> trains = new ArrayList();
+    private ArrayList<Train> trains = new ArrayList();    
+    private transient BackgroundTask1 background = new BackgroundTask1(villes, this);
+    private int nbTrain=0;
+    private int nbVilles=0;
+    private Ressource bois;
+    private Ressource fer;
+    private Ressource cereales;
+    private Produit pistolet;
+    private Produit whisky;
     
     ImageIcon beziersCity = new ImageIcon("./src/imgs/Texture 100x100/villeBeziersCity.png");
     ImageIcon beziersCitySelection = new ImageIcon("./src/imgs/Texture 100x100/villeBeziersCitySelection.png");
@@ -49,9 +56,9 @@ public class Modele implements Serializable{
     ImageIcon santaFeSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSantaFeSelection.png");
     ImageIcon sanAntonioIcn = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonio.png");
     ImageIcon sanAntonioSelection = new ImageIcon("./src/imgs/Texture 100x100/villeSanAntonioSelection.png");
+
+
     
-    transient BackgroundTask1 background = new BackgroundTask1(villes, this);
-    int nbTrain=0;
     public Modele(String s){
  
         map=new Case[7][7];
@@ -65,6 +72,36 @@ public class Modele implements Serializable{
         this.observateur=new ArrayList<>();
         this.nom=s;
         this.point=0;
+        
+        villes.add(new Ville(10,10,"villeFactice1",bois));
+        villes.add(new Ville(10,10,"villeFactice2",bois));
+        villes.add(new Ville(10,10,"villeFactice3",bois));
+        villes.add(new Ville(10,10,"villeFactice4",bois));
+        villes.add(new Ville(10,10,"villeFactice5",bois));
+
+        
+             //Creation des ressource          
+            this.bois = new Ressource("bois",1);
+            this.fer = new Ressource("fer",1);
+            this.cereales = new Ressource("cereales",1);
+        
+            //ligneItem des different produit       
+            LigneItem I1pistolet = new LigneItem(fer,5);
+            LigneItem I2pistolet = new LigneItem(bois,5);
+            LigneItem I1whisky = new LigneItem(cereales,5);
+            LigneItem I2whisky = new LigneItem(bois,5);
+          
+            //ArayList de ligne item pour crée des produit
+            ArrayList<LigneItem> fabricationPistolet =new ArrayList();
+            ArrayList<LigneItem> fabricationWhisky =new ArrayList();        
+            fabricationPistolet.add(I1pistolet);
+            fabricationPistolet.add(I2pistolet);
+            fabricationWhisky.add(I1whisky);
+            fabricationWhisky.add(I2whisky);
+
+            //Creation des produit          
+            this.pistolet = new Produit("pistolet",100,fabricationPistolet);
+            this.whisky = new Produit("whisky",100,fabricationWhisky);
     }
     
     //GET SET
@@ -132,64 +169,43 @@ public class Modele implements Serializable{
         this.trains = trains;
     }
 
+    public int getNbVilles() {
+        return nbVilles;
+    }
+
+    public void setNbVilles(int nbVilles) {
+        this.nbVilles = nbVilles;
+    }
+    
+
         public void  genererMonde() throws InterruptedException{
-            
-            //Creation des ressource          
-            Ressource bois = new Ressource("bois",1);
-            Ressource fer = new Ressource("fer",1);
-            Ressource cereales = new Ressource("cereales",1);
-            
-            
-            //ligneItem des different produit       
-            LigneItem I1pistolet = new LigneItem(fer,20);
-            LigneItem I2pistolet = new LigneItem(bois,5);
-            LigneItem I1whisky = new LigneItem(cereales,20);
-            LigneItem I2whisky = new LigneItem(bois,5);
-
-          
-            //ArayList de ligne item pour crée des produit
-            ArrayList<LigneItem> fabricationPistolet =new ArrayList();
-            ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
-
-           
-            fabricationPistolet.add(I1pistolet);
-            fabricationPistolet.add(I2pistolet);
-            fabricationWhisky.add(I1whisky);
-            fabricationWhisky.add(I2whisky);
-
-        
-            
-            //Creation des produit          
-            Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
-            Produit whisky = new Produit("whisky",100,fabricationWhisky);
-
             
             //Creation ville
         
             Ville beziers = new Ville("Beziers City",pistolet, villes);
             beziers.setTexture(beziersCity);
             beziers.setTextureSelection(beziersCitySelection);
-            villes.add(beziers);
+            villes.set(0,beziers);
             
             Ville agen=new Ville("Agen City",whisky, villes);
             agen.setTexture(agenCity);
             agen.setTextureSelection(agenCitySelection);
-            villes.add(agen);
+            villes.set(1,agen);
 
             Ville tombstone = new Ville("Tombstone",bois, villes);
             tombstone.setTexture(tombstoneIcn);
             tombstone.setTextureSelection(tombstoneSelection);
-            villes.add(tombstone);
+            villes.set(2,tombstone);
 
             Ville hillValley = new Ville("Hill Valley",cereales, villes);
             hillValley.setTexture(hillValleyIcn);
             hillValley.setTextureSelection(hillValleySelection);
-            villes.add(hillValley);
+            villes.set(3,hillValley);
             
             Ville santaFe = new Ville("Sant Fe",fer,villes );
             santaFe.setTexture(santaFeIcn);
             santaFe.setTextureSelection(santaFeSelection);
-            villes.add(santaFe);
+            villes.set(4,santaFe);
 
     
             //placement des villes sur le modele et sur la vue
@@ -283,15 +299,66 @@ public class Modele implements Serializable{
            
           
             avertirAllCreationRessource();
-       
-            
-            //Lancer tache generer ressource ville
             background.start();
+
+  
+        }
+        
+        public void jouer(){
+             //LigneItem pour initialiser le stock
+            LigneItem boisItemTombstone = new LigneItem(bois,10);
+            LigneItem ferItemTombstone = new LigneItem(fer,0);
+            LigneItem cerealeItemTombstone = new LigneItem(cereales,0);
             
-            //this.textuel();
             
-           /*LigneItem I1halteretest = new LigneItem(fer,20);
-           carcassonne.getStock().add(I1halteretest);*/
+            LigneItem boisItemSantaFe = new LigneItem(bois,0);
+            LigneItem ferItemSantaFe = new LigneItem(fer,10);
+            LigneItem cerealeItemSantaFe = new LigneItem(cereales,0);
+            
+            
+            LigneItem boisItemHillValley = new LigneItem(bois,0);
+            LigneItem ferItemHillValley = new LigneItem(fer,0);
+            LigneItem cerealesItemHillValley = new LigneItem(cereales,10);
+            
+            
+            LigneItem boisItemBeziers = new LigneItem(bois,0);
+            LigneItem ferItemBeziers= new LigneItem(fer,0);
+            LigneItem cerealeItemBeziers = new LigneItem(cereales,0);
+            LigneItem pistoletItem = new LigneItem(pistolet,0);
+            
+            LigneItem boisItemAgen = new LigneItem(bois, 0);
+            LigneItem ferItemAgen = new LigneItem(fer, 0);
+            LigneItem cerealeItemAgen = new LigneItem(cereales, 0);
+            LigneItem whiskyItem=new LigneItem(whisky,0);
+            
+            villes.get(2).setStock(boisItemTombstone);
+            villes.get(2).setStock(ferItemTombstone);
+            villes.get(2).setStock(cerealeItemTombstone);
+            
+            villes.get(4).setStock(boisItemSantaFe);
+            villes.get(4).setStock(ferItemSantaFe);
+            villes.get(4).setStock(cerealeItemSantaFe);
+            
+
+            villes.get(3).setStock(boisItemHillValley);
+            villes.get(3).setStock(ferItemHillValley);
+            villes.get(3).setStock(cerealesItemHillValley);
+            
+            villes.get(0).setStock(boisItemBeziers);
+            villes.get(0).setStock(ferItemBeziers);
+            villes.get(0).setStock(cerealeItemBeziers);
+            villes.get(0).setStock(pistoletItem);
+           
+            villes.get(1).setStock(boisItemAgen);
+            villes.get(1).setStock(ferItemAgen);
+            villes.get(1).setStock(cerealeItemAgen);
+            villes.get(1).setStock(whiskyItem);
+           
+          
+            avertirAllCreationRessource();
+            
+            background.start();
+
   
         }
     
@@ -582,38 +649,8 @@ public class Modele implements Serializable{
         }
        
        public void PlacerVille(ArrayList<int[]> t, int ville){
-           
-            //Creation des ressource          
-            Ressource bois = new Ressource("bois",1);
-            Ressource fer = new Ressource("fer",1);
-            Ressource cereales = new Ressource("cereales",1);
-            Ressource cuir = new Ressource("cuir",1);
-            
-            //ligneItem des different produit       
-            LigneItem I1pistolet = new LigneItem(fer,5);
-            LigneItem I2pistolet = new LigneItem(bois,5);
-            LigneItem I1whisky = new LigneItem(cereales,5);
-            LigneItem I2whisky = new LigneItem(bois,5);
-            LigneItem I1bottes = new LigneItem(cuir,20);
-            LigneItem I2bottes = new LigneItem(bois,5);
-        
-            //ArayList de ligne item pour crée des produit
-            ArrayList<LigneItem> fabricationPistolet =new ArrayList();
-            ArrayList<LigneItem> fabricationWhisky =new ArrayList(); 
-            ArrayList<LigneItem> fabricationBottes=new ArrayList();
-           
-            fabricationPistolet.add(I1pistolet);
-            fabricationPistolet.add(I2pistolet);
-            fabricationWhisky.add(I1whisky);
-            fabricationWhisky.add(I2whisky);
-            fabricationBottes.add(I1bottes);
-            fabricationBottes.add(I2bottes);
-            
-            
-            //Creation des produit          
-            Produit pistolet = new Produit("pistolet",100,fabricationPistolet);
-            Produit whisky = new Produit("whisky",100,fabricationWhisky);
-            //Produit bottes = new Produit("bottes",100,fabricationBottes);
+           boolean resultat=false;
+           if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
             
             switch (ville)
             {
@@ -621,49 +658,69 @@ public class Modele implements Serializable{
                 Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
                 beziers.setTexture(beziersCity);
                 beziers.setTextureSelection(beziersCitySelection);
-                villes.add(ville,beziers);           
+                villes.set(ville,beziers);              
                 map[beziers.getX()][beziers.getY()]=beziers;
                 avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+                nbVilles++;
+                
             break;
           
             case 1:
                 Ville agen = new Ville(t.get(0)[0],t.get(0)[1],"Agen City",whisky);
                 agen.setTexture(agenCity);
                 agen.setTextureSelection(agenCitySelection);
-                villes.add(ville, agen);
+                villes.set(ville, agen);
                 map[agen.getX()][agen.getY()]=agen;
                 avertirAllChangementCase(agen.getX(), agen.getY(), agen);
+                nbVilles++;
             break;
             
             case 2:
                 Ville tombstone = new Ville(t.get(0)[0],t.get(0)[1],"Tombstone",bois);
                 tombstone.setTexture(tombstoneIcn);
                 tombstone.setTextureSelection(tombstoneSelection);
-                villes.add(ville, tombstone);
+                villes.set(ville, tombstone);
                 map[tombstone.getX()][tombstone.getY()]=tombstone;
                 avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
+                nbVilles++;
             break;
             
             case 3:
                 Ville hillvalley = new Ville(t.get(0)[0],t.get(0)[1],"hillvalley",cereales);
                 hillvalley.setTexture(hillValleyIcn);
                 hillvalley.setTextureSelection(hillValleySelection);
-                villes.add(ville, hillvalley);
+                villes.set(ville, hillvalley);
                 map[hillvalley.getX()][hillvalley.getY()]=hillvalley;
                 avertirAllChangementCase(hillvalley.getX(), hillvalley.getY(), hillvalley);
+                nbVilles++;
             break;
             
             case 4:
                 Ville santafe = new Ville(t.get(0)[0],t.get(0)[1],"santafe",fer);
                 santafe.setTexture(santaFeIcn);
                 santafe.setTextureSelection(santaFeSelection);
-                villes.add(ville, santafe);
+                villes.set(ville, santafe);
                 map[santafe.getX()][santafe.getY()]=santafe;
                 avertirAllChangementCase(santafe.getX(), santafe.getY(), santafe);
+                nbVilles++;
             break;
             
             } 
-           
+           }
+           else {
+               
+               avertirAllInformations("Attention vous ne pouvez placer des elements que sur des cases libres");
+           }
+          
+       }
+       
+       public void PlacerObstacle(ArrayList<int[]> t){
+           if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
+               Obstacle o = new Obstacle(t.get(0)[0], t.get(0)[1]);
+               map[t.get(0)[0]][t.get(0)[1]]=o;
+               avertirAllChangementCase(t.get(0)[0], t.get(0)[1], o);
+           }
+           else avertirAllInformations("Attention vous ne pouvez placer des elements que sur des cases libres");
        }
 }
     

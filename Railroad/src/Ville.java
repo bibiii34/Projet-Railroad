@@ -36,7 +36,6 @@ public class Ville extends Case implements Serializable {
         super(x,y);
         ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");       
         ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
-        
         this.texture=VILLE;
         this.textureSelection=VILLESELECTION;
         this.nom=n;
@@ -52,8 +51,8 @@ public class Ville extends Case implements Serializable {
         boolean coordonnees = false;
         
         while (coordonnees == false){
-            this.x=0 + (int)(Math.random() * ((5 - 0) + 1));
-            this.y=0 + (int)(Math.random() * ((5 - 0) + 1));   
+            this.x=0 + (int)(Math.random() * ((6 - 0) + 1));
+            this.y=0 + (int)(Math.random() * ((6 - 0) + 1));   
             
             if (v.isEmpty()){
                 coordonnees = true;

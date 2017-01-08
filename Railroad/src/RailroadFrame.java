@@ -29,12 +29,9 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
 
     private static final ImageIcon DESERT = new ImageIcon("./src/imgs/Texture 100x100/desert.png");
-    private static final ImageIcon DESERTSELECTION = new ImageIcon("./src/imgs/Texture 100x100/desertSelection.png");
-    
+    private static final ImageIcon DESERTSELECTION = new ImageIcon("./src/imgs/Texture 100x100/desertSelection.png");   
     private static final ImageIcon VILLE = new ImageIcon("./src/imgs/Texture 100x100/ville.png");
     private static final ImageIcon VILLESELECTION = new ImageIcon("./src/imgs/Texture 100x100/villeSelection.png");
-    
-    
     private static final ImageIcon RAILV = new ImageIcon("./src/imgs/Texture 100x100/railsV.png");
     private static final ImageIcon RAILH = new ImageIcon("./src/imgs/Texture 100x100/railsH.png");
     private static final ImageIcon RAIL = new ImageIcon("./src/imgs/Texture 100x100/railsH.png");
@@ -51,7 +48,8 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         initComponents();
         this.setLocationRelativeTo(null);
         modele=m;
-        
+        ImageIcon img = new ImageIcon("./src/imgs/Texture 100x100/train.png");
+        this.setIconImage(img.getImage());
         
     // Pannel disposé en grille 8*8
         panelJeu.setLayout(new GridLayout(7,7));
@@ -88,8 +86,6 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaInformations = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -137,6 +133,11 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jLabelAgenFer = new javax.swing.JLabel();
         jLabelAgenCereales = new javax.swing.JLabel();
         jLabelAgenWhisky = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabelPoints = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextAreaInformations1 = new javax.swing.JTextArea();
         jPanelEditeur = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jButtonBeziers = new javax.swing.JButton();
@@ -148,20 +149,17 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabelPoints = new javax.swing.JLabel();
+        jButtonJouer = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaInformations = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuSauvegarder = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenuItem7.setText("jMenuItem7");
 
@@ -182,10 +180,12 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         );
         panelJeuLayout.setVerticalGroup(
             panelJeuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(175, 122, 68));
+        jPanel1.setPreferredSize(new java.awt.Dimension(506, 700));
+        jPanel1.setLayout(null);
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Wide Latin", 0, 10)); // NOI18N
@@ -197,6 +197,9 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(10, 30, 220, 29);
+        jButton1.getAccessibleContext().setAccessibleName("placerRails");
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Wide Latin", 0, 10)); // NOI18N
@@ -207,28 +210,29 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jTextAreaInformations.setBackground(new java.awt.Color(0, 0, 0));
-        jTextAreaInformations.setColumns(20);
-        jTextAreaInformations.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextAreaInformations.setForeground(new java.awt.Color(255, 255, 255));
-        jTextAreaInformations.setLineWrap(true);
-        jTextAreaInformations.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaInformations);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(243, 30, 230, 29);
 
         jLabel8.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         jLabel8.setText("INFORMATIONS");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(10, 330, 186, 30);
 
         jLabel1.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         jLabel1.setText("ACTIONS");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 10, 103, 20);
 
         jLabel2.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         jLabel2.setText("PRODUCTION");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 73, 158, 20);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("TOMBSTONE");
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,10 +254,6 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +267,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                         .addComponent(jLabelTomstoneFer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelTomstoneBois, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,11 +289,15 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(10, 94, 132, 100);
+
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setPreferredSize(new java.awt.Dimension(114, 105));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("HILL VALLEY");
 
         jLabelHillValley1.setForeground(new java.awt.Color(255, 255, 255));
@@ -315,7 +320,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabelHillValley3)
@@ -331,10 +336,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                             .addGap(18, 18, 18)
                             .addComponent(jLabelHillValleyBois, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,10 +358,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(330, 94, 132, 100);
+
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("SANTA FE");
 
         jLabelHillValley4.setForeground(new java.awt.Color(255, 255, 255));
@@ -384,22 +390,17 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelHillValley6)
-                            .addComponent(jLabelHillValley4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelHillValley5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelSantaFeBois, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelSantaFeFer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelSantaFeCereales, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabelHillValley6)
+                    .addComponent(jLabelHillValley4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelHillValley5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelSantaFeBois, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSantaFeFer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelSantaFeCereales, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,10 +422,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.add(jPanel4);
+        jPanel4.setBounds(170, 94, 132, 100);
+
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("BEZIERS CITY");
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -471,10 +476,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                             .addComponent(jLabelBeziersPistolets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelBeziersCereales, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,10 +504,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addContainerGap())
         );
 
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(10, 200, 132, 121);
+
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("AGEN CITY");
 
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -535,24 +541,19 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel14))
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelAgenCereales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jLabelAgenBois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelAgenFer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelAgenWhisky, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel13)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel16)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel14))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelAgenCereales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabelAgenBois, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAgenFer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAgenWhisky, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,140 +581,28 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addGap(16, 16, 16))
         );
 
-        jPanelEditeur.setBackground(new java.awt.Color(102, 51, 0));
-
-        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel18.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Editeur de monde");
-
-        jButtonBeziers.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonBeziers.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonBeziers.setText("Béziers");
-        jButtonBeziers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBeziersActionPerformed(evt);
-            }
-        });
-
-        jButtonAgen.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonAgen.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonAgen.setText("Agen");
-        jButtonAgen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgenActionPerformed(evt);
-            }
-        });
-
-        jButtonObstacle.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonObstacle.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonObstacle.setText("Obstacle");
-
-        jButtonTombstone.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonTombstone.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTombstone.setText("Tombstone");
-        jButtonTombstone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTombstoneActionPerformed(evt);
-            }
-        });
-
-        jButtonSantaFe.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonSantaFe.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSantaFe.setText("Santa Fe");
-
-        jButtonHillValley.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonHillValley.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonHillValley.setText("Hill Valley");
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Villes Ressources :");
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Villes Produit :");
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Obstacles :");
-
-        javax.swing.GroupLayout jPanelEditeurLayout = new javax.swing.GroupLayout(jPanelEditeur);
-        jPanelEditeur.setLayout(jPanelEditeurLayout);
-        jPanelEditeurLayout.setHorizontalGroup(
-            jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEditeurLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addGroup(jPanelEditeurLayout.createSequentialGroup()
-                        .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(jButtonTombstone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonSantaFe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonAgen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonBeziers, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jLabel20))
-                        .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelEditeurLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel21))
-                            .addGroup(jPanelEditeurLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonObstacle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButtonHillValley, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        jPanelEditeurLayout.setVerticalGroup(
-            jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEditeurLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonTombstone)
-                    .addComponent(jButtonBeziers)
-                    .addComponent(jButtonObstacle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEditeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSantaFe)
-                    .addComponent(jButtonAgen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonHillValley, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jPanel6);
+        jPanel6.setBounds(170, 200, 132, 121);
 
         jPanel7.setBackground(new java.awt.Color(0, 0, 0));
         jPanel7.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("POINTS");
 
         jLabelPoints.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelPoints.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelPoints.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPoints.setText("0");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel22))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabelPoints)))
-                .addContainerGap(50, Short.MAX_VALUE))
+            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelPoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -725,74 +614,142 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(15, 15, 15))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jPanelEditeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanelEditeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel1.add(jPanel7);
+        jPanel7.setBounds(330, 200, 132, 121);
 
-        jButton1.getAccessibleContext().setAccessibleName("placerRails");
+        jTextAreaInformations1.setEditable(false);
+        jTextAreaInformations1.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaInformations1.setColumns(20);
+        jTextAreaInformations1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextAreaInformations1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaInformations1.setLineWrap(true);
+        jTextAreaInformations1.setRows(5);
+        jTextAreaInformations1.setText("Fabrication :\n\nPistolet (Beziers City)  =  20 Fer + 5 Bois\tPoints : 100\nWhisky (Agen City)       =  20 Cereales + 5 Bois\tPoints : 100");
+        jScrollPane3.setViewportView(jTextAreaInformations1);
+
+        jPanel1.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 450, 452, 81);
+
+        jPanelEditeur.setBackground(new java.awt.Color(102, 51, 0));
+        jPanelEditeur.setLayout(null);
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Editeur de monde");
+        jPanelEditeur.add(jLabel18);
+        jLabel18.setBounds(10, 17, 182, 13);
+
+        jButtonBeziers.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonBeziers.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBeziers.setText("Béziers");
+        jButtonBeziers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBeziersActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonBeziers);
+        jButtonBeziers.setBounds(140, 60, 100, 23);
+
+        jButtonAgen.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonAgen.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAgen.setText("Agen");
+        jButtonAgen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgenActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonAgen);
+        jButtonAgen.setBounds(140, 89, 100, 23);
+
+        jButtonObstacle.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonObstacle.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonObstacle.setText("Obstacle");
+        jButtonObstacle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonObstacleActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonObstacle);
+        jButtonObstacle.setBounds(258, 60, 100, 23);
+
+        jButtonTombstone.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonTombstone.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTombstone.setText("Tombstone");
+        jButtonTombstone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTombstoneActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonTombstone);
+        jButtonTombstone.setBounds(10, 60, 100, 23);
+
+        jButtonSantaFe.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonSantaFe.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSantaFe.setText("Santa Fe");
+        jButtonSantaFe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSantaFeActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonSantaFe);
+        jButtonSantaFe.setBounds(10, 89, 100, 23);
+
+        jButtonHillValley.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonHillValley.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonHillValley.setText("Hill Valley");
+        jButtonHillValley.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHillValleyActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonHillValley);
+        jButtonHillValley.setBounds(10, 118, 100, 23);
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Villes Ressources :");
+        jPanelEditeur.add(jLabel19);
+        jLabel19.setBounds(10, 40, 103, 14);
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Villes Produit :");
+        jPanelEditeur.add(jLabel20);
+        jLabel20.setBounds(140, 40, 79, 14);
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Obstacles :");
+        jPanelEditeur.add(jLabel21);
+        jLabel21.setBounds(259, 40, 61, 14);
+
+        jButtonJouer.setBackground(new java.awt.Color(255, 0, 0));
+        jButtonJouer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonJouer.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonJouer.setText("Jouer sur ce monde !");
+        jButtonJouer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonJouerActionPerformed(evt);
+            }
+        });
+        jPanelEditeur.add(jButtonJouer);
+        jButtonJouer.setBounds(202, 11, 180, 23);
+
+        jPanel1.add(jPanelEditeur);
+        jPanelEditeur.setBounds(10, 540, 450, 150);
+
+        jTextAreaInformations.setEditable(false);
+        jTextAreaInformations.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaInformations.setColumns(20);
+        jTextAreaInformations.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextAreaInformations.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaInformations.setLineWrap(true);
+        jTextAreaInformations.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaInformations);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 360, 452, 81);
 
         jMenu1.setText("Partie");
 
@@ -803,6 +760,14 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             }
         });
         jMenu1.add(jMenuItem8);
+
+        jMenuItem9.setText("Retour au Menu");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
 
         jMenuBar1.add(jMenu1);
 
@@ -839,34 +804,6 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
         jMenuBar1.add(jMenuSauvegarder);
 
-        jMenu2.setText("Charger");
-
-        jMenuItem6.setText("Emplacement 1");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem6);
-
-        jMenuItem4.setText("Emplacement 2");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Emplacement 3");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -876,32 +813,16 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelJeu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelJeu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Bouton placer rail
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            modele.placerRails(trajet);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    modele.supprimerRails(trajet);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuSauvegarderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSauvegarderActionPerformed
 
@@ -938,58 +859,99 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        try {
-            modele.charger("2");
-        } catch (IOException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
- 
-        try { 
-            modele.charger("1");
-        } catch (IOException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        try {           
-            modele.charger("3");
-        } catch (IOException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-            // TODO add your handling code here:
+        Modele m = new Modele(modele.getNom());
+        RailroadFrame rf = new RailroadFrame(m);
+        m.register(rf);
+        this.setVisible(false);
+        rf.editeur(false);
+        try {
+            m.genererMonde();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MenuUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        MenuUser menu = new MenuUser(modele.getNom());
+        menu.setVisible(true);
+        this.setVisible(false);  
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jButtonJouerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJouerActionPerformed
+        bouton(true);
+        editeur(false);
+        information("Selectionner un chemin d'une ville à une autre puis cliquer sur Placer Rails");
+        modele.jouer();
+    }//GEN-LAST:event_jButtonJouerActionPerformed
+
+    private void jButtonHillValleyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHillValleyActionPerformed
+        modele.PlacerVille(trajet,3);
+        trajet.clear();
+        jButtonHillValley.setEnabled(false);
+        if (modele.getNbVilles()==5){
+            this.jouer(true);
+        }
+    }//GEN-LAST:event_jButtonHillValleyActionPerformed
+
+    private void jButtonSantaFeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSantaFeActionPerformed
+        modele.PlacerVille(trajet,4);
+        trajet.clear();
+        jButtonSantaFe.setEnabled(false);
+        if (modele.getNbVilles()==5){
+            this.jouer(true);
+        }
+    }//GEN-LAST:event_jButtonSantaFeActionPerformed
+
+    private void jButtonTombstoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTombstoneActionPerformed
+        modele.PlacerVille(trajet,2);
+        trajet.clear();
+        jButtonTombstone.setEnabled(false);
+        if (modele.getNbVilles()==5){
+            this.jouer(true);
+        }
+    }//GEN-LAST:event_jButtonTombstoneActionPerformed
+
+    private void jButtonObstacleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObstacleActionPerformed
+        modele.PlacerObstacle(trajet);
+        trajet.clear();
+
+    }//GEN-LAST:event_jButtonObstacleActionPerformed
+
+    private void jButtonAgenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgenActionPerformed
+        modele.PlacerVille(trajet,1);
+        trajet.clear();
+        jButtonAgen.setEnabled(false);
+        if (modele.getNbVilles()==5){
+            this.jouer(true);
+        }
+    }//GEN-LAST:event_jButtonAgenActionPerformed
 
     private void jButtonBeziersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBeziersActionPerformed
         modele.PlacerVille(trajet,0);
         trajet.clear();
+        jButtonBeziers.setEnabled(false);
+        if (modele.getNbVilles()==5){
+            this.jouer(true);
+        }
     }//GEN-LAST:event_jButtonBeziersActionPerformed
 
-    private void jButtonAgenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgenActionPerformed
-        modele.PlacerVille(trajet,1);  
-        trajet.clear();
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAgenActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        modele.supprimerRails(trajet);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButtonTombstoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTombstoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonTombstoneActionPerformed
+    //Bouton placer rail
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            modele.placerRails(trajet);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RailroadFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1035,6 +997,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.JButton jButtonAgen;
     private javax.swing.JButton jButtonBeziers;
     private javax.swing.JButton jButtonHillValley;
+    private javax.swing.JButton jButtonJouer;
     private javax.swing.JButton jButtonObstacle;
     private javax.swing.JButton jButtonSantaFe;
     private javax.swing.JButton jButtonTombstone;
@@ -1087,16 +1050,13 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.JLabel jLabelTomstoneCereales;
     private javax.swing.JLabel jLabelTomstoneFer;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jMenuSauvegarder;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1107,7 +1067,9 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelEditeur;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextAreaInformations;
+    private javax.swing.JTextArea jTextAreaInformations1;
     private javax.swing.JPanel panelJeu;
     // End of variables declaration//GEN-END:variables
 
@@ -1188,14 +1150,27 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
 
             }
         }
-        //avertirCreationRessource();
+        
     }
     
     public void editeur(boolean b){
         jPanelEditeur.setVisible(b);
     }
 
+    public void bouton(boolean b){
+        jButton1.setEnabled(b);
+        jButton2.setEnabled(b);
+        
+    }
     
+    public void jouer(boolean b){
+       jButtonJouer.setVisible(b); 
+    }
+    
+    public void information(String info){
+        jTextAreaInformations.setText(null);
+        jTextAreaInformations.setText(info);
+    }
     
     
     //Mouvement souris
