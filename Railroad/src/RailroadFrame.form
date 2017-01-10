@@ -976,7 +976,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="450" width="452" height="-1"/>
+              <AbsoluteConstraints x="10" y="430" width="452" height="100"/>
             </Constraint>
           </Constraints>
 
@@ -997,7 +997,7 @@
                 </Property>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Fabrication :&#xa;&#xa;Pistolet (Beziers City)  =  20 Fer + 5 Bois&#x9;Points : 100&#xa;Whisky (Agen City)       =  20 Cereales + 5 Bois&#x9;Points : 100"/>
+                <Property name="text" type="java.lang.String" value="S&#xe9;lectionner un chemin de ville en ville puis cliquer sur &quot;placer des rails&quot;.&#xa;Relier les villes productrices de ressources aux villes productrices de produit.&#xa;&#xa;Fabrication :&#xa;Pistolet (Beziers City)  =  20 Fer + 5 Bois&#x9;Points : 100&#xa;Whisky (Agen City)       =  20 Cereales + 5 Bois&#x9;Points : 100"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1229,7 +1229,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="360" width="452" height="-1"/>
+              <AbsoluteConstraints x="10" y="360" width="452" height="60"/>
             </Constraint>
           </Constraints>
 

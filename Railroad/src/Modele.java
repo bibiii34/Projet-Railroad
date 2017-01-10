@@ -26,7 +26,6 @@ import javax.swing.ImageIcon;
 public class Modele implements Serializable{
     private String nom;
     private Case[][] map;
-    private ArrayList<Produit> production;
     private  ArrayList<Observateur> observateur;
     transient ArrayList<Observateur> temp;
     private long point;
@@ -60,7 +59,7 @@ public class Modele implements Serializable{
 
     
     public Modele(String s){
- 
+        
         map=new Case[7][7];
                 for(int i=0;i<7;i++){
             for(int j=0;j<7;j++){
@@ -85,13 +84,13 @@ public class Modele implements Serializable{
             this.fer = new Ressource("fer",1);
             this.cereales = new Ressource("cereales",1);
         
-            //ligneItem des different produit       
-            LigneItem I1pistolet = new LigneItem(fer,5);
+            //ligneItem des differents produits       
+            LigneItem I1pistolet = new LigneItem(fer,20);
             LigneItem I2pistolet = new LigneItem(bois,5);
-            LigneItem I1whisky = new LigneItem(cereales,5);
+            LigneItem I1whisky = new LigneItem(cereales,20);
             LigneItem I2whisky = new LigneItem(bois,5);
           
-            //ArayList de ligne item pour crée des produit
+            //ArrayList de ligne item pour créer des produits
             ArrayList<LigneItem> fabricationPistolet =new ArrayList();
             ArrayList<LigneItem> fabricationWhisky =new ArrayList();        
             fabricationPistolet.add(I1pistolet);
@@ -177,10 +176,10 @@ public class Modele implements Serializable{
         this.nbVilles = nbVilles;
     }
     
-
+        //generer monde pour nouvelle partie
         public void  genererMonde() throws InterruptedException{
             
-            //Creation ville
+            //Creation des villes
         
             Ville beziers = new Ville("Beziers City",pistolet, villes);
             beziers.setTexture(beziersCity);
@@ -224,7 +223,7 @@ public class Modele implements Serializable{
             map[santaFe.getX()][santaFe.getY()]=santaFe;
             avertirAllChangementCase(santaFe.getX(), santaFe.getY(), santaFe);
 
-            //Generer obstacle
+            //Generer obstacles
             Obstacle o = new Obstacle(villes);
             System.out.println("obstacle :"+o.getX()+"/"+o.getY());
             Obstacle o1 = new Obstacle(villes);
@@ -234,7 +233,7 @@ public class Modele implements Serializable{
             Obstacle o3 = new Obstacle(villes);
             System.out.println("obstacle :"+o3.getX()+"/"+o.getY());
       
-            //placement des obstacles sur le modele et la vue;
+            //placement des obstacles sur le modele et la vue
             map[o.getX()][o.getY()]=o;
             avertirAllChangementCase(o.getX(), o.getY(), o);
             
@@ -248,7 +247,7 @@ public class Modele implements Serializable{
             avertirAllChangementCase(o3.getX(), o3.getY(), o3);
             
             
-            //LigneItem pour initialiser le stock
+            //LigneItem pour initialiser le stock des villes
             LigneItem boisItemTombstone = new LigneItem(bois,10);
             LigneItem ferItemTombstone = new LigneItem(fer,0);
             LigneItem cerealeItemTombstone = new LigneItem(cereales,0);
@@ -286,26 +285,28 @@ public class Modele implements Serializable{
             hillValley.setStock(boisItemHillValley);
             hillValley.setStock(ferItemHillValley);
             hillValley.setStock(cerealesItemHillValley);
-            
-           beziers.setStock(boisItemBeziers);
-           beziers.setStock(ferItemBeziers);
-           beziers.setStock(cerealeItemBeziers);
-           beziers.setStock(pistoletItem);
-           
-           agen.setStock(boisItemAgen);
-           agen.setStock(ferItemAgen);
-           agen.setStock(cerealeItemAgen);
-           agen.setStock(whiskyItem);
+
+            beziers.setStock(boisItemBeziers);
+            beziers.setStock(ferItemBeziers);
+            beziers.setStock(cerealeItemBeziers);
+            beziers.setStock(pistoletItem);
+
+            agen.setStock(boisItemAgen);
+            agen.setStock(ferItemAgen);
+            agen.setStock(cerealeItemAgen);
+            agen.setStock(whiskyItem);
            
           
             avertirAllCreationRessource();
+            //Lancement script de generation de ressources
             background.start();
 
   
         }
-        
+        //Methode pour jouer à partir de l'éditeur
         public void jouer(){
-             //LigneItem pour initialiser le stock
+            
+             //initialisation des stock des villes 
             LigneItem boisItemTombstone = new LigneItem(bois,10);
             LigneItem ferItemTombstone = new LigneItem(fer,0);
             LigneItem cerealeItemTombstone = new LigneItem(cereales,0);
@@ -356,62 +357,61 @@ public class Modele implements Serializable{
            
           
             avertirAllCreationRessource();
-            
             background.start();
 
   
         }
-    
+        //ajouter un observateur
         public void register(Observateur o){
         observateur.add(o);
     }
-    
+        //supprimer un observateur
         public void unregister(Observateur o){
         observateur.remove(o);
     }
-            
+        //changement d'une case    
         public void avertirAllChangementCase(int i, int j, Case c){
             for (Observateur o : this.observateur){
             o.avertirChangementCase(i, j,c);            
         }
         }
-        
+        //Selection d'une case
         public void avertirAllSelection(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirSelection(i, j, c);
         }
         }
-        
+        //Deselection d'une case
         public void avertirAllDeselection(int i, int j, Case c){
         for (Observateur o : this.observateur){
             o.avertirDeselection(i, j, c);
         }
         }
-        
+        //train sur une case
         public void avertirAllTrainTrue(int i, int j, Case c){
          for (Observateur o : this.observateur){
             o.avertirTrainTrue(i, j, c);
         }   
         }
-        
+        //train n'est plus sur une case
         public void avertirAllTrainFalse(int i, int j, Case c){
             for (Observateur o : this.observateur){
             o.avertirTrainFalse(i, j, c);
         }   
         }
-        
+        //creation d'une ressource
         public void avertirAllCreationRessource(){
             for (Observateur o : this.observateur){
                 o.avertirCreationRessource();
         }  
         }
-        
+        //rafraichir la map pour remettre les bonnes textures apres chargement d'une partie
         public void avertirAllRafraichir(){
                         for (Observateur o : this.observateur){
                 o.rafraichir();
         }  
         }
-        
+        //afficher une info
         public void avertirAllInformations(String s){
                         for (Observateur o : this.observateur){
                 o.avertirInformation(s);
@@ -420,19 +420,21 @@ public class Modele implements Serializable{
         
         /* PLACER RAILS */
         public synchronized void placerRails(ArrayList<int[]> trajet) throws InterruptedException{
+        //Si trajet n'est pas vide 
         if (trajet.isEmpty()==false){
+        //si la premiere et derniere case du trajet sont des villes    
         if(this.getCase(trajet.get(0)[0],trajet.get(0)[1]) instanceof Ville && this.getCase(trajet.get(trajet.size()-1)[0],trajet.get(trajet.size()-1)[1]) instanceof Ville){
             
              int c = 0;
             /*on parcoure l'arraylist trajet en ignorant 1er coordonées (ville)*/
             for (int i=1; i<=trajet.size()-1; i++){
  
-                /*On rempli une liste de Rails avec les coordonnées des case selectionnées*/ 
+                /*On rempli une liste de Rails avec les coordonnées des cases selectionnées*/ 
                 if (i!=trajet.size()-1){
                 rails.add(c,new Rail(trajet.get(i)[0],trajet.get(i)[1])); 
                 }
                 
-        //RAIL HORIZONTAL        
+            //RAIL HORIZONTAL        
                 //Si la case n'est pas une ville et si le X de la case selectionnée est le meme que la case precedente alors placement rail horizontal              
                 if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rails.get(c).getX()==trajet.get(i-1)[0]){
                     rails.get(c).setTexture(rails.get(c).getRailH());
@@ -446,7 +448,7 @@ public class Modele implements Serializable{
                     this.avertirAllChangementCase(rails.get(c).getX(),rails.get(c).getY(), rails.get(c));
                 
                 }
-        //RAIL VERTICAL        
+            //RAIL VERTICAL        
                 //Si la case n'est pas une ville et si le Y de la case selectionnée est le meme que la case precedente alors placement rail vertical
                 if(this.getCase(trajet.get(i)[0],trajet.get(i)[1]) instanceof Ville == false && rails.get(c).getY()==trajet.get(i-1)[1])
                 {
@@ -459,7 +461,7 @@ public class Modele implements Serializable{
   
                 }
                 
-        //RAIL VIRAGE1 
+            //RAIL VIRAGE1 
                 //Si  nous somme a partir de la 3eme case
                 if( (i>=2)
                         //X est plus petit que X de case-2 et Y est plus grand
@@ -475,7 +477,7 @@ public class Modele implements Serializable{
                 }
                 
                 
-        //RAIL VIRAGE 2
+            //RAIL VIRAGE 2
                 //Si nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
@@ -492,7 +494,7 @@ public class Modele implements Serializable{
                 }
   
         
-        //RAIL VIRAGE 3
+            //RAIL VIRAGE 3
                 //Si nous somme a partir de la 3eme case
                 if(  (i>=2) 
                         
@@ -509,7 +511,7 @@ public class Modele implements Serializable{
                 this.avertirAllChangementCase(rails.get(c-1).getX(),rails.get(c-1).getY(), rails.get(c-1));
                 }
                  
-        //RAIL VIRAGE4 
+            //RAIL VIRAGE4 
                 //Si nous somme a partir de la 3eme case
                 if( ((i>=2)) 
                         
@@ -536,7 +538,7 @@ public class Modele implements Serializable{
                 v.setSelection(false);
                this.avertirAllDeselection(v.getX(), v.getY(), v);
             }
- 
+
             
             //creation d'un train en fonction du trajet.
             synchronized(trains) {
@@ -551,20 +553,20 @@ public class Modele implements Serializable{
             //On nettoye le trajet apres cration du chemin de rails 
             trajet.clear();
             
-        }    
-        }
-        
-        else {
-            System.out.println("Attention le depart et l'arrivée doivent etre une ville");
-            avertirAllInformations("Attention le depart et l'arrivée doivent etre une ville");
-            for (int i =0 ; i<7;i++){
-                for (int j=0 ; i<7;i++){
-                    map[i][j].setSelection(false);
-                    this.avertirAllDeselection(i, j, this.getCase(i, j));
+        }  
+            else {
+                System.out.println("Attention le depart et l'arrivée doivent etre une ville");
+                avertirAllInformations("Attention le depart et l'arrivée doivent etre une ville");
+                
+                for(int[] i : trajet){
+                    map[i[0]][i[1]].setSelection(false);
+                    avertirAllDeselection(i[0], i[1], this.getCase(i[0],i[1]));
                 }
+                trajet.clear();
+   
             }
         }
-
+        
         }
            
         /*SUPPRIMER RAILS*/
@@ -579,8 +581,10 @@ public class Modele implements Serializable{
 
                 
             }
+            trajet.clear();
         }
-
+        
+        /*SAUVEGARDER*/
         public void sauvegarder(String s) throws IOException, InterruptedException{
             temp=new ArrayList(observateur);
             FileOutputStream f = new FileOutputStream(new File("./src/save/"+this.nom+s));
@@ -595,7 +599,7 @@ public class Modele implements Serializable{
 
             avertirAllInformations("Monde Sauvegardé !");
         }
-        
+        /*CHARGER*/
         public void charger(String s) throws FileNotFoundException, IOException, ClassNotFoundException{
             //on charge le modele en fonction du nom et de l'emplacement
             temp.clear();
@@ -611,8 +615,8 @@ public class Modele implements Serializable{
             this.textuel();
             System.out.println("monde chargé");
         }
-
-       public void textuel(){
+        /*AFFICHER LA MAP DANS LA CONSOLE*/
+        public void textuel(){
            System.out.println("textuel :");
    
                System.out.println(this.map[0][0].toString()+this.map[0][1].toString()+this.map[0][2].toString()+this.map[0][3].toString()
@@ -647,81 +651,82 @@ public class Modele implements Serializable{
            
 
         }
-       
-       public void PlacerVille(ArrayList<int[]> t, int ville){
-           boolean resultat=false;
-           if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
-            
-            switch (ville)
-            {
-            case 0:
-                Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
-                beziers.setTexture(beziersCity);
-                beziers.setTextureSelection(beziersCitySelection);
-                villes.set(ville,beziers);              
-                map[beziers.getX()][beziers.getY()]=beziers;
-                avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
-                nbVilles++;
-                
-            break;
-          
-            case 1:
-                Ville agen = new Ville(t.get(0)[0],t.get(0)[1],"Agen City",whisky);
-                agen.setTexture(agenCity);
-                agen.setTextureSelection(agenCitySelection);
-                villes.set(ville, agen);
-                map[agen.getX()][agen.getY()]=agen;
-                avertirAllChangementCase(agen.getX(), agen.getY(), agen);
-                nbVilles++;
-            break;
-            
-            case 2:
-                Ville tombstone = new Ville(t.get(0)[0],t.get(0)[1],"Tombstone",bois);
-                tombstone.setTexture(tombstoneIcn);
-                tombstone.setTextureSelection(tombstoneSelection);
-                villes.set(ville, tombstone);
-                map[tombstone.getX()][tombstone.getY()]=tombstone;
-                avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
-                nbVilles++;
-            break;
-            
-            case 3:
-                Ville hillvalley = new Ville(t.get(0)[0],t.get(0)[1],"hillvalley",cereales);
-                hillvalley.setTexture(hillValleyIcn);
-                hillvalley.setTextureSelection(hillValleySelection);
-                villes.set(ville, hillvalley);
-                map[hillvalley.getX()][hillvalley.getY()]=hillvalley;
-                avertirAllChangementCase(hillvalley.getX(), hillvalley.getY(), hillvalley);
-                nbVilles++;
-            break;
-            
-            case 4:
-                Ville santafe = new Ville(t.get(0)[0],t.get(0)[1],"santafe",fer);
-                santafe.setTexture(santaFeIcn);
-                santafe.setTextureSelection(santaFeSelection);
-                villes.set(ville, santafe);
-                map[santafe.getX()][santafe.getY()]=santafe;
-                avertirAllChangementCase(santafe.getX(), santafe.getY(), santafe);
-                nbVilles++;
-            break;
-            
-            } 
-           }
+        /*PLACER VILLE*/
+        public void PlacerVille(ArrayList<int[]> t, int ville){
+            boolean resultat=false;
+            //Si la case selectionnée n'est pas deja une ville ou un obstacle
+            if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
+                //Switch en fonction du numero de ville
+                switch (ville)
+                {
+                case 0:
+                    Ville beziers = new Ville(t.get(0)[0],t.get(0)[1],"Beziers City",pistolet);
+                    beziers.setTexture(beziersCity);
+                    beziers.setTextureSelection(beziersCitySelection);
+                    villes.set(ville,beziers);              
+                    map[beziers.getX()][beziers.getY()]=beziers;
+                    avertirAllChangementCase(beziers.getX(), beziers.getY(), beziers);
+                    nbVilles++;
+
+                break;
+
+                case 1:
+                    Ville agen = new Ville(t.get(0)[0],t.get(0)[1],"Agen City",whisky);
+                    agen.setTexture(agenCity);
+                    agen.setTextureSelection(agenCitySelection);
+                    villes.set(ville, agen);
+                    map[agen.getX()][agen.getY()]=agen;
+                    avertirAllChangementCase(agen.getX(), agen.getY(), agen);
+                    nbVilles++;
+                break;
+
+                case 2:
+                    Ville tombstone = new Ville(t.get(0)[0],t.get(0)[1],"Tombstone",bois);
+                    tombstone.setTexture(tombstoneIcn);
+                    tombstone.setTextureSelection(tombstoneSelection);
+                    villes.set(ville, tombstone);
+                    map[tombstone.getX()][tombstone.getY()]=tombstone;
+                    avertirAllChangementCase(tombstone.getX(), tombstone.getY(), tombstone);
+                    nbVilles++;
+                break;
+
+                case 3:
+                    Ville hillvalley = new Ville(t.get(0)[0],t.get(0)[1],"hillvalley",cereales);
+                    hillvalley.setTexture(hillValleyIcn);
+                    hillvalley.setTextureSelection(hillValleySelection);
+                    villes.set(ville, hillvalley);
+                    map[hillvalley.getX()][hillvalley.getY()]=hillvalley;
+                    avertirAllChangementCase(hillvalley.getX(), hillvalley.getY(), hillvalley);
+                    nbVilles++;
+                break;
+
+                case 4:
+                    Ville santafe = new Ville(t.get(0)[0],t.get(0)[1],"santafe",fer);
+                    santafe.setTexture(santaFeIcn);
+                    santafe.setTextureSelection(santaFeSelection);
+                    villes.set(ville, santafe);
+                    map[santafe.getX()][santafe.getY()]=santafe;
+                    avertirAllChangementCase(santafe.getX(), santafe.getY(), santafe);
+                    nbVilles++;
+                break;
+
+                } 
+               }
            else {
                
                avertirAllInformations("Attention vous ne pouvez placer des elements que sur des cases libres");
            }
           
        }
-       
-       public void PlacerObstacle(ArrayList<int[]> t){
-           if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
-               Obstacle o = new Obstacle(t.get(0)[0], t.get(0)[1]);
-               map[t.get(0)[0]][t.get(0)[1]]=o;
-               avertirAllChangementCase(t.get(0)[0], t.get(0)[1], o);
-           }
-           else avertirAllInformations("Attention vous ne pouvez placer des elements que sur des cases libres");
-       }
+        /*PLACER OBSTACLE*/
+        public void PlacerObstacle(ArrayList<int[]> t){
+            if (this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Ville == false && this.getCase(t.get(0)[0], t.get(0)[1]) instanceof Obstacle == false){
+                Obstacle o = new Obstacle(t.get(0)[0], t.get(0)[1]);
+                map[t.get(0)[0]][t.get(0)[1]]=o;
+                avertirAllChangementCase(t.get(0)[0], t.get(0)[1], o);
+            }
+            else avertirAllInformations("Attention vous ne pouvez placer des elements que sur des cases libres");
+        }
 }
     
 

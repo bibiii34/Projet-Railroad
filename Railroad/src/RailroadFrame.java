@@ -624,11 +624,11 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jTextAreaInformations1.setForeground(new java.awt.Color(255, 255, 255));
         jTextAreaInformations1.setLineWrap(true);
         jTextAreaInformations1.setRows(5);
-        jTextAreaInformations1.setText("Fabrication :\n\nPistolet (Beziers City)  =  20 Fer + 5 Bois\tPoints : 100\nWhisky (Agen City)       =  20 Cereales + 5 Bois\tPoints : 100");
+        jTextAreaInformations1.setText("Sélectionner un chemin de ville en ville puis cliquer sur \"placer des rails\".\nRelier les villes productrices de ressources aux villes productrices de produit.\n\nFabrication :\nPistolet (Beziers City)  =  20 Fer + 5 Bois\tPoints : 100\nWhisky (Agen City)       =  20 Cereales + 5 Bois\tPoints : 100");
         jScrollPane3.setViewportView(jTextAreaInformations1);
 
         jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 450, 452, 81);
+        jScrollPane3.setBounds(10, 430, 452, 100);
 
         jPanelEditeur.setBackground(new java.awt.Color(102, 51, 0));
         jPanelEditeur.setLayout(null);
@@ -749,7 +749,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
         jScrollPane2.setViewportView(jTextAreaInformations);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 360, 452, 81);
+        jScrollPane2.setBounds(10, 360, 452, 60);
 
         jMenu1.setText("Partie");
 
@@ -1083,6 +1083,7 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
     @Override
     public void avertirDeselection(int i, int j, Case c){
         jboard[i][j].setIcon(c.getTexture());
+       // jboard[i][j].setIcon(modele.getMap()[i][j].getTexture());
     }
     
     @Override
@@ -1146,8 +1147,6 @@ public  class  RailroadFrame extends javax.swing.JFrame implements Observateur, 
             for (int j=0; j<7;j++){
                
                  jboard[i][j].setIcon(modele.getMap()[i][j].getTexture());
-                
-
             }
         }
         

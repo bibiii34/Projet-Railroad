@@ -160,10 +160,11 @@ public class Train implements Serializable {
                         this.aller=false;
                     }    
                                 
-                Thread.sleep(1000); 
+                Thread.sleep(900); 
                 }
                 else {
                     System.out.println("le train s'arrete");
+                    modele.avertirAllInformations("Plus de rail le train s'arrete !");
                     this.thd.stop();
                     
                 }
@@ -174,8 +175,7 @@ public class Train implements Serializable {
                         }
                         //RETOUR
                         if (retour=true){
-                            
-                            
+     
                             //on parcoure le trajet en partant de la fin
                             for(int c=this.getTrajet().size()-2;c>=1;c--){
                                 
@@ -209,7 +209,7 @@ public class Train implements Serializable {
                                         modele.avertirAllCreationRessource();
                                     }    
                                 
-                                Thread.sleep(2000);
+                                Thread.sleep(900);
                                 }
                                 else {
                                      System.out.println("Plus de rail le train s'arrete");
